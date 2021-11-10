@@ -1,0 +1,130 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Approval;
+use App\Models\CategoryTraining;
+use App\Models\Provider;
+use App\Models\Lesson;
+use App\Models\Room;
+use App\Models\SubcategoryTraining;
+use App\Models\Venue;
+use Illuminate\Http\Request;
+
+class TrainingController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $category = CategoryTraining::all();
+        $lesson = Lesson::all();
+        $subcategory = SubcategoryTraining::all();
+        $approval = Approval::all();
+        //$room = Room::all();
+        $provider = Provider::all();
+        // $data['venue'] = Venue::get(["nameVenue","id"]);
+        $venue = Venue::all();
+        return view('setting.createTraining',compact('approval','provider','venue','category','subcategory','lesson'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    public function getRoom(Request $request)
+    {
+        // $data['states'] = State::where("country_id",$request->country_id)->get();
+        // return response()->json($data);
+
+        $data['rooms'] = Room::where("venue_id",$request->venue_id)->get(["id","nameRoom"]);
+        // ->get(["nameRoom","id"]);
+        return response()->json($data);
+    }
+
+    public function getLesson(Request $request)
+    {
+        $data['lessons'] = Lesson::where("subcategory_id",$request->subcategory_id)->get(["id","nameLesson"]);
+        // ->get(["nameRoom","id"]);
+        return response()->json($data);
+    }
+
+    public function getSubcategory(Request $request)
+    {
+        // $data['states'] = State::where("country_id",$request->country_id)->get();
+        // return response()->json($data);
+
+        $data['subcategory_trainings'] = SubcategoryTraining::where("category_id",$request->category_id)->get(["id","nameSubcategory"]);
+        // ->get(["nameRoom","id"]);
+        return response()->json($data);
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'start_date'  => 'required|date',
+            'end_date'    => 'required|date|after:start_date',
+        ]);
+    }
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
