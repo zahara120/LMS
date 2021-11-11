@@ -8,6 +8,12 @@
 </div>
 @endif
 
+<style>
+  .status{
+    margin-left: 5px;
+  }
+</style>
+
 <div class="box">
     <div class="box-header">
         <h3 class="box-title">Data Approval Record</h3>
@@ -74,23 +80,11 @@
                     </div>
                     </form> --}}
     
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-warning ">Status</button>
-                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-                          <span class="caret"></span>
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                          {{-- <li><a href="/approval/{id},$application->id" status=2 onclick="updateleave(this);removedropdown(this)">Reject</a></li>
-                          <li><a href="/approval/{id},$application->id" status=1 onclick="updateleave(this);removedropdown(this)">Approval</a></li> --}}
-                          <li><a data-url="{{route('status.update', $item->status)}}" status=2 onclick="updateleave(this);removedropdown(this)">Reject</a></li>
-                          <li><a data-url="{{route('status.update', $item->status)}}" status=1 onclick="updateleave(this);removedropdown(this)">Approval</a></li>
-                        </ul>
-                    </div>
+                    <a href="/approval/{{$item->id}}" type="button" class="btn btn-warning status">Status</a>
             
                     <div class="col-md-4">
                     @if($item->status==1)
-                    <a class="btn btn-info " type ="button" href="/training" > Detail</a>
+                    <a class="btn btn-info" type ="button" href="/training/{{$item->id}}/approval"> Detail</a>
                     @else
                     <button class="btn btn-info "  data-toggle="modal" data-target="#yModal" disabled> Detail</button>
                     @endif

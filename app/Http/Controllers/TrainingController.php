@@ -18,17 +18,17 @@ class TrainingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($approval_id)
     {
+        $approval = Approval::find($approval_id);
         $category = CategoryTraining::all();
         $lesson = Lesson::all();
         $subcategory = SubcategoryTraining::all();
-        $approval = Approval::all();
         //$room = Room::all();
         $provider = Provider::all();
         // $data['venue'] = Venue::get(["nameVenue","id"]);
         $venue = Venue::all();
-        return view('setting.createTraining',compact('approval','provider','venue','category','subcategory','lesson'));
+        return view('setting.createTraining',compact('approval','provider','venue','category','subcategory','lesson','approval'));
     }
 
     /**
@@ -75,6 +75,8 @@ class TrainingController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request); 
+        
         $this->validate($request, [
             'start_date'  => 'required|date',
             'end_date'    => 'required|date|after:start_date',

@@ -16,12 +16,9 @@
             <div class="form-group row mt-2">
                 <label class="col-sm-3 control-label">Title Training :</label>
                 <div class="col-sm-8">
-                <select class="form-control select2" name="approval_id" placeholder="titleTraining" style="width: 100%;">
-                    @foreach($approval as $item)
-                    <option value="{{ $item->id }}">{{ $item->titleTraining }}</option>
-                    @endforeach
+                <select class="form-control select2" name="approval_id" placeholder="titleTraining" style="width: 100%;" disabled>
+                    <option>{{ $approval->titleTraining }}</option>
                 </select>
-                {{-- <input type="text" class="form-control" name="" value="" placeholder="Judul Training"> --}}
                 </div>
             </div>
 
@@ -29,13 +26,13 @@
                 <label class="col-sm-3 control-label">Mandatory for Employee :</label>
                 <div class="col-lg-4">
                     <div class="checkbox">
-                        <label><input type="radio" name="" value="yes"> Yes</label>
+                        <label><input type="radio" name="mandatory" value="yes"> Yes</label>
                     </div>
                 </div>
 
                 <div class="col-lg-2">
                     <div class="checkbox">
-                      <label><input type="radio" name="" value="no"> No</label>
+                      <label><input type="radio" name="mandatory" value="no"> No</label>
                     </div>
                 </div>
             </div>

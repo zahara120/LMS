@@ -64,7 +64,8 @@ class ApprovalRecordController extends Controller
 
         //return $request->all();
 
-        //approvalTraining::create($request->all());
+        //approvalTraining::create($request->all());'
+        
 
         return redirect('/approval')->with('succes','succes add data');
     }
@@ -77,7 +78,8 @@ class ApprovalRecordController extends Controller
      */
     public function show($id)
     {
-        //
+        $approval = Approval::findOrFail($id);
+        return view('approvalDetail',compact('approval'));
     }
 
     /**
