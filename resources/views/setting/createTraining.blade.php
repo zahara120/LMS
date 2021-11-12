@@ -6,7 +6,8 @@
 <div class="box">
     <div class="box-header with-border">
 
-        <h3 class="box-title">Create Training</h3>
+        <h3 class="box-title">Create Training</h3> <br>
+        <h3 class="box-title">bikin CREATE/database</h3>
     </div>
 
     <form role="form" action="/training" method="post">
@@ -131,6 +132,8 @@
                     </div>
                 </div>
             </div>
+
+
 
         </div>
     <div class="box-footer">
