@@ -8,6 +8,7 @@ use App\Models\Provider;
 use App\Models\Lesson;
 use App\Models\Room;
 use App\Models\SubcategoryTraining;
+use App\Models\Training;
 use App\Models\Venue;
 use Illuminate\Http\Request;
 
@@ -73,14 +74,17 @@ class TrainingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $approval_id)
     {
-        dd($request); 
-        
+        // dd($request);
         $this->validate($request, [
             'start_date'  => 'required|date',
             'end_date'    => 'required|date|after:start_date',
         ]);
+
+        $request->request->add(['approval_id' => $approval_id]);
+        Training::create($request->all());
+        return redirect('/approval');
     }
 
 

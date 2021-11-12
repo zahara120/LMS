@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CategoryTraining;
 use App\Models\Approval;
 use App\Models\SubcategoryTraining;
+use App\Models\Training;
 use Illuminate\Http\Request;
 
 class ApprovalRecordController extends Controller
@@ -17,7 +18,8 @@ class ApprovalRecordController extends Controller
     public function index()
     {
         $approval = Approval::all();
-        return view('approvalRecord',compact('approval'));
+        $trainings = Training::all();
+        return view('approvalRecord',compact('approval', 'trainings'));
     }
 
     /**
@@ -108,21 +110,15 @@ class ApprovalRecordController extends Controller
     //     return back();
     // }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $approval_id)
     {
-        //$id = \Request::segment(3);
-        $application = Approval::find($id)->update(['status' => $request->status]);
-        if ($application->status == 1) 
-        {
-        $application->status = 2;
-        $msg = 'User UnApproved successfully';
-        }
-        else {
-            $application->status = 1;   
-            $msg = 'User Approved successfully';
-                }
-        $application->save();
-        //return Redirect::back()->with('message',$msg);
+        // dd($request->status);
+        // dd($approval_id);
+        $approval = Approval::findOrFail($approval_id);
+        $request->request->add(['status' => $request->status]);
+        $input = $request->all();
+        $approval->fill($input)->save();
+        return redirect('/approval');
     }
     
 

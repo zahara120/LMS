@@ -95,8 +95,23 @@
 
     </div>
     store button ke status
-    <a type="button" class="btn btn-success">Terima</a>
-    <a type="button" class="btn btn-danger">Tolak</a>
-    <input type="text" name="alasan" placeholder="Alasan"> bikin table lagi
+    <form action="/approval/{{$approval->id}}" method="post">
+    @csrf
+    @method('PUT')
+        <!-- <a type="button" class="btn btn-success">Terima</a>
+        <a type="button" class="btn btn-danger">Tolak</a> -->
+        
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="status" id="setuju" value="1">
+            <label class="form-check-label" for="inlineRadio1">Terima</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="status" id="tidak" value="2">
+            <label class="form-check-label" for="inlineRadio2">Tolak</label>
+        </div>
+        <input type="text" name="alasan" placeholder="Alasan">
+        <br>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
 </div>
 @endsection

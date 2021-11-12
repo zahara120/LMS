@@ -83,13 +83,22 @@
                     <a href="/approval/{{$item->id}}" type="button" class="btn btn-warning status">Status</a>
             
                     <div class="col-md-4">
-                    @if($item->status==1)
-                    <a class="btn btn-info" type ="button" href="/training/{{$item->id}}/approval"> Detail</a>
-                    @else
-                    <button class="btn btn-info "  data-toggle="modal" data-target="#yModal" disabled> Detail</button>
-                    @endif
+                    <?php $buttonFlag = 0;?>
+                      @foreach($trainings as $training)
+                      <!-- kalo ada -->
+                        @if($training->approval_id == $item->id)
+                        <?php $buttonFlag++ ?>
+                        @endif
+                      @endforeach
+
+                      @if($buttonFlag < 1)
+                      <a class="btn btn-info" type ="button" href="/training/{{$item->id}}/approval"> Detail</a>
+                      @else
+                      <button class="btn btn-info "  data-toggle="modal" data-target="#yModal" disabled> Detail</button>
+                      @endif
+
                     </div> 
-         
+                    disable button status
                     {{-- <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             status
