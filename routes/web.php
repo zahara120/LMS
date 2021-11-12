@@ -19,6 +19,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VenueController;
 use App\Http\Controllers\ExamController;
 use App\Models\CategoryTraining;
+use App\Http\Controllers\ForumController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -51,6 +52,8 @@ Auth::routes();
 Route::middleware(['auth', 'role:Admin'])->group(function () {
     
     Route::get('/setting',[SettingController::class,'index']);
+
+    Route::resource('/forum',ForumController::class);
 
     Route::resource('/lesson',LessonController::class);
 
