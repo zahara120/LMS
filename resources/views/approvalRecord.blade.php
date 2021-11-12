@@ -79,8 +79,11 @@
                         </select>
                     </div>
                     </form> --}}
-    
-                    <a href="/approval/{{$item->id}}" type="button" class="btn btn-warning status">Status</a>
+                    @if($item->status == 0)
+                      <a href="/approval/{{$item->id}}" type="button" class="btn btn-warning status">Status</a>
+                    @else
+                      <a href="/approval/{{$item->id}}" type="button" class="btn btn-warning status" disabled>Status</a>
+                    @endif
             
                     <div class="col-md-4">
                     <?php $buttonFlag = 0;?>
@@ -96,22 +99,7 @@
                       @else
                       <button class="btn btn-info "  data-toggle="modal" data-target="#yModal" disabled> Detail</button>
                       @endif
-
                     </div> 
-                    disable button status
-                    {{-- <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            status
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item"  data-status="1">
-                              Approve
-                            </button>
-                            <a class="dropdown-item"  data-status="2">
-                              Rejected
-                            </button>
-                        </div>
-                    </div> --}}
                 </td>
             </tr>
             @endforeach

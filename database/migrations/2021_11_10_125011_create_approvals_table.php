@@ -26,6 +26,7 @@ class CreateApprovalsTable extends Migration
             $table->mediumText('objectiveTraining');
             $table->mediumText('backgroundTraining');
             $table->text('description');
+            $table->string('alasan')->nullable();
             $table->timestamps();
         });
 

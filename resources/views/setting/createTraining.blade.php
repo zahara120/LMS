@@ -6,8 +6,7 @@
 <div class="box">
     <div class="box-header with-border">
 
-        <h3 class="box-title">Create Training</h3> <br>
-        <h3 class="box-title">bikin CREATE/DATABASE</h3>
+        <h3 class="box-title">Create Training</h3>
     </div>
 
     <form role="form" action="/training/{{$approval->id}}/approval" method="post">

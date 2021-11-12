@@ -116,6 +116,7 @@ class ApprovalRecordController extends Controller
         // dd($approval_id);
         $approval = Approval::findOrFail($approval_id);
         $request->request->add(['status' => $request->status]);
+        $request->request->add(['alasan' => $request->alasan]);
         $input = $request->all();
         $approval->fill($input)->save();
         return redirect('/approval');
