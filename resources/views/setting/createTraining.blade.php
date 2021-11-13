@@ -6,11 +6,10 @@
 <div class="box">
     <div class="box-header with-border">
 
-        <h3 class="box-title">Create Training</h3> <br>
-        <h3 class="box-title">bikin CREATE/DATABASE</h3>
+        <h3 class="box-title">Create Training</h3>
     </div>
 
-    <form role="form" action="/training" method="post">
+    <form role="form" action="/training/{{$approval->id}}/approval" method="post">
         @csrf
         <div class="box-body">
 
@@ -18,7 +17,7 @@
                 <label class="col-sm-3 control-label">Title Training :</label>
                 <div class="col-sm-8">
                 <select class="form-control select2" name="approval_id" placeholder="titleTraining" style="width: 100%;" disabled>
-                    <option>{{ $approval->titleTraining }}</option>
+                    <option value="{{ $approval->titleTraining }}">{{ $approval->titleTraining }}</option>
                 </select>
                 </div>
             </div>
@@ -42,13 +41,13 @@
                 <label class="col-sm-3 control-label">Metode Training :</label>
                 <div class="col-lg-4">
                     <div class="checkbox">
-                        <label><input type="radio" onclick="javascript:onlineorofflineCheck();" name="methodTraining" id="online"> Online</label>
+                        <label><input type="radio" onclick="javascript:onlineorofflineCheck();" name="mandatoryTraining" id="online" value="online"> Online</label>
                     </div>
                 </div>
 
                 <div class="col-lg-2">
                     <div class="checkbox">
-                      <label><input type="radio" onclick="javascript:onlineorofflineCheck();" name="methodTraining" id="offline"> Offline</label>
+                      <label><input type="radio" onclick="javascript:onlineorofflineCheck();" name="mandatoryTraining" id="offline" value="offline"> Offline</label>
                     </div>
                 </div>
             </div>
@@ -85,7 +84,7 @@
                     {{-- <div class="input-group-addon">
                         <i class="fa fa-clock-o"></i>
                     </div> --}}
-                    <input type="date" class="form-control pull-right" id="reservationtime">
+                    <input type="date" name="start_date" class="form-control pull-right" id="reservationtime">
                     </div>
                     </div>
 
@@ -98,7 +97,7 @@
                     {{-- <div class="input-group-addon">
                         <i class="fa fa-clock-o"></i>
                     </div> --}}
-                    <input type="date" class="form-control pull-right" id="reservationtime">
+                    <input type="date" name="end_date" class="form-control pull-right" id="reservationtime">
                     </div>
                     </div>
 
@@ -120,7 +119,7 @@
             <div class="form-group row mt-2">
                 <label class="col-sm-3 control-label">Catatan : </label>
                 <div class="col-sm-8">
-                <textarea class="form-control" name="description" rows="3" placeholder="Catatan..."></textarea>
+                <textarea class="form-control" name="catatan" rows="3" placeholder="Catatan..."></textarea>
                 </div>
             </div>
 
@@ -128,7 +127,7 @@
                 <label class="col-sm-3 control-label">Publish :</label>
                 <div class="col-lg-2">
                     <div class="checkbox">
-                        <label><input type="checkbox" name="methodTraining" id="online"> Yes</label>
+                        <label><input type="checkbox" name="publish" id="online" value="yes"> Yes</label>
                     </div>
                 </div>
             </div>
@@ -137,7 +136,7 @@
 
         </div>
     <div class="box-footer">
-    <button type="button" class="btn btn-default">Cancel</button>
+    <a href="/approval" type="button" class="btn btn-default">Cancel</a>
     <button type="submit" class="btn btn-primary">Submit</button>
     </div>
     </form>

@@ -2,34 +2,6 @@
 @section('title','Approval Detail')
 
 @section('content')
-<!-- <h2>
-    category ID :
-    {{$approval->category_id}}
-<br>
-    subcategory ID :
-    {{$approval->subcategory_id}}
-<br>
-    Title Training :
-    {{$approval->titleTraining}}
-<br>
-    Status :
-    {{$approval->status}}
-<br>
-    Quota :
-    {{$approval->quota}}
-<br>
-    Objective Training :
-    {{$approval->objectiveTraining}}
-<br>
-    Background Training :
-    {{$approval->backgroundTraining}}
-<br>
-    Description :
-    {{$approval->description}}
-</h2>
-
-
- -->
 
 <div class="box">
     <div class="box-header with-border">
@@ -51,52 +23,62 @@
         <div class="form-group row mt-2">
             <label class="col-sm-3 control-label">Status :</label>
             <div class="col-sm-8">
-            <select class="form-control select2" name="lesson_id" placeholder="LessonTraining" style="width: 100%;" disabled>
-                <option value="">{{$approval->status}}</option>
-            </select>
+                <input class="form-control select2" type="text" value="{{$approval->status}}" disabled>
             </div>
         </div>
         
         <div class="form-group row mt-2">
             <label class="col-sm-3 control-label">Quota :</label>
             <div class="col-sm-8">
-            <select class="form-control select2" name="lesson_id" placeholder="LessonTraining" style="width: 100%;" disabled>
-                <option value="">{{$approval->quota}}</option>
-            </select>
+                <input class="form-control select2" type="text" value="{{$approval->quota}}" disabled>
             </div>
         </div>
         
         <div class="form-group row mt-2">
             <label class="col-sm-3 control-label">Objective Training :</label>
             <div class="col-sm-8">
-            <select class="form-control select2" name="lesson_id" placeholder="LessonTraining" style="width: 100%;" disabled>
-                <option value="">{{$approval->objectiveTraining}}</option>
-            </select>
+                <input class="form-control select2" type="text" value="{{$approval->objectiveTraining}}" disabled>
             </div>
         </div>
         
         <div class="form-group row mt-2">
             <label class="col-sm-3 control-label">Background Training :</label>
             <div class="col-sm-8">
-            <select class="form-control select2" name="lesson_id" placeholder="LessonTraining" style="width: 100%;" disabled>
-                <option value="">{{$approval->backgroundTraining}}</option>
-            </select>
+                <input class="form-control select2" type="text" value="{{$approval->backgroundTraining}}" disabled>
             </div>
         </div>
         
         <div class="form-group row mt-2">
             <label class="col-sm-3 control-label">Description :</label>
             <div class="col-sm-8">
-            <select class="form-control select2" name="lesson_id" placeholder="LessonTraining" style="width: 100%;" disabled>
-                <option value="">{{$approval->description}}}</option>
-            </select>
+                <input class="form-control select2" type="text" value="{{$approval->description}}}" disabled>
             </div>
         </div>
+        <form action="/approval/{{$approval->id}}" method="post">
+        @csrf
+        @method('PUT')
+            <div class="form-group row mt-2">
+                <label class="col-sm-3 control-label">Decision :</label>
+                <div class="col-lg-4">
+                    <div class="checkbox">
+                        <label><input type="radio" name="status" value="1">Terima</label>
+                    </div>
+                </div>
 
+                <div class="col-lg-2">
+                    <div class="checkbox">
+                        <label><input type="radio" name="status" value="2">Tolak</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mt-2">
+                <label class="col-sm-3 control-label">Alasan :</label>
+                <div class="col-sm-8">
+                    <input type="text" name="alasan" placeholder="Alasan">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
     </div>
-    store button ke status
-    <a type="button" class="btn btn-success">Terima</a>
-    <a type="button" class="btn btn-danger">Tolak</a>
-    <input type="text" name="alasan" placeholder="Alasan"> bikin table lagi
 </div>
 @endsection

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Approval extends Model
 {
-    protected $fillable = ['titleTraining', 'category_id', 'quota', 'description', 'objectiveTraining', 'backgroundTraining'];
+    protected $guarded = ['id'];
     use HasFactory;
     public function category(){
         return $this->belongsTo('App\Models\CategoryTraining');
