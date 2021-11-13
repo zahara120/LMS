@@ -97,6 +97,8 @@ class ProviderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $provider = Provider::find($id);
+        $provider->delete();
+        return redirect('/provider')->with('succes','succes delete data');
     }
 }

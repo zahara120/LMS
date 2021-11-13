@@ -79,7 +79,13 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
-        //
+        $venue = Venue::all();
+        // $subcategory = SubcategoryTraining::all();
+        $room = Room::findorfail($id);
+
+        //dd($subcategory);
+        //$category = CategoryTraining::findorfail($id);
+        return view ('setting.editRoom',compact('room','venue'));
     }
 
     /**
@@ -91,7 +97,9 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $room = Room::findorfail($id);
+        $room->update($request->all());
+        return redirect('/room')->with('succes','succes edit data');
     }
 
     /**
@@ -102,6 +110,8 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $room = Room::find($id);
+        $room->delete();
+        return redirect('/room')->with('succes','succes delete data');
     }
 }

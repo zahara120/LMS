@@ -55,12 +55,16 @@
                     <a href=" " class="btn btn-xs btn-info" >
                         <i class="fa fa-eye"></i> View
                     </a>
-                    <a href="" class="btn btn-xs btn-primary">
+                    <a href="{{url('/subcategorytraining/'.$item->id.'/edit')}}" class="btn btn-xs btn-primary">
                         <i class="fa fa-pencil"></i> Edit
                     </a>
-                    <a href="" class="btn btn-xs btn-danger">
-                        <i class="fa fa-trash"></i> Delete
-                    </a> 
+                    <form action="{{ url('subcategorytraining/'.$item->id) }}" class="inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
+                        @method('delete')
+                        @csrf         
+                        <button type="submit" class="btn btn-xs btn-danger" >
+                            <i class="fa fa-trash"></i> Delete
+                        </button> 
+                    </form>  
                 </td>
             </tr>
             @endforeach
@@ -84,7 +88,7 @@
             <form action="/subcategorytraining" method="post">
             @csrf
             <div class="form-group">
-                <label for="nameSubcategory">Name Subcategory :</label>
+                <label for="nameSubcategory">Name Subcategory Training :</label>
                 <input type="text" name="nameSubcategory" class="form-control" id="nameSubcategory" placeholder="Nama Subcategory Training">
                 @if ($errors->has('nameSubcategory'))
                 <span class="help-block">
@@ -96,7 +100,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                    <label>Name Category : </label>
+                    <label>Name Category Training : </label>
                     <select class="form-control select2" name="category_id" placeholder="nameCategory" style="width: 100%;">
                         {{-- <option selected="">Name Category</option> --}}
                         @foreach($category as $item)

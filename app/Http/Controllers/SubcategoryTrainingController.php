@@ -72,7 +72,7 @@ class SubcategoryTrainingController extends Controller
      */
     public function show($id)
     {
-        //
+        $subcategory = subcategoryTraining::findOrFail($id);
     }
 
     /**
@@ -83,7 +83,13 @@ class SubcategoryTrainingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = CategoryTraining::all();
+        // $subcategory = SubcategoryTraining::all();
+        $subcategory = SubcategoryTraining::findorfail($id);
+
+        //dd($subcategory);
+        //$category = CategoryTraining::findorfail($id);
+        return view ('setting.editSubcategory',compact('subcategory','category'));
     }
 
     /**
@@ -95,7 +101,9 @@ class SubcategoryTrainingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subcategory = SubcategoryTraining::findorfail($id);
+        $subcategory->update($request->all());
+        return redirect('/subcategorytraining')->with('succes','succes edit data');
     }
 
     /**
@@ -106,6 +114,8 @@ class SubcategoryTrainingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subcategory = subcategoryTraining::find($id);
+        $subcategory->delete();
+        return redirect('/subcategorytraining')->with('succes','succes delete data');
     }
 }
