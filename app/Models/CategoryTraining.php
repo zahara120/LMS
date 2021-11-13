@@ -9,7 +9,7 @@ use App\Models\SubcategoryTraining;
 class CategoryTraining extends Model
 {
     //use HasFactory;
-    protected $fillable = ['nameCategory'];
+    protected $guarded = ['id'];
 
     public function subcategory(){
         return $this->hasMany('App\Models\SubcategoryTraining');

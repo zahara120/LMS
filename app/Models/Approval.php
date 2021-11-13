@@ -10,6 +10,6 @@ class Approval extends Model
     protected $guarded = ['id'];
     use HasFactory;
     public function category(){
-        return $this->belongsTo('App\Models\CategoryTraining');
+        return $this->belongsTo('App\Models\CategoryTraining', 'category_trainings_id');
     }
 }

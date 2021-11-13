@@ -21,12 +21,12 @@ class CreateTrainingsTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
-            $table->foreignId('venue_id')
+            $table->foreignId('venue_id')->nullable()
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
-            $table->foreignId('room_id')
+            $table->foreignId('room_id')->nullable()
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
