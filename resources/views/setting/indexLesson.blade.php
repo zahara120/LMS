@@ -82,7 +82,7 @@
                 url: "{{url('api/fetch-subcategory')}}",
                 type: "POST",
                 data: {
-                    category_id: idCategory,
+                    category_trainings_id: idCategory,
                     _token: '{{csrf_token()}}'
                 },
                 dataType: 'json',
@@ -126,22 +126,18 @@
                 <div class="col-md-4">
                     <div class="form-group">
                     <label>Category Training : </label>
-                    <select class="form-control select2" id="category_id" name="category_id" placeholder="categoryTraining" style="width: 100%;">
+                    <select class="form-control select2" id="category_id" name="category_trainings_id" placeholder="categoryTraining" style="width: 100%;">
                         <option value="">Name Category</option>
                         @foreach($category as $item)
                         <option value="{{ $item->id }}">{{ $item->nameCategory }}</option>
                         @endforeach
                     </select>
-                    {{-- <div class="col-lg-2">
-                        <select class="form-control select2" id="subcategory" name="subcategory" placeholder="subcategoryTraining" style="width: 100%;">
-                        </select>
-                    </div> --}}
                     </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                         <label>Subcategory Training :</label>
-                        <select class="form-control select2" id="subcategory_id" name="subcategory_id" placeholder="subcategoryTraining" style="width: 100%;">
+                        <select class="form-control select2" id="subcategory_id" name="subcategory_trainings_id" placeholder="subcategoryTraining" style="width: 100%;">
                         </select>
                     </div>
                 </div>

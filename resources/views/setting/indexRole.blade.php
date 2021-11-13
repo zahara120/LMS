@@ -103,11 +103,16 @@
                 <div class="col-md-6">
                     <div class="form-group">
                     <label>Permission : </label>
-                    <select class="form-control select2" name="namePermission" placeholder="Permission" style="width: 100%;">
+                    <!-- <select class="form-control select2" name="namePermission" placeholder="Permission" style="width: 100%;">
                         @foreach ($permissions as $item)
                             <option value="{{ $item->id }}">{{ $item->namePermission }}</option>
                         @endforeach
-                    </select>
+                    </select> -->
+                    @foreach ($permissions as $item)
+                        <br>
+                        <input type="checkbox" name="namePermission" value="{{ $item->id }}">
+                        <label for="namePermission">{{ $item->namePermission }}</label>
+                    @endforeach
                     </div>
                 </div>
             </div>

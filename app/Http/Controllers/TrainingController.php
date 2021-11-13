@@ -54,7 +54,7 @@ class TrainingController extends Controller
 
     public function getLesson(Request $request)
     {
-        $data['lessons'] = Lesson::where("subcategory_id",$request->subcategory_id)->get(["id","nameLesson"]);
+        $data['lessons'] = Lesson::where("subcategory_trainings_id",$request->subcategory_trainings_id)->get(["id","nameLesson"]);
         // ->get(["nameRoom","id"]);
         return response()->json($data);
     }

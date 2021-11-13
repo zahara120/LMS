@@ -4,8 +4,6 @@
     <li class="{{ request()->is('dashboard') ? 'active' : "" }}"><a href="/dashboard"><i class="fa"></i> <span>Dashboard</span></a></li>
   
       {{-- @if(auth()->user()->role()->nameRole='Admin') --}}
-  
-    <li class="{{ request()->is('training') ? 'active' : "" }}"><a href="/training"><i class="fa"></i> <span>Create Training</span></a></li>
       
     <li class="{{ request()->is('test') ? 'active' : "" }}"><a href="/test"><i class="fa"></i> <span>Quiz</span></a></li>
 

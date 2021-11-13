@@ -16,7 +16,12 @@ class CreateTestsTable extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('training_id')
+            $table->foreignId('category_trainings_id')
+            ->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->foreignId('subcategory_trainings_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');

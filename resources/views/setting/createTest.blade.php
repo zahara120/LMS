@@ -80,7 +80,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title" id="myModalLabel">Add Subcategory Training</h4>
+          <h4 class="modal-title" id="myModalLabel">Create Test</h4>
         </div>
         <div class="modal-body">
             <form action="/exam" method="post">
@@ -112,22 +112,18 @@
                 <div class="col-md-6">
                     <div class="form-group">
                     <label>Category Training : </label>
-                    <select class="form-control select2" id="category_id" name="category_id" placeholder="categoryTraining" style="width: 100%;">
+                    <select class="form-control select2" id="category_id" name="category_trainings_id" placeholder="categoryTraining" style="width: 100%;">
                         <option value="">Name Category</option>
                         @foreach($category as $item)
                         <option value="{{ $item->id }}">{{ $item->nameCategory }}</option>
                         @endforeach
                     </select>
-                    {{-- <div class="col-lg-2">
-                        <select class="form-control select2" id="subcategory" name="subcategory" placeholder="subcategoryTraining" style="width: 100%;">
-                        </select>
-                    </div> --}}
                     </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                         <label>Subcategory Training :</label>
-                        <select class="form-control select2" id="subcategory_id" name="subcategory_id" placeholder="subcategoryTraining" style="width: 100%;">
+                        <select class="form-control select2" id="subcategory_id" name="subcategory_trainings_id" placeholder="subcategoryTraining" style="width: 100%;">
                         </select>
                     </div>
                 </div>
@@ -145,24 +141,21 @@
             </div>
 
             <div class="row">
-            <div class="col-md-6">
-            <!-- time Picker -->
-            <div class="bootstrap-timepicker">
-                <div class="form-group">
-                  <label>Time picker:</label>
+                <div class="col-md-6">
+                <!-- time Picker -->
+                <!-- di html ataupun di javascript ga ngedukung tipe data durasi -->
+                    <div class="bootstrap-timepicker">
+                        <div class="form-group">
+                            <label>Duration:</label>
 
-                  <div class="input-group">
-                    <input type="time" name="timeTest" class="form-control timepicker">
-
-                    <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
+                            <div class="input-group">
+                                <input type="time" name="timeTest" class="form-control">
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+                        <!-- /.form group -->
                     </div>
-                  </div>
-                  <!-- /.input group -->
                 </div>
-                <!-- /.form group -->
-            </div>
-            </div>
             </div>
 
             <div class="form-group">
@@ -197,7 +190,7 @@
             url:"{{url('api/fetch-subcategory')}}",
             type: "POST",
             data: {
-            category_id: idCategory,
+            category_trainings_id: idCategory,
             _token: '{{csrf_token()}}' 
             },
             dataType : 'json',
@@ -217,7 +210,7 @@
             url:"{{url('api/fetch-lesson')}}",
             type: "POST",
             data: {
-            subcategory_id: idSubcategory,
+            subcategory_trainings_id: idSubcategory,
             _token: '{{csrf_token()}}' 
             },
             dataType : 'json',
