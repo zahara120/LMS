@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 
+
 class CategoryTrainingController extends Controller
 {
 
@@ -28,7 +29,8 @@ class CategoryTrainingController extends Controller
         // $category = CategoryTraining::all();
         // $category = CategoryTraining::with('subcategory')->get();
         // $category = CategoryTraining::with('subcategory')->simplePaginate(5);
-        $category = CategoryTraining::paginate(1);
+        $category = CategoryTraining::paginate(10);
+        //$category = CategoryTraining::all();
         return view('setting.indexCategory',compact('category'));
     }
 
@@ -87,8 +89,9 @@ class CategoryTrainingController extends Controller
      */
     public function edit($id)
     {
-        $category = CategoryTraining::find($id);
-
+        $category = CategoryTraining::findorfail($id);
+        //dd($category);
+        return view ('setting.editCategory',compact('category'));
     }
 
     /**
@@ -100,7 +103,10 @@ class CategoryTrainingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = CategoryTraining::find($id);
+        //return $id;
+        $category = CategoryTraining::findorfail($id);
+        $category->update($request->all());
+        return redirect('/categorytraining')->with('succes','succes edit data');
     }
 
     /**
@@ -112,9 +118,10 @@ class CategoryTrainingController extends Controller
     
     public function destroy($id)
     {
-        $category = CategoryTraining::find($id);
+        //$category = CategoryTraining::findorfail($id)->delete();
+        $category = categoryTraining::find($id);
         $category->delete();
-        return redirect('/lesson')->with('succes','succes delete data');
+        return redirect('/categorytraining')->with('succes','succes delete data');
     }
 
     public function categoryExport(){

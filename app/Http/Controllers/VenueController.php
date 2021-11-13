@@ -71,7 +71,8 @@ class VenueController extends Controller
      */
     public function edit($id)
     {
-        //
+        $venue = Venue::findorfail($id);
+        return view ('setting.editVenue',compact('venue'));
     }
 
     /**
@@ -83,7 +84,9 @@ class VenueController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $venue = Venue::findorfail($id);
+        $venue->update($request->all());
+        return redirect('/venue')->with('succes','succes edit data');
     }
 
     /**
@@ -94,6 +97,8 @@ class VenueController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $venue = Venue::find($id);
+        $venue->delete();
+        return redirect('/room')->with('succes','succes delete data');
     }
 }

@@ -51,21 +51,27 @@
                 <td class="text-center">{{ $category->firstItem() + $key }}</td>
                 <td>{{ $item->nameCategory }}</td>
                 <td class="text-center" width="200px">
-                    {{-- <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#editmodal">
-                        <i class="fa fa-pencil"></i> Edit
-                    </button> --}}
+                
                     <a href="{{url('/categorytraining/'.$item->id)}}" class="btn btn-xs btn-info" >
                         <i class="fa fa-eye"></i> View
                     </a>
-                    <a href="" class="btn btn-xs btn-primary">
+                    <a href="{{url('/categorytraining/'.$item->id.'/edit')}}" class="btn btn-xs btn-primary">
                         <i class="fa fa-pencil"></i> Edit
                     </a>
                     
                     {{-- <a href="/daftar/destroy/{{$student->id_siswa}}" class="btn btn-xs btn-danger" onclick="return confirm('yakin?');">Delete</a> --}}
 
-                    <a href="categorytraining/{{$item->id}}" class="btn btn-xs btn-danger"  onclick="return confirm('yakin?');">
+                    <form action="{{ url('categorytraining/'.$item->id) }}" class="inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
+                    @method('delete')
+                    @csrf         
+                    <button type="submit" class="btn btn-xs btn-danger" >
                         <i class="fa fa-trash"></i> Delete
-                    </a> 
+                    </button> 
+                    </form>
+
+                    {{-- <a href="{{ url('categorytraining/'.$item->id) }}" class="btn btn-xs btn-danger"  onclick="return confirm('Are you sure want to delete this data?');">
+                        <i class="fa fa-trash"></i> Delete
+                    </a>  --}}
                 </td>
             </tr>
             @endforeach
@@ -102,7 +108,7 @@
             <form action="/categorytraining" method="post">
             @csrf
             <div class="form-group">
-                <label for="nameCategory">Name Category :</label>
+                <label for="nameCategory">Name Category Training :</label>
                 <input type="text" name="nameCategory" class="form-control" id="nameCategory" placeholder="Nama Category Training">
                 @if ($errors->has('nameCategory'))
                 <span class="help-block">
