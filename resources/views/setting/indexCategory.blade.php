@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="box-body table-responsive">
-        <table class="table table-bordered table-striped">
+        <table id="table" class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th class="text-center">No</th>
@@ -54,7 +54,7 @@
                     {{-- <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#editmodal">
                         <i class="fa fa-pencil"></i> Edit
                     </button> --}}
-                    <a href=" " class="btn btn-xs btn-info" >
+                    <a href="{{url('/categorytraining/'.$item->id)}}" class="btn btn-xs btn-info" >
                         <i class="fa fa-eye"></i> View
                     </a>
                     <a href="" class="btn btn-xs btn-primary">
@@ -72,7 +72,7 @@
         </tbody> 
     </table>
     {{-- pagination --}}
-    <div class="pull-right">
+    {{-- <div class="pull-right">
         {{ $category->links()}}
     </div>
     <div class="pull-left">
@@ -83,7 +83,7 @@
         of
         {{ $category->total() }}
     </div>
-    </div>
+    </div> --}}
 </div>
 
 @endsection
@@ -98,8 +98,8 @@
           <h4 class="modal-title" id="myModalLabel">Add Category Training</h4>
         </div>
         <div class="modal-body">
-            {!! Form::open(array('url' => '/categorytraining','method' => 'POST')) !!}
-            {{-- <form action="/categorytraining" method="post"> --}}
+            {{-- {!! Form::open(array('url' => '/categorytraining','method' => 'POST')) !!} --}}
+            <form action="/categorytraining" method="post">
             @csrf
             <div class="form-group">
                 <label for="nameCategory">Name Category :</label>
@@ -142,8 +142,8 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           <button type="submit" class="btn btn-primary">Import</button>
-          {{ Form::close() }}
-        {{-- </form> --}}
+          {{-- {{ Form::close() }} --}}
+        </form>
         </div>
       </div>
     </div>

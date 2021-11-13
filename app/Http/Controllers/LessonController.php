@@ -16,7 +16,8 @@ class LessonController extends Controller
     public function index()
     {
         $lesson = Lesson::all();
-        return view('setting.indexLesson',compact('lesson'));
+        $category = CategoryTraining::all();
+        return view('setting.indexLesson',compact('lesson','category'));
     }
 
     /**
@@ -43,7 +44,8 @@ class LessonController extends Controller
         ]);
 
         $lesson = new Lesson();
-        
+        $lesson->category_id = $request->nameLesson;
+        $lesson->subcategory_id = $request->subcategory_id;
         $lesson->nameLesson = $request->nameLesson;
         $lesson->url = $request->url;
         $lesson->description = $request->description;

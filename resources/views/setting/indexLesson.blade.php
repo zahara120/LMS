@@ -35,7 +35,7 @@
     </div>
 
     <div class="box-body table-responsive">
-        <table class="table table-bordered table-striped">
+        <table id="table" class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th class="text-center">No</th>
@@ -55,7 +55,7 @@
                 <td>{{ $item->file }}</td>
                 <td>{{ $item->description }}</td>
                 <td class="text-center" width="200px">
-                    <a href="{{url('/show',$item->id)}} " class="btn btn-xs btn-info" >
+                    <a href="{{url('/lesson/'.$item->id)}} " class="btn btn-xs btn-info" >
                         <i class="fa fa-eye"></i> View
                     </a>
                     <a href="" class="btn btn-xs btn-primary">
@@ -71,6 +71,32 @@
     </table>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#category_id').on('change', function () {
+            var idCategory = this.value;
+            $("#subcategory_id").html('');
+            $.ajax({
+                url: "{{url('api/fetch-subcategory')}}",
+                type: "POST",
+                data: {
+                    category_id: idCategory,
+                    _token: '{{csrf_token()}}'
+                },
+                dataType: 'json',
+                success: function (result) {
+                    $('#subcategory_id').html('<option value="">Select Subcategory</option>');
+                    $.each(result.subcategory_trainings, function (key, value) {
+                        $("#subcategory_id").append('<option value="' + value.id + '">' + value.nameSubcategory + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
+
 
 @endsection
 
@@ -95,6 +121,31 @@
                     </span>
                 @endif
             </div>   
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                    <label>Category Training : </label>
+                    <select class="form-control select2" id="category_id" name="category_id" placeholder="categoryTraining" style="width: 100%;">
+                        <option value="">Name Category</option>
+                        @foreach($category as $item)
+                        <option value="{{ $item->id }}">{{ $item->nameCategory }}</option>
+                        @endforeach
+                    </select>
+                    {{-- <div class="col-lg-2">
+                        <select class="form-control select2" id="subcategory" name="subcategory" placeholder="subcategoryTraining" style="width: 100%;">
+                        </select>
+                    </div> --}}
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                        <label>Subcategory Training :</label>
+                        <select class="form-control select2" id="subcategory_id" name="subcategory_id" placeholder="subcategoryTraining" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+            </div>
 
             <div class="form-group">
                 <label class="control-label">Video :</label>
