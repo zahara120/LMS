@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Lesson;
+use App\Models\Forum;
+use App\Http\Controllers\Controller;
 
 class ForumController extends Controller
 {
@@ -13,7 +16,8 @@ class ForumController extends Controller
      */
     public function index()
     {
-        //
+        $forum = Forum::orderBy('created_at','desc')->paginate(10);
+        return view ('forum',compact('forum'));
     }
 
     /**
@@ -23,7 +27,7 @@ class ForumController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,7 +38,10 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->request->add(['user_id' => auth()->user()->id]);
+        Forum::create($request->all());
+        return redirect()->back()->with('success','succes add forum');
+
     }
 
     /**
@@ -45,7 +52,9 @@ class ForumController extends Controller
      */
     public function show($id)
     {
-        //
+        $forum = Forum::find($id);
+        return view('viewforum',compact('forum'));
+        //dd($id);
     }
 
     /**
@@ -81,4 +90,5 @@ class ForumController extends Controller
     {
         //
     }
+
 }

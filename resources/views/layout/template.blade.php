@@ -11,6 +11,8 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('style/bower_components/font-awesome/css/font-awesome.min.css')}}">
   <!-- Ionicons -->
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{asset('style/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('style/bower_components/Ionicons/css/ionicons.min.css')}}">
   <!-- daterange picker -->
   <link rel="stylesheet" href="{{asset('style/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
@@ -159,6 +161,9 @@
 <script src="{{asset('style/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('style/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<!-- DataTables -->
+<script src="{{asset('style/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('style/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 <!-- date-range-picker -->
 <script src="{{asset('style/bower_components/moment/min/moment.min.js')}}"></script>
 <script src="{{asset('style/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
@@ -175,6 +180,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('style/dist/js/demo.js')}}"></script>
 <script>
+  $('#table').DataTable();
   $(document).ready(function () {
     $('.sidebar-menu').tree()
   })

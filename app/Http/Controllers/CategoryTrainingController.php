@@ -75,7 +75,8 @@ class CategoryTrainingController extends Controller
      */
     public function show($id)
     {
-
+        $category = categoryTraining::find($id);
+        return view('setting.viewCategory', compact('category'));
     }
 
     /**

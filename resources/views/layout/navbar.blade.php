@@ -5,9 +5,11 @@
   
       {{-- @if(auth()->user()->role()->nameRole='Admin') --}}
   
-      <li class="{{ request()->is('training') ? 'active' : "" }}"><a href="/training"><i class="fa"></i> <span>Create Training</span></a></li>
+    <li class="{{ request()->is('training') ? 'active' : "" }}"><a href="/training"><i class="fa"></i> <span>Create Training</span></a></li>
       
     <li class="{{ request()->is('test') ? 'active' : "" }}"><a href="/test"><i class="fa"></i> <span>Quiz</span></a></li>
+
+    <li class="{{ request()->is('forum') ? 'active' : "" }}"><a href="/forum"><i class="fa"></i> <span>Forum</span></a></li>
   
     <li class="{{ request()->is('test/create') ? 'active' : "" }}"><a href="/test/create"><i class="fa"></i> <span>Create Test</span></a></li>
   
