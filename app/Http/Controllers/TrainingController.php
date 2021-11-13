@@ -64,7 +64,7 @@ class TrainingController extends Controller
         // $data['states'] = State::where("country_id",$request->country_id)->get();
         // return response()->json($data);
 
-        $data['subcategory_trainings'] = SubcategoryTraining::where("category_id",$request->category_id)->get(["id","nameSubcategory"]);
+        $data['subcategory_trainings'] = SubcategoryTraining::where("category_trainings_id",$request->category_trainings_id)->get(["id","nameSubcategory"]);
         // ->get(["nameRoom","id"]);
         return response()->json($data);
     }

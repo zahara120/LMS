@@ -52,21 +52,22 @@ class ApprovalRecordController extends Controller
     public function store(Request $request)
     {
 
-        $approval = new Approval;
+        // dd($request);
+        // $approval = new Approval;
         // $approval->training_id = $request->training_id;
-        $approval->user_id = $request->user()->id;
-        $approval->titleTraining = $request->titleTraining;
-        $approval->category_id = $request->category_id;
-        $approval->subcategory_id = $request->subcategory_id;
-        $approval->quota = $request->quota;
-        $approval->description = $request->description;
-        $approval->objectiveTraining = $request->objectiveTraining;
-        $approval->backgroundTraining = $request->backgroundTraining;
-        $approval->save();
-
+        // $approval->user_id = $request->user()->id;
+        // $approval->titleTraining = $request->titleTraining;
+        // $approval->category_id = $request->category_id;
+        // $approval->subcategory_id = $request->subcategory_id;
+        // $approval->quota = $request->quota;
+        // $approval->description = $request->description;
+        // $approval->objectiveTraining = $request->objectiveTraining;
+        // $approval->backgroundTraining = $request->backgroundTraining;
+        // $approval->save();
         //return $request->all();
-
-        //approvalTraining::create($request->all());'
+        
+        $request->request->add(['user_id' => $request->user()->id]);
+        Approval::create($request->all());
         
 
         return redirect('/approval')->with('succes','succes add data');

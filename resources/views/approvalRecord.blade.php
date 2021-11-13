@@ -53,7 +53,6 @@
                 <td class="text-center">{{ $loop->iteration }}</td>
                 <td>{{ $item->titleTraining }}</td>
                 <td>{{ $item->category->nameCategory }}</td>
-                {{-- <td>{{ $item->category->nameCategory }}</td> --}}
                 <td>{{ $item->quota }}</td>
                 <td>
                     @if ($item->status==0)

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoryTrainingsTable extends Migration
+class CreateRoomsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,15 @@ class CreateCategoryTrainingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_trainings', function (Blueprint $table) {
+        Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('nameCategory')->unique();
+
+            $table->foreignId('venue_id')
+            ->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->string('nameRoom');
             $table->timestamps();
         });
     }
@@ -27,6 +33,6 @@ class CreateCategoryTrainingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_trainings');
+        Schema::dropIfExists('rooms');
     }
 }

@@ -14,20 +14,9 @@ class CreateVenuesTable extends Migration
     public function up()
     {
         Schema::create('venues', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nameVenue')->unique();
             $table->timestamps();
-        });
-
-        Schema::create('rooms', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('venue_id');
-            $table->string('nameRoom');
-            $table->timestamps();
-        });
-
-        Schema::table('rooms', function(Blueprint $table){
-            $table->foreign('venue_id')->references('id')->on('venues')->onDelete('cascade')->unUpdate('cascade');
         });
     }
 
@@ -39,7 +28,5 @@ class CreateVenuesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('venues');
-        Schema::dropIfExists('rooms');
-
     }
 }

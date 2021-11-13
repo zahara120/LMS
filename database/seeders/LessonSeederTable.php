@@ -13,8 +13,8 @@ class LessonSeederTable extends Seeder
         DB::table('lessons')->insert([
             [
                 'id'             => 1,
-                'category_id'             => 4,
-                'subcategory_id'             => 3,
+                'category_trainings_id'             => 4,
+                'subcategory_trainings_id'             => 3,
                 'nameLesson'           => 'Audit & Sales Tax',
                 'description' => 'Usu ocurreret omittantur concludaturque ad, natum constituto, reque vivendum an per.',
                 'file'           => '1634541782.mp4',
@@ -22,8 +22,8 @@ class LessonSeederTable extends Seeder
             ],
             [
                 'id'             => 2,
-                'category_id'             => 3,
-                'subcategory_id'             => 2,
+                'category_trainings_id'             => 3,
+                'subcategory_trainings_id'             => 2,
                 'nameLesson'           => 'Basic Electrical',
                 'description' => 'Et erant dignissim vel, ei stet oportere intellegam cum.',
                 'file'           => '1634541920.mp4',
@@ -31,8 +31,8 @@ class LessonSeederTable extends Seeder
             ],
             [
                 'id'             => 3,
-                'category_id'             => 4,
-                'subcategory_id'             => 3,
+                'category_trainings_id'             => 4,
+                'subcategory_trainings_id'             => 3,
                 'nameLesson'           => 'Economic Theory',
                 'description' => 'Eu adipisci usu, offendit ocurreret, ut legendos voluptatum ullamcorper.',
                 'file'           => '1634541782.mp4',
@@ -40,8 +40,8 @@ class LessonSeederTable extends Seeder
             ],
             [
                 'id'             => 4,
-                'category_id'             => 1,
-                'subcategory_id'             => 4,
+                'category_trainings_id'             => 1,
+                'subcategory_trainings_id'             => 4,
                 'nameSubcategory'           => 'Management Time',
                 'description' => 'Cum eloquentiam intellegebat ut, deleniti voluptua ad quo.',
                 'file'           => '1634541920.mp4',
