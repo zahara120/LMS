@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateApprovalsTable extends Migration
+class CreateLessonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateApprovalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('approvals', function (Blueprint $table) {
+        Schema::create('lessons', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('user_id')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
 
             $table->foreignId('category_trainings_id')
             ->constrained()
@@ -31,14 +26,13 @@ class CreateApprovalsTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
-            // $table->unsignedInteger('training_id')->default(0)->nullable();
-            $table->string('titleTraining')->unique();
-            $table->boolean('status')->default(0)->nullable();
-            $table->integer('quota');
-            $table->mediumText('objectiveTraining');
-            $table->mediumText('backgroundTraining');
-            $table->text('description');
-            $table->string('alasan')->nullable();
+            $table->string('nameLesson');
+            $table->longText('description')->nullable();
+            $table->string('file');
+            $table->string('url');
+            //$table->video();
+            //$table->unsignedInteger('training_id')->nullable();
+            //$table->boolean('publish')->default(0)->nullable();
             $table->timestamps();
         });
     }
@@ -50,6 +44,6 @@ class CreateApprovalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('approvals');
+        Schema::dropIfExists('lessons');
     }
 }
