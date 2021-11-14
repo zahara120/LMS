@@ -26,6 +26,7 @@
                 <input type="email" class="form-control" id="inputEmail" placeholder="Email">
               </div>
             </div>
+
             <div class="form-group">
               <label for="inputName" class="col-sm-2 control-label">Name</label>
 
@@ -33,6 +34,7 @@
                 <input type="text" class="form-control" id="inputName" placeholder="Name">
               </div>
             </div>
+
             <div class="form-group">
               <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
 
@@ -40,6 +42,7 @@
                 <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
               </div>
             </div>
+
             <div class="form-group">
               <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
 
@@ -47,6 +50,7 @@
                 <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
               </div>
             </div>
+            
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <div class="checkbox">
@@ -58,7 +62,6 @@
             </div>
             
           </form>
-
         <label for="inputName" class="col-sm-2 control-label">Category id: </label>
         <div class="col-sm-10">
         </div>

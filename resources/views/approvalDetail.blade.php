@@ -61,24 +61,48 @@
                 <label class="col-sm-3 control-label">Decision :</label>
                 <div class="col-lg-4">
                     <div class="checkbox">
-                        <label><input type="radio" name="status" value="1">Terima</label>
+                        <label><input type="radio" name="status" id="approve" onclick="javascript:statusCheck();" value="1">Terima</label>
                     </div>
                 </div>
 
                 <div class="col-lg-2">
                     <div class="checkbox">
-                        <label><input type="radio" name="status" value="2">Tolak</label>
+                        <label><input type="radio" name="status" id="reject" onclick="javascript:statusCheck();" value="2">Tolak</label>
                     </div>
                 </div>
             </div>
-            <div class="form-group row mt-2">
+
+            <div id="ifreject" style="display:none">
+                <div class="form-group row mt-2">
+                <label class="col-sm-3 control-label">Alasan :</label>
+                <div class="col-sm-8">
+                    <input type="text" name="alasan" placeholder="alasan">
+                </div>
+            </div>
+            </div>
+
+            {{-- <div class="form-group row mt-2">
                 <label class="col-sm-3 control-label">Alasan :</label>
                 <div class="col-sm-8">
                     <input type="text" name="alasan" placeholder="Alasan">
                 </div>
-            </div>
+            </div> --}}
             <button type="submit" class="btn btn-success">Submit</button>
         </form>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript">
+
+    function statusCheck() {
+        if (document.getElementById('reject').checked) {
+            document.getElementById('ifreject').style.display = 'block';
+        }
+        else document.getElementById('ifreject').style.display = 'none';
+    
+    }
+
+</script>
+
 @endsection

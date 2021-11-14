@@ -81,7 +81,7 @@
                     @if($item->status == 0)
                       <a href="/approval/{{$item->id}}" type="button" class="btn btn-warning status">Status</a>
                     @else
-                      <a href="/approval/{{$item->id}}" type="button" class="btn btn-warning status" disabled>Status</a>
+                      <a type="button" class="btn btn-warning status" disabled>Status</a>
                     @endif
             
                     <div class="col-md-4">
@@ -93,10 +93,12 @@
                         @endif
                       @endforeach
 
-                      @if($buttonFlag < 1)
+                      @if($buttonFlag < 1 &&  $item->status == 1)
                       <a class="btn btn-info" type ="button" href="/training/{{$item->id}}/approval"> Detail</a>
+                      {{-- @elseif ($item->status == 1)
+                      <a class="btn btn-info" type ="button" href="/training/{{$item->id}}/approval"> Detail</a> --}}
                       @else
-                      <button class="btn btn-info "  data-toggle="modal" data-target="#yModal" disabled> Detail</button>
+                      <button class="btn btn-info "  disabled> Detail</button>
                       @endif
                     </div> 
                 </td>
