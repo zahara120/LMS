@@ -20,6 +20,8 @@ use App\Http\Controllers\VenueController;
 use App\Http\Controllers\ExamController;
 use App\Models\CategoryTraining;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\AnswerController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -65,9 +67,14 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::resource('/room',RoomController::class);
     Route::resource('/provider',ProviderController::class);
 
+    Route::resource('/question',QuestionController::class);
+
+    Route::resource('/answer',AnswerController::class);
+
     // Roles
     //Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
     Route::resource('/role', RoleController::class);
+    
 
     // Permissions
     //Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');

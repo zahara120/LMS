@@ -44,7 +44,7 @@ class LessonController extends Controller
         ]);
 
         $lesson = new Lesson();
-        $lesson->category_id = $request->nameLesson;
+        $lesson->category_id = $request->category_id;
         $lesson->subcategory_id = $request->subcategory_id;
         $lesson->nameLesson = $request->nameLesson;
         $lesson->url = $request->url;

@@ -22,6 +22,8 @@
           </span>
         </a>
         <ul class="treeview-menu">
+          <li><a href="/answer"><i class="fa fa-circle-o"></i>Create Answer</a></li>
+          <li><a href="/question"><i class="fa fa-circle-o"></i>Create Question</a></li>
           <li><a href="/lesson"><i class="fa fa-circle-o"></i>Lesson Training</a></li>
           <li><a href="/categorytraining"><i class="fa fa-circle-o"></i>Category Training</a></li>
           <li><a href="/subcategorytraining"><i class="fa fa-circle-o"></i>Subcategory Training</a></li>
