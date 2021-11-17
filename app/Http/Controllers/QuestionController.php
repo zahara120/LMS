@@ -39,20 +39,23 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
             'addmore.*.question' => 'required',
         ]);
-        //dd($request);
-        foreach ($request->addmore as $key => $value) {
-            Question::create($value);
+        foreach ($request->question as $value) {
+            Question::create([
+                'question' => $value,
+                'test_id' => $request->test_id
+            ]);
         }
         return redirect('/question')->with('succes','succes add data');
     }
 
     /**
      * Display the specified resource.
-     *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
