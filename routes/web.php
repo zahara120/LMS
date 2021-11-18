@@ -20,6 +20,7 @@ use App\Http\Controllers\VenueController;
 use App\Http\Controllers\ExamController;
 use App\Models\CategoryTraining;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +55,8 @@ Auth::routes();
 Route::middleware(['auth', 'role:Admin'])->group(function () {
     
     Route::get('/setting',[SettingController::class,'index']);
+
+    Route::resource('comment.forum',CommentController::class);
 
     Route::resource('/forum',ForumController::class);
 

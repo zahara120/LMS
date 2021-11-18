@@ -21,7 +21,7 @@
                 <div class="form-group row mt-2">
                     <label class="col-sm-2 control-label">Name test :</label>
                     <div class="col-sm-8">
-                    <select class="form-control select2" name="approval_id" placeholder="titleTraining" style="width: 100%;">
+                    <select class="form-control select2" name="test_id" placeholder="titleTraining" style="width: 100%;">
                         @foreach($test as $item)
                         <option value="{{ $item->id }}">{{ $item->nameTest }}</option>
                         @endforeach

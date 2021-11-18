@@ -42,11 +42,12 @@ class QuestionController extends Controller
         $request->validate([
             'addmore.*.question' => 'required',
         ]);
-        //dd($request);
+        dd($request);
         foreach ($request->addmore as $key => $value) {
             Question::create($value);
         }
         return redirect('/question')->with('succes','succes add data');
+
     }
 
     /**

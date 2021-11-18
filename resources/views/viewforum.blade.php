@@ -25,37 +25,64 @@
             </div>
             {{-- <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
             <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a></li>--}}
-    </ul>
+        </ul>
+      
 
     {{-- <div class="row"> --}}
     <div class="modal-body">
-    <form action = "" style="display:none" id="comment" method="post">
+    <form action = "/comment/{{$forum->id}}/forum" style="display:none" id="comment" method="post">
        @csrf
-      <input type="hiden" name="forum_id" value="{{ $forum->id }}"> 
-      <input type="hiden" name="parent" value="0">
+      <input type="hidden" name="forum_id" value="{{ $forum->id }}"> 
+      <input type="hidden" name="parent" value="0">
       <div class="form-group">
-      <textarea class="form-control" name="comment" rows="3" placeholder="Type a comment ..."></textarea>
+      <textarea class="form-control" name="content" id="comment-ckeditor" rows="3" placeholder="Type a comment ..."></textarea>
       <input type="submit" class="btn btn-primary" value="submit">
     </div>
     </form>
+
+    <p><h4>Komentar</h4></p>
+
     </div>
     {{-- </div> --}}
 
     {{-- <input style="display:none" id="comment" class="form-control input-sm" type="text" placeholder="Type a comment"> --}}
 
-
-    <p><h4>Komentar</h4></p>
-
     <div class="modal-body">
     <div class="post">
+      @foreach($forum->comment()->where('parent',0)->orderBy('created_at','desc')->get() as $item)
       <div class="user-block">
         <img class="img-circle img-bordered-sm" src="{{asset('style/dist/img/default-user.jpg')}}" alt="user image">
                   <span class="username">
-                    <a href="#">snkndksdnknk</a>
-                    <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                    <a href="#">{{ $item->user->name }}</a>
+                    {{-- <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a> --}}
+                    <form action="{{ url('comment/'.$item->id) }}" class=" pull-right btn-box-tool inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
+                      @method('delete')
+                      @csrf         
+                        <i class="fa fa-times"></i> 
+                  </form>
                   </span>
-              <span class="description"><a href="#">dkjsnkdnskndk</a> | <span class="timestamp">snksdkdksn</span>
+              <span class="description">{{ $item->created_at->diffForhumans() }}</span>
+        
+              <p>{!! $item->content !!}</p>
+
+              <form action="/comment/{{$forum->id}}/forum" class="form-horizontal" method="post">
+                @csrf
+                <input type="hidden" name="forum_id" value="{{ $forum->id }}"> 
+                <input type="hidden" name="parent" value="{{  $forum->id  }}">
+                <div class="form-group margin-bottom-none">
+                  <div class="col-sm-10">
+                    <input class="form-control input-sm" name="content" placeholder="Type a comment">
+                  </div>
+                  <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary pull-right btn-block btn-sm">Send</button>
+                  </div>
+                </div>
+              </form>
+              
+              {{-- <input class="form-control input-sm" type="text" placeholder="Type a comment"> --}}
       </div>
+      <p>TEST</p>
+      @endforeach
     </div>
     </div>
 
@@ -72,6 +99,17 @@
           $('#comment').toggle('slide');
       });
   });
+</script>
+
+@endsection
+
+@section('scripts')
+<script>
+  ClassicEditor
+      .create( document.querySelector( '#comment-ckeditor' ) )
+      .catch( error => {
+          console.error( error );
+      } );
 </script>
 
 @endsection
