@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
@@ -16,7 +17,7 @@ class Comment extends Model
         return $this->belongsTo('App\Models\Forum');
     }
 
-    public function child(){
-        return $this->hasMany(Comment::class,'parent_id');
+    public function childs(){
+        return $this->hasMany(Comment::class,'parent');
     }
 }

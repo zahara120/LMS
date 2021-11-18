@@ -68,7 +68,7 @@
               <form action="/comment/{{$forum->id}}/forum" class="form-horizontal" method="post">
                 @csrf
                 <input type="hidden" name="forum_id" value="{{ $forum->id }}"> 
-                <input type="hidden" name="parent" value="{{  $forum->id  }}">
+                <input type="hidden" name="parent" value="{{  $item->id  }}">
                 <div class="form-group margin-bottom-none">
                   <div class="col-sm-10">
                     <input class="form-control input-sm" name="content" placeholder="Type a comment">
@@ -78,10 +78,26 @@
                   </div>
                 </div>
               </form>
-              
               {{-- <input class="form-control input-sm" type="text" placeholder="Type a comment"> --}}
       </div>
-      <p>TEST</p>
+      @foreach($item->childs as $child)
+      <div class="user-block">
+        <img class="img-circle img-bordered-sm" src="{{asset('style/dist/img/default-user.jpg')}}" alt="user image">
+                  <span class="username">
+                    <a href="#">{{ $child->user->name }}</a>
+                    {{-- <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a> --}}
+                    <form action="{{ url('comment/'.$item->id) }}" class=" pull-right btn-box-tool inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
+                      @method('delete')
+                      @csrf         
+                        <i class="fa fa-times"></i> 
+                  </form>
+                  </span>
+             <p> <span class="description">{{ $child->created_at->diffForhumans() }}</span></p>
+        
+              <p>{!! $child->content !!}</p>
+      </div>
+      @endforeach
+
       @endforeach
     </div>
     </div>
