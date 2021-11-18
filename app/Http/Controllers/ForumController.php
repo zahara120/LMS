@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\Forum;
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 
 class ForumController extends Controller
 {
@@ -53,8 +54,8 @@ class ForumController extends Controller
     public function show($id)
     {
         $forum = Forum::find($id);
+        // dd($comment);
         return view('viewforum',compact('forum'));
-        //dd($id);
     }
 
     /**
@@ -86,9 +87,11 @@ class ForumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($forum_id)
     {
-        //
+        Forum::find($forum_id)->delete(); 
+
+        return redirect('/forum');
     }
 
 }

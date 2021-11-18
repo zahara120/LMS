@@ -17,10 +17,17 @@ class CreateForumsTable extends Migration
             $table->increments('id');
             $table->string('titleForum');
             $table->string('slug');
+
             $table->foreignId('user_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
+
+            $table->foreignId('subcategory_trainings_id')
+            ->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
             $table->longText('content');
             $table->timestamps();
         });

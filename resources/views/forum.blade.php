@@ -26,7 +26,11 @@
               <img class="img-circle img-bordered-sm" src="{{asset('style/dist/img/default-user.jpg')}}" alt="user image">
                   <span class="username">
                     <a href="{{url('/forum/'.$item->id)}}">{{ $item->titleForum }}</a>
-                    <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                    <form action="/forum/{{$item->id}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="pull-right btn" type="submit"><i class="fa fa-times"></i></button>
+                    </form>
                   </span>
               <span class="description"><a href="#">{{  $item->user->name  }} </a> | <span class="timestamp">{{ $item->created_at->diffForHumans() }}</span>
             </div>

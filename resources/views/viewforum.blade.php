@@ -54,12 +54,11 @@
         <img class="img-circle img-bordered-sm" src="{{asset('style/dist/img/default-user.jpg')}}" alt="user image">
                   <span class="username">
                     <a href="#">{{ $item->user->name }}</a>
-                    {{-- <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a> --}}
-                    <form action="{{ url('comment/'.$item->id) }}" class=" pull-right btn-box-tool inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
-                      @method('delete')
-                      @csrf         
-                        <i class="fa fa-times"></i> 
-                  </form>
+                  <form action="comment/{{$item->id}}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <button class="pull-right btn" type="submit"><i class="fa fa-times"></i></button>
+                    </form>
                   </span>
               <span class="description">{{ $item->created_at->diffForhumans() }}</span>
         
