@@ -15,4 +15,8 @@ class Comment extends Model
     public function forum(){
         return $this->belongsTo('App\Models\Forum');
     }
+
+    public function child(){
+        return $this->hasMany(Comment::class,'parent_id');
+    }
 }
