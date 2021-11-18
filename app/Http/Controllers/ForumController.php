@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\Forum;
+use App\Models\SubcategoryTraining;
 use App\Http\Controllers\Controller;
 
 class ForumController extends Controller
@@ -16,8 +17,9 @@ class ForumController extends Controller
      */
     public function index()
     {
+        $subcategory = SubcategoryTraining::all();
         $forum = Forum::orderBy('created_at','desc')->paginate(10);
-        return view ('forum',compact('forum'));
+        return view ('forum',compact('forum','subcategory'));
     }
 
     /**

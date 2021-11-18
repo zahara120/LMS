@@ -122,6 +122,16 @@
             </div>   
 
             <div class="form-group">
+                <label>Subcategory Training :</label>
+                <select class="form-control select2" id="subcategory_id" name="subcategory_trainings_id" placeholder="categoryTraining" style="width: 100%;">
+                    <option value="">Name Subategory</option>
+                    @foreach($subcategory as $item)
+                    <option value="{{ $item->id }}">{{ $item->nameSubcategory }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label>Content :</label>
                 <textarea class="form-control" name="content" rows="3" placeholder="Content ..."></textarea>
             </div>

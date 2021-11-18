@@ -43,7 +43,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="{{asset('style/index2.html')}}" class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>G</b>T</span>
       <!-- logo for regular state and mobile devices -->
@@ -157,6 +157,8 @@
 </div>
 <!-- ./wrapper -->
 
+<script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+@yield('scripts')
 <!-- jQuery 3 -->
 <script src="{{asset('style/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.3.7 -->
