@@ -12,7 +12,15 @@
     <form role="form" action="/training/{{$approval->id}}/approval" method="post">
         @csrf
         <div class="box-body">
-
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group row mt-2">
                 <label class="col-sm-3 control-label">Title Training :</label>
                 <div class="col-sm-8">
