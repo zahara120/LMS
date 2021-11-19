@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Auth;
 
 class Forum extends Model
 {
@@ -29,5 +30,14 @@ class Forum extends Model
 
     public function comment(){
         return $this->hasMany('App\Models\Comment');
+    }
+
+    public function likes(){
+        return $this->hasMany('App\Models\Like');
+    }
+
+    public function is_liked()
+    {
+        return $this->likes->where('user_id', Auth::user()->id)->count();
     }
 }

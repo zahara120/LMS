@@ -8,6 +8,8 @@ use App\Models\Forum;
 use App\Models\SubcategoryTraining;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Like;
+use Illuminate\Support\Facades\Auth;
 
 class ForumController extends Controller
 {
@@ -58,8 +60,9 @@ class ForumController extends Controller
     public function show($id)
     {
         $forum = Forum::find($id);
-        // dd($comment);
-        return view('viewforum',compact('forum'));
+        $count = Like::where('forum_id', $id)->count();
+        // dd($count);
+        return view('viewforum',compact('forum', 'count'));
     }
 
     /**
@@ -96,6 +99,23 @@ class ForumController extends Controller
         Forum::find($forum_id)->delete(); 
 
         return redirect('/forum');
+    }
+
+    public function toggle($forum_id)
+    {
+        $forum = Forum::findOrFail($forum_id);
+        $attr = ['user_id' => Auth::user()->id];
+        
+        if($forum->likes()->where($attr)->exists()){
+            $forum->likes()->where($attr)->delete();
+            $msg = ['status' => 'UNLIKE'];
+        }
+        else{
+            $forum->likes()->create($attr);
+            $msg = ['status' => 'LIKE'];
+
+        }
+        return response()->json($msg);
     }
 
 }
