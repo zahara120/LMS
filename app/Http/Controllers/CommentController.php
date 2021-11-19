@@ -84,6 +84,12 @@ class CommentController extends Controller
     public function destroy($id)
     {
         Comment::find($id)->delete();
-        return redirect('/forum');
+        return redirect()->back();
+    }
+    
+    public function destroyChild($id)
+    {
+        Comment::find($id)->delete();
+        return redirect()->back();
     }
 }

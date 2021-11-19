@@ -58,6 +58,9 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::resource('comment.forum',CommentController::class);
 
+    Route::delete('/comment/{comment_id}/delete',[CommentController::class, 'destroy']);
+    Route::delete('/comment/{child_id}/deleteChild',[CommentController::class, 'destroyChild']);
+
     Route::resource('/forum',ForumController::class);
 
     Route::resource('/lesson',LessonController::class);

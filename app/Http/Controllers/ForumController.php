@@ -41,7 +41,9 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $request->request->add(['user_id' => auth()->user()->id]);
+        $request->request->add(['subcategory_trainings_id' => $request->subcategory_trainings_id]);
         Forum::create($request->all());
         return redirect()->back()->with('success','succes add forum');
 

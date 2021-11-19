@@ -49,12 +49,12 @@
 
     <div class="modal-body">
     <div class="post">
-      @foreach($forum->comment()->where('parent',0)->orderBy('created_at','desc')->get() as $item)
+      @foreach($forum->comment()->where('parent',0)->latest()->get() as $item)
       <div class="user-block">
         <img class="img-circle img-bordered-sm" src="{{asset('style/dist/img/default-user.jpg')}}" alt="user image">
                   <span class="username">
                     <a href="#">{{ $item->user->name }}</a>
-                  <form action="comment/{{$item->id}}" method="post">
+                  <form action="/comment/{{$item->id}}/delete" method="post">
                       @csrf
                       @method('DELETE')
                       <button class="pull-right btn" type="submit"><i class="fa fa-times"></i></button>
@@ -84,11 +84,11 @@
         <img class="img-circle img-bordered-sm" src="{{asset('style/dist/img/default-user.jpg')}}" alt="user image">
                   <span class="username">
                     <a href="#">{{ $child->user->name }}</a>
-                    {{-- <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a> --}}
-                    <form action="{{ url('comment/'.$item->id) }}" class=" pull-right btn-box-tool inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
-                      @method('delete')
+                    <!-- <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a> -->
+                    <form action="/comment/{{$child->id}}/deleteChild" class=" pull-right" method="post" onclick="return confirm('Are you sure want to delete this data?')">
                       @csrf         
-                        <i class="fa fa-times"></i> 
+                      @method('delete')
+                      <button class="pull-right btn" type="submit"><i class="fa fa-times"></i></button>
                   </form>
                   </span>
              <p> <span class="description">{{ $child->created_at->diffForhumans() }}</span></p>
