@@ -20,11 +20,21 @@
         
         <ul class="list-inline">
             <div  class="btn-group">
-                <button class="btn btn-default"><i class="fa fa-thumbs-o-up margin-r-5"></i>Like</button>
+                <button class="btn btn-default" onclick="like({{$forum->id}}, this)">
+                  <i class="fa fa-thumbs-o-up margin-r-5"></i>
+                  {{ ($forum->is_liked() ? 'Unlike' : 'Like') }} | {{$count}} 
+                </button>
+                <script>
+                    function like(id, el){
+                        fetch('/like/' + id)
+                            .then(response => response.json())
+                            .then(data => {
+                                el.innerText = (data.status == 'Like') ? 'Unlike' : 'Like'
+                            });
+                    }
+                </script>
                 <button id = "btn-comment" class="btn btn-default"><i class="fa fa-comments-o margin-r-5"></i>Comment</button>
             </div>
-            {{-- <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-            <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a></li>--}}
         </ul>
       
 
