@@ -94,7 +94,7 @@
                       @endforeach
 
                       @if($buttonFlag < 1 &&  $item->status == 1)
-                      <a class="btn btn-info" type ="button" href="/training/{{$item->id}}/approval"> Detail</a>
+                      <a class="btn btn-info" type ="button" href="/training/{{$item->id}}/approval/create"> Detail</a>
                       {{-- @elseif ($item->status == 1)
                       <a class="btn btn-info" type ="button" href="/training/{{$item->id}}/approval"> Detail</a> --}}
                       @else

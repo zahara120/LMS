@@ -19,7 +19,27 @@ class TrainingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($approval_id)
+    public function index()
+    {
+        $approval = Approval::all();
+        $category = CategoryTraining::all();
+        $lesson = Lesson::all();
+        $subcategory = SubcategoryTraining::all();
+        //$approval = Approval::all();
+        //$room = Room::all();
+        $training = Training::all();
+        $provider = Provider::all();
+        // $data['venue'] = Venue::get(["nameVenue","id"]);
+        $venue = Venue::all();
+        return view('recordTraining',compact('training','approval','provider','venue','category','subcategory','lesson','approval'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create($approval_id)
     {
         $approval = Approval::find($approval_id);
         $category = CategoryTraining::all();
@@ -30,16 +50,6 @@ class TrainingController extends Controller
         // $data['venue'] = Venue::get(["nameVenue","id"]);
         $venue = Venue::all();
         return view('setting.createTraining',compact('approval','provider','venue','category','subcategory','lesson','approval'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     public function getRoom(Request $request)
@@ -84,7 +94,7 @@ class TrainingController extends Controller
 
         $request->request->add(['approval_id' => $approval_id]);
         Training::create($request->all());
-        return redirect('/approval');
+        return redirect('/training')->with('succes','succes add data');;
     }
 
 
@@ -97,7 +107,8 @@ class TrainingController extends Controller
      */
     public function show($id)
     {
-        //
+        $training = Training::find($id);
+        return view('detailTraining',compact('training'));
     }
 
     /**

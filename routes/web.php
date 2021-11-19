@@ -96,6 +96,8 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::resource('/approval', ApprovalRecordController::class);
 
+    Route::resource('/training', TrainingController::class);
+
     Route::resource('training.approval', TrainingController::class);
 
     //create exam

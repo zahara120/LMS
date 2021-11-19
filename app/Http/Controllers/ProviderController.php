@@ -74,7 +74,8 @@ class ProviderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $provider = Provider::findorfail($id);
+        return view ('setting.editProvider',compact('provider'));
     }
 
     /**
@@ -86,7 +87,9 @@ class ProviderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $provider = Provider::findorfail($id);
+        $provider->update($request->all());
+        return redirect('/provider')->with('succes','succes edit data');
     }
 
     /**
