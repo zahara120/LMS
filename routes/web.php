@@ -100,6 +100,9 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::resource('training.approval', TrainingController::class);
 
+    //Route::resource('/regist', RegistController::class);
+    Route::resource('regist.training', RegistController::class);
+
     //create exam
     Route::resource('/exam', ExamController::class);
 
