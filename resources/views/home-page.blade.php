@@ -32,7 +32,7 @@
                 <td>{{ $item->mandatoryTraining }}</td>
                 {{-- <td>{{ $item->venue->nameVenue }}</td>
                 <td>{{ $item->room->nameRoom }}</td> --}}
-                <td>{{ $item->startDate }} s.d {{ $item->endDate }}</td>
+                <td>{{ $item->start_date }} s.d {{ $item->end_date }}</td>
                 <td>{{ $item->approval->quota }} / 0</td>
                 <td class="text-center">
                     {{-- <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#editmodal">
