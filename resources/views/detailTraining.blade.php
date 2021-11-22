@@ -22,14 +22,14 @@
             <div class="form-group row mt-2">
                 <label class="col-sm-3 control-label" for="nameLesson">Method Training :</label>
                 <div class="col-sm-8">
-                    <input type="text"  class="form-control" value="{{ $training->methodTraining }}" placeholder="Nama Lesson Training" disable>
+                    <input type="text"  class="form-control" value="{{ $training->mandatoryTraining }}" placeholder="Nama Lesson Training" disable>
                 </div>
             </div>
 
             <div class="form-group row mt-2">
                 <label class="col-sm-3 control-label" for="nameLesson">Mandatory Training :</label>
                 <div class="col-sm-8">
-                    <input type="text"  class="form-control" value="{{ $training->mandatoryTraining }}" placeholder="Nama Lesson Training" disable>
+                    <input type="text"  class="form-control" value="{{ $training->mandatory }}" placeholder="Nama Lesson Training" disable>
                 </div>
             </div>
 
@@ -44,7 +44,12 @@
           <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
          -->
          <a href="{{url()->previous()}}" class="btn btn-danger">Cancel</a>
-          <button type="submit" class="btn btn-success">Registration</button>
+          {{-- <button type="submit" class="btn btn-success">Registration</button> --}}
+        <form action="regist/{{ $training->id }}/training" method="post" class="btn btn-success" onclick="return confirm('Are you sure want to delete this data?')">
+            @csrf
+            @method('Post')
+            <button class="btn btn-success" type="submit">Registration</button>
+        </form>
         </div>
         </form>
         </div>
