@@ -108,11 +108,11 @@ class ForumController extends Controller
         
         if($forum->likes()->where($attr)->exists()){
             $forum->likes()->where($attr)->delete();
-            $msg = ['status' => 'UNLIKE'];
+            $msg = ['status' => 'Unlike'];
         }
         else{
             $forum->likes()->create($attr);
-            $msg = ['status' => 'LIKE'];
+            $msg = ['status' => 'Like'];
 
         }
         return response()->json($msg);
