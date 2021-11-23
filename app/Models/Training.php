@@ -18,11 +18,13 @@ class Training extends Model
         return $this->belongsTo('App\Models\Lesson', 'lesson_id');
     }
 
-    public function room(){
-        return $this->hasOne('App\Models\Room', 'room_id');
+    public function venue()
+    {
+        return $this->belongsTo(Venue::class);
     }
 
-    public function venue(){
-        return $this->hasOne('App\Models\Venue', 'venue_id');
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
     }
 }

@@ -19,34 +19,20 @@
             </select>
             </div>
         </div>
-        @if($training->venue_id != null)
+        @if($training->venue_id)
         <div class="form-group row mt-2">
             <label class="col-sm-3 control-label">Venue :</label>
             <div class="col-sm-8">
                 <input class="form-control select2" type="text" value="{{$training->venue->nameVenue}}" disabled>
             </div>
         </div>
-        @else
-        <div class="form-group row mt-2">
-            <label class="col-sm-3 control-label">Venue :</label>
-            <div class="col-sm-8">
-                <input class="form-control select2" type="text" value="null" disabled>
-            </div>
-        </div>
         @endif
 
-        @if($training->room_id != null)
+        @if($training->room_id)
         <div class="form-group row mt-2">
             <label class="col-sm-3 control-label">Room :</label>
             <div class="col-sm-8">
                 <input class="form-control select2" type="text" value="{{$training->room->nameRoom}}" disabled>
-            </div>
-        </div>
-        @else
-        <div class="form-group row mt-2">
-            <label class="col-sm-3 control-label">Room :</label>
-            <div class="col-sm-8">
-                <input class="form-control select2" type="text" value="null" disabled>
             </div>
         </div>
         @endif

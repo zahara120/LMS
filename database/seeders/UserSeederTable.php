@@ -33,7 +33,7 @@ class UserSeederTable extends Seeder
                 'id'             => 3,
                 'name'           => 'zahara',
                 'nip'          => 'admin@admin.com',
-                'password'       => '12345678',
+                'password'       => '$2y$10$W8pQrG78CjSTp1FNTcWE8O.ahuxJh9FiS7/w.0Sjj/3q77oHu6YUO',
                 'two_factor_secret'        => '',
                 'two_factor_recovery_codes' => '',
                 'remember_token' => '',

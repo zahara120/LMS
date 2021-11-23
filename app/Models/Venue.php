@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Venue extends Model
 {
     //use HasFactory;
-    protected $fillable = ['nameVenue'];
+    protected $guarded = ['id'];
 
     public function room(){
         return $this->hasMany('App\Models\Room');
     }
 
-    public function training(){
-        return $this->belongsTo('App\Models\Training');
+    public function training()
+    {
+        return $this->hasMany(Training::class);
     }
 }
