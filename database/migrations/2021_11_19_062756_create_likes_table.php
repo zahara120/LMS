@@ -15,11 +15,11 @@ class CreateLikesTable extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('forum_id')
+            $table->foreignId('forum_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->unsignedInteger('user_id')
+            $table->foreignId('user_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');

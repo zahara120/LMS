@@ -26,7 +26,11 @@
             @foreach ($training as $item)
             <tr>
                 <td class="text-center">{{ $loop->iteration }}</td>
+                @if($item->end_date > $date)
+                <td>SUDAH TUTUP</td>
+                @else
                 <td>SEDANG BEJALAN  SEDANG BERLANGSUNG</td>
+                @endif
                 <td>{{ $item->approval->titleTraining }}</td>
                 <td>{{ $item->mandatory }}</td>
                 <td>{{ $item->mandatoryTraining }}</td>
@@ -38,10 +42,9 @@
                     {{-- <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#editmodal">
                         <i class="fa fa-pencil"></i> Edit
                     </button> --}}
-                    <a href="{{url('training/'.$item->id)}}" class="btn btn-xs btn-success" >
+                    <a href="/regist/{{$item->id}}/create" class="btn btn-xs btn-success" >
                         <i class="fa fa-eye"></i> Detail
                     </a>
-    
                 </td>
             </tr>
             @endforeach

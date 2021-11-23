@@ -23,6 +23,7 @@ use App\Http\Controllers\ForumController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\RegistController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -97,11 +98,12 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::resource('/approval', ApprovalRecordController::class);
 
     Route::resource('/training', TrainingController::class);
-
+    
     Route::resource('training.approval', TrainingController::class);
 
-    //Route::resource('/regist', RegistController::class);
-    Route::resource('regist.training', RegistController::class);
+    Route::get('/regist', [RegistController::class, 'index']);
+    Route::get('/regist/{training_id}/create', [RegistController::class, 'create']);
+    Route::post('/regist/{training_id}/store', [RegistController::class, 'store']);
 
     //create exam
     Route::resource('/exam', ExamController::class);

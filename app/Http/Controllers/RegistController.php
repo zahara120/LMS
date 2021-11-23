@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Training;
 use App\Models\Regist;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Ui\Presets\React;
 
 class RegistController extends Controller
 {
@@ -13,10 +15,10 @@ class RegistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($training_id)
+    public function index()
     {
-        $training = Training::find($training_id);
-        return view('detailTraining',compact('training'));
+        $regist = Regist::all();
+        return view('registTrainingRecord',compact('regist'));
     }
 
     /**
@@ -24,12 +26,10 @@ class RegistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($training_id)
     {
-        // $training = Training::find($training_id);
-        // return view('detailTraining',compact('training'));
-        $regist = Regist::all();
-        return view('registTrainingRecord',compact('regist'));
+        $training = Training::find($training_id);
+        return view('detailTraining',compact('training'));
     }
 
     /**
@@ -41,7 +41,7 @@ class RegistController extends Controller
     public function store(Request $request, $training_id)
     {
         //dd($training_id);
-        $request->request->add(['user_id' => $request->user()->id]);
+        $request->request->add(['user_id' => Auth::user()->id]);
         $request->request->add(['training_id' => $training_id]);
         Regist::create($request->all());
         return redirect('/regist')->with('succes','succes regist Training');
