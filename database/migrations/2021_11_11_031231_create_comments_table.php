@@ -16,11 +16,11 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent');
-            $table->unsignedInteger('forum_id')
+            $table->foreignId('forum_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->unsignedInteger('user_id')
+            $table->foreignId('user_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');

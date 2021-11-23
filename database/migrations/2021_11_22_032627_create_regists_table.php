@@ -15,12 +15,12 @@ class CreateRegistsTable extends Migration
     {
         Schema::create('regists', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id')
+            $table->foreignId('user_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->boolean('status')->default(0)->nullable();
-            $table->unsignedInteger('training_id')
+            $table->foreignId('training_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
