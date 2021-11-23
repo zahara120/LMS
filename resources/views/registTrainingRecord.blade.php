@@ -49,7 +49,7 @@
                 
                 <td class="text-center">
                     @if($item->status == 0)
-                      <a href="#" type="button" class="btn btn-warning status">Status</a>
+                      <a href="/regist/{{$item->training->id}}/{{$item->id}}" type="button" class="btn btn-warning status">Status</a>
                     @else
                       <a type="button" class="btn btn-warning status" disabled>Status</a>
                     @endif

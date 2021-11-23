@@ -13,4 +13,8 @@ class Venue extends Model
     public function room(){
         return $this->hasMany('App\Models\Room');
     }
+
+    public function training(){
+        return $this->belongsTo('App\Models\Training');
+    }
 }

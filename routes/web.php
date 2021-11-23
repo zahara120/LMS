@@ -104,6 +104,8 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('/regist', [RegistController::class, 'index']);
     Route::get('/regist/{training_id}/create', [RegistController::class, 'create']);
     Route::post('/regist/{training_id}/store', [RegistController::class, 'store']);
+    Route::get('/regist/{training_id}/{regist_id}', [RegistController::class, 'show']);
+    Route::put('/regist/{regist_id}', [RegistController::class, 'update']);
 
     //create exam
     Route::resource('/exam', ExamController::class);

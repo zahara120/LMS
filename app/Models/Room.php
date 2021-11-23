@@ -13,4 +13,8 @@ class Room extends Model
     public function venue(){
         return $this->belongsTo('App\Models\Venue');
     }
+
+    public function training(){
+        return $this->belongsTo('App\Models\Training');
+    }
 }

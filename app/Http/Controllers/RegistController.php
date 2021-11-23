@@ -53,9 +53,11 @@ class RegistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($training_id, $regist_id)
     {
-        //
+        $training = Training::findOrFail($training_id);
+        $regist = $regist_id;
+        return view('registrationDetail', compact('training', 'regist'));
     }
 
     /**
@@ -76,9 +78,13 @@ class RegistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $regist_id)
     {
-        //
+        $regist = Regist::findOrFail($regist_id);
+        $request->request->add(['status' => $request->status]);
+        $input = $request->all();
+        $regist->fill($input)->save();
+        return redirect('/regist');
     }
 
     /**
