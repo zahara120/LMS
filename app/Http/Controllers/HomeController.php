@@ -7,6 +7,7 @@ use App\Models\Approval;
 use App\Models\CategoryTraining;
 use App\Models\Provider;
 use App\Models\Lesson;
+use App\Models\RegistTraining;
 use App\Models\Training;
 use App\Models\Room;
 use App\Models\SubcategoryTraining;
@@ -32,6 +33,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $registTrainings = RegistTraining::all();
+        // dd($registTrainings);
         $approval = Approval::all();
         $category = CategoryTraining::all();
         $lesson = Lesson::all();
@@ -40,6 +43,6 @@ class HomeController extends Controller
         $provider = Provider::all();
         $venue = Venue::all();
         $date = Carbon::today()->toDateString();
-        return view('home-page',compact('training','approval','provider','venue','category','subcategory','lesson','approval','date'));
+        return view('home-page',compact('training','approval','provider','venue','category','subcategory','lesson','approval','date','registTrainings'));
     }
 }
