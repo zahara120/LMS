@@ -90,7 +90,16 @@
                 {{-- <td>{{ $item->venue->nameVenue }}</td>
                 <td>{{ $item->room->nameRoom }}</td> --}}
                 <td>{{ $item->start_date }} s.d {{ $item->end_date }}</td>
-                <td>{{ $item->approval->quota }} / 0</td>
+                <td>
+                    {{ $item->approval->quota }} / 
+                    <?php $quota = 0;?>
+                    @foreach($registTrainings as $rt)
+                        @if($rt->training_id == $item->id AND $rt->regist->status == 1)
+                            <?php $quota++;?>
+                        @endif
+                    @endforeach
+                    {{$quota}}
+                </td>
                 <td class="text-center">
                     {{-- <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#editmodal">
                         <i class="fa fa-pencil"></i> Edit

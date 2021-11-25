@@ -156,6 +156,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     //submit approval detail
     Route::put('/approval/{id}', [ApprovalRecordController::class, 'update']);
 
+
     //view all training
     Route::get('/training', [TrainingController::class,'index']);
     //create training
@@ -165,6 +166,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::get('/regist/{regist_id}', [RegistController::class, 'show']);
     
+
     Route::put('/regist/{regist_id}', [RegistController::class, 'update']);
 
     //create exam

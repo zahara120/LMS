@@ -9,11 +9,16 @@ class Regist extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    // protected $table = 'regist';
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
-    public function training(){
-        return $this->belongsTo('App\Models\Training');
-    }
     
+    public function training(){
+        return $this->belongsTo(Training::class);
+    }
+
+    public function registTraining(){
+        return $this->hasMany(RegistTraining::class);
+    }
 }

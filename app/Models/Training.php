@@ -11,10 +11,24 @@ class Training extends Model
     protected $guarded = ['id'];
 
     public function approval(){
-        return $this->belongsTo('App\Models\Approval', 'approval_id');
+        return $this->belongsTo(Approval::class, 'approval_id');
     }
     
     public function lesson(){
         return $this->belongsTo('App\Models\Lesson', 'lesson_id');
+    }
+
+    public function venue()
+    {
+        return $this->belongsTo(Venue::class);
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+    
+    public function registTraining(){
+        return $this->hasMany(RegistTraining::class);
     }
 }
