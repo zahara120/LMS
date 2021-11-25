@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegistrationTrainingTable extends Migration
+class CreateRegistTrainingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateRegistrationTrainingTable extends Migration
      */
     public function up()
     {
-        Schema::create('registration_training', function (Blueprint $table) {
+        Schema::create('regist_training', function (Blueprint $table) {
             $table->id();
-            
             $table->foreignId('training_id')
             ->constrained()
             ->onUpdate('cascade')
@@ -36,6 +35,6 @@ class CreateRegistrationTrainingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registration_training');
+        Schema::dropIfExists('regist_training');
     }
 }

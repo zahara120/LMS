@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Training;
 use App\Models\Regist;
+use App\Models\RegistTraining;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Ui\Presets\React;
 
@@ -47,6 +48,10 @@ class RegistController extends Controller
 
         $regist_id = $regist->id;
 
+        RegistTraining::create([
+            'training_id' => $training_id,
+            'regist_id' => $regist_id
+        ]);
         // $registration = Regist::find($regist_id);
         // $registration->training()->attach($training_id); //buat ngisi table registration_training
         return redirect('/regist')->with('succes','succes regist Training');
