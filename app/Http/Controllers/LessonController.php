@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoryTraining;
+use App\Models\SubcategoryTraining;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
 
@@ -93,7 +94,10 @@ class LessonController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lesson = Lesson::findorfail($id);
+        $category = CategoryTraining::all();
+        $subcategory =SubcategoryTraining::all();
+        return view ('setting.editLesson',compact('lesson','subcategory','category'));
     }
 
     /**
@@ -105,7 +109,9 @@ class LessonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $lesson = Lesson::findorfail($id);
+        $lesson->update($request->all());
+        return redirect('/lesson')->with('success','success edit data');
     }
 
     /**
@@ -119,5 +125,10 @@ class LessonController extends Controller
         $lesson = Lesson::find($id);
         $lesson->delete();
         return redirect('/lesson')->with('succes','succes delete data');
+    }
+
+    public function lessonExport()
+    {
+        return Excel::download(new LessonExport,'Lesson.xlsx');
     }
 }

@@ -58,7 +58,7 @@
                     <a href="{{url('/lesson/'.$item->id)}} " class="btn btn-xs btn-info" >
                         <i class="fa fa-eye"></i> View
                     </a>
-                    <a href="" class="btn btn-xs btn-primary">
+                    <a href="{{url('/lesson/'.$item->id.'/edit')}}" class="btn btn-xs btn-primary">
                         <i class="fa fa-pencil"></i> Edit
                     </a>
                     <form action="{{ url('lesson/'.$item->id) }}" class="inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">

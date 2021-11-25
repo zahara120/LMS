@@ -3,15 +3,16 @@
 
 @section('content')
 
-<div class="box box-primary">
+
+<div class="box">
     <div class="box-header with-border">
         <h3 class="box-title">Forum</h3>
         <div class="pull-right">
-            
+            @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
             <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">
                 Add Forum
             </button>
-            
+            @endif
         </div>
     </div>
 
@@ -26,11 +27,13 @@
               <img class="img-circle img-bordered-sm" src="{{asset('style/dist/img/default-user.jpg')}}" alt="user image">
                   <span class="username">
                     <a href="{{url('/forum/'.$item->id)}}">{{ $item->titleForum }}</a>
-                    <form action="/forum/{{$item->id}}" method="post">
+                    @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
+                    <form action="/forum/{{$item->id}}" method="post" class="pull-right btn"  onclick="return confirm('Are you sure want to delete this data?')">
                         @csrf
                         @method('DELETE')
-                        <button class="pull-right btn" type="submit"><i class="fa fa-times"></i></button>
+                        <button type="submit"><i class="fa fa-times"></i></button>
                     </form>
+                    @endif
                   </span>
               <span class="description"><a href="#">{{  $item->user->name  }} </a> | <span class="timestamp">{{ $item->created_at->diffForHumans() }}</span>
             </div>

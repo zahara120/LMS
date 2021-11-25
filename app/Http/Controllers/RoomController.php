@@ -114,4 +114,9 @@ class RoomController extends Controller
         $room->delete();
         return redirect('/room')->with('succes','succes delete data');
     }
+
+    public function RoomExport()
+    {
+        return Excel::download(new RoomExport,'Room.xlsx');
+    }
 }

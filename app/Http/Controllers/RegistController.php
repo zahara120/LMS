@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Training;
 use App\Models\Regist;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Ui\Presets\React;
 
 class RegistController extends Controller
 {
@@ -13,10 +16,10 @@ class RegistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($training_id)
+    public function index()
     {
-        $training = Training::find($training_id);
-        return view('detailTraining',compact('training'));
+        $regist = Regist::orderBy('created_at', 'DESC')->get();
+        return view('registTrainingRecord',compact('regist'));
     }
 
     /**
@@ -24,12 +27,11 @@ class RegistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($training_id)
     {
-        // $training = Training::find($training_id);
-        // return view('detailTraining',compact('training'));
-        $regist = Regist::all();
-        return view('registTrainingRecord',compact('regist'));
+        $training = Training::find($training_id);
+        $date = Carbon::today()->toDateString();
+        return view('detailTraining',compact('training','date'));
     }
 
     /**
@@ -41,7 +43,7 @@ class RegistController extends Controller
     public function store(Request $request, $training_id)
     {
         //dd($training_id);
-        $request->request->add(['user_id' => $request->user()->id]);
+        $request->request->add(['user_id' => Auth::user()->id]);
         $request->request->add(['training_id' => $training_id]);
         Regist::create($request->all());
         return redirect('/regist')->with('succes','succes regist Training');
@@ -55,7 +57,8 @@ class RegistController extends Controller
      */
     public function show($id)
     {
-        //
+        $regist = Regist::findOrFail($id);
+        return view('registrationDetail', compact('regist'));
     }
 
     /**
@@ -76,9 +79,13 @@ class RegistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $regist_id)
     {
-        //
+        $regist = Regist::findOrFail($regist_id);
+        $request->request->add(['status' => $request->status]);
+        $input = $request->all();
+        $regist->fill($input)->save();
+        return redirect('/regist')->with('succes','succes input data');;
     }
 
     /**

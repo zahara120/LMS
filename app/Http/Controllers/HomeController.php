@@ -11,6 +11,8 @@ use App\Models\Training;
 use App\Models\Room;
 use App\Models\SubcategoryTraining;
 use App\Models\Venue;
+use Carbon\Carbon;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -38,6 +40,9 @@ class HomeController extends Controller
         $training = Training::all();
         $provider = Provider::all();
         $venue = Venue::all();
-        return view('home-page',compact('training','approval','provider','venue','category','subcategory','lesson','approval'));
+        $total_user = User::count();
+        $total_training = Training::count();
+        $date = Carbon::today()->toDateString();
+        return view('home-page',compact('training','approval','provider','venue','category','subcategory','lesson','approval','date','total_training','total_user'));
     }
 }

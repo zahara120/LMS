@@ -27,7 +27,7 @@ class TrainingController extends Controller
         $subcategory = SubcategoryTraining::all();
         //$approval = Approval::all();
         //$room = Room::all();
-        $training = Training::all();
+        $training = Training::orderBy('created_at', 'DESC')->get();
         $provider = Provider::all();
         // $data['venue'] = Venue::get(["nameVenue","id"]);
         $venue = Venue::all();
@@ -107,8 +107,7 @@ class TrainingController extends Controller
      */
     public function show($id)
     {
-        $training = Training::find($id);
-        return view('detailTraining',compact('training'));
+    
     }
 
     /**

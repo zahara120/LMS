@@ -101,4 +101,9 @@ class VenueController extends Controller
         $venue->delete();
         return redirect('/room')->with('succes','succes delete data');
     }
+
+    public function venueExport()
+    {
+        return Excel::download(new VenueExport,'Venue.xlsx');
+    }
 }

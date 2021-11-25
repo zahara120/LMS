@@ -56,14 +56,14 @@
                     <a href=" " class="btn btn-xs btn-info" >
                         <i class="fa fa-eye"></i> View
                     </a>
-                    <a href="{{url('/categorytraining/'.$item->id.'/edit')}}" class="btn btn-xs btn-primary">
+                    <a href="" class="btn btn-xs btn-primary">
                         <i class="fa fa-pencil"></i> Edit
                     </a>
                     
 
-                    <form action="{{ url('categorytraining/'.$item->id) }}" class="inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
-                        @method('delete')
-                        @csrf         
+                    <form action="" class="inline" onclick="return confirm('Are you sure want to delete this data?')">
+                        {{-- @method('delete')
+                        @csrf          --}}
                         <button type="submit" class="btn btn-xs btn-danger" >
                             <i class="fa fa-trash"></i> Delete
                         </button> 

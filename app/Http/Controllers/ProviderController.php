@@ -104,4 +104,9 @@ class ProviderController extends Controller
         $provider->delete();
         return redirect('/provider')->with('succes','succes delete data');
     }
+
+    public function ProviderExport()
+    {
+        return Excel::download(new ProviderExport,'Provider.xlsx');
+    }
 }

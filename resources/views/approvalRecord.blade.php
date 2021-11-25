@@ -34,23 +34,37 @@
         </div> 
     </div>
     <div class="box-body table-responsive">
-        <table class="table table-bordered table-striped">
+        <table id="table" class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th class="text-center">No</th>
+                @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
+                <th>NIP</th>
+                <th>Nama Pemohon</th>
+                @endif
                 <th>Tittle Training</th>
                 <th>Category Training</th>
                 <th>Kuota</th>
                 <th>Status</th>
                 <th>Waktu Pengajuan</th>
+                @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
                 <th >Action</th>
+                @endif
                 {{-- <th class="text-center">Action</th> --}}
             </tr> 
         </thead>
         <tbody>
+            <?php $number = 0;?>
             @foreach ($approval as $item)
+             @if(Auth::user()->id == $item->user_id || Auth::user()->role()->where('nameRole', '=', 'Admin')->exists())
             <tr>
-                <td class="text-center">{{ $loop->iteration }}</td>
+                <!-- <td class="text-center">{{ $loop->iteration }}</td> -->
+                <?php $number++ ?>
+                <td class="text-center">{{ $number }}</td>
+                @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
+                <td>{{ $item->user->nip }}</td>
+                <td>{{ $item->user->name }}</td>
+                @endif
                 <td>{{ $item->titleTraining }}</td>
                 <td>{{ $item->category->nameCategory }}</td>
                 <td>{{ $item->quota }}</td>
@@ -67,7 +81,8 @@
                 {{-- <td>
                     <label class="label {{ ($item->status == 0) ? 'label-danger' :'label-success' }}">{{ ($item->status==0)?'Pending':'Approve' }}</label>
                 </td> --}}
-                <td>
+                @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
+                <td class="text-center">
                     {{-- <form role="form" action="/approval/{id}" method="post">
                     @csrf
                     <div class="form-group col-md-6">
@@ -102,7 +117,9 @@
                       @endif
                     </div> 
                 </td>
+                @endif
             </tr>
+            @endif
             @endforeach
         </tbody> 
     </table>

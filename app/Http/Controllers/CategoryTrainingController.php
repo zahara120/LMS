@@ -124,7 +124,8 @@ class CategoryTrainingController extends Controller
         return redirect('/categorytraining')->with('succes','succes delete data');
     }
 
-    public function categoryExport(){
+    public function categoryExport()
+    {
         return Excel::download(new CategoryExport,'CategoryTraining.xlsx');
     }
 }

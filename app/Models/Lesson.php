@@ -17,4 +17,8 @@ class Lesson extends Model
     public function typelesson(){
         return $this->hasMany('App\Models\TypeLesson');
     }
+
+    public function category(){
+        return $this->belongsTo('App\Models\CategoryTraining');
+    }
 }

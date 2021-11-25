@@ -76,7 +76,7 @@
 
     </div>
   <div class="box-footer">
-    <button type="button" class="btn btn-default">Cancel</button>
+    <a href="{{ url()->previous() }}" type="button" class="btn btn-default" data-dismiss="modal">Cancel</a>
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>

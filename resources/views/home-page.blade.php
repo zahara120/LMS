@@ -2,6 +2,59 @@
 @section('title','HOME PAGE')
 
 @section('content')
+@if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-teal"><i class="fa fa-mortar-board"></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Jumlah Training</span>
+            <span class="info-box-number">{{ $total_training }} <small>Course</small></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-orange"><i class="fa fa-users"></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Jumlah User</span>
+            <span class="info-box-number">{{ $total_user }} <small>Peson</small></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-maroon"><i class="fa fa-rocket"></i></span>
+  
+          <div class="info-box-content">
+              <span class="info-box-text">Jumlah User</span>
+              <span class="info-box-number">{{ $total_user }} <small>Peson</small></span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua"><i class="fa fa-plane"></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Jumlah Training</span>
+            <span class="info-box-number">{{ $total_training }} <small>Course</small></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+</div>
+@endif
+
 <div class="box">
     <div class="box-header with-border">
         <h3 class="box-title">Home Page</h3>
@@ -26,7 +79,11 @@
             @foreach ($training as $item)
             <tr>
                 <td class="text-center">{{ $loop->iteration }}</td>
-                <td>SEDANG BEJALAN  SEDANG BERLANGSUNG</td>
+                @if($item->end_date < $date)
+                <td><label class="label label-danger">PENDAFTARAN TUTUP</label></td>
+                @else
+                <td><label class="label label-success">PENDAFTARAN AKTIF</label></td>
+                @endif
                 <td>{{ $item->approval->titleTraining }}</td>
                 <td>{{ $item->mandatory }}</td>
                 <td>{{ $item->mandatoryTraining }}</td>
@@ -38,10 +95,9 @@
                     {{-- <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#editmodal">
                         <i class="fa fa-pencil"></i> Edit
                     </button> --}}
-                    <a href="{{url('training/'.$item->id)}}" class="btn btn-xs btn-success" >
+                    <a href="/regist/{{$item->id}}/create" class="btn btn-xs btn-success" >
                         <i class="fa fa-eye"></i> Detail
                     </a>
-    
                 </td>
             </tr>
             @endforeach

@@ -64,10 +64,10 @@
         <img class="img-circle img-bordered-sm" src="{{asset('style/dist/img/default-user.jpg')}}" alt="user image">
                   <span class="username">
                     <a href="#">{{ $item->user->name }}</a>
-                  <form action="/comment/{{$item->id}}/delete" method="post">
+                  <form action="/comment/{{$item->id}}/delete" method="post" class=" pull-right btn-box-tool inline" onclick="return confirm('Are you sure want to delete this data?')">
                       @csrf
                       @method('DELETE')
-                      <button class="pull-right btn" type="submit"><i class="fa fa-times"></i></button>
+                      <button type="submit"><i class="fa fa-times"></i></button>
                     </form>
                   </span>
               <span class="description">{{ $item->created_at->diffForhumans() }}</span>
@@ -95,10 +95,10 @@
                   <span class="username">
                     <a href="#">{{ $child->user->name }}</a>
                     <!-- <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a> -->
-                    <form action="/comment/{{$child->id}}/deleteChild" class=" pull-right" method="post" onclick="return confirm('Are you sure want to delete this data?')">
+                    <form action="/comment/{{$child->id}}/deleteChild" class="pull-right btn" method="post" onclick="return confirm('Are you sure want to delete this data?')">
                       @csrf         
                       @method('delete')
-                      <button class="pull-right btn" type="submit"><i class="fa fa-times"></i></button>
+                      <button type="submit"><i class="fa fa-times"></i></button>
                   </form>
                   </span>
              <p> <span class="description">{{ $child->created_at->diffForhumans() }}</span></p>

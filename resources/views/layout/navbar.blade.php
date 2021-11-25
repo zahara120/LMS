@@ -8,14 +8,16 @@
     <li class="{{ request()->is('test') ? 'active' : "" }}"><a href="/test"><i class="fa"></i> <span>Quiz</span></a></li>
 
     <li class="{{ request()->is('forum') ? 'active' : "" }}"><a href="/forum"><i class="fa"></i> <span>Forum</span></a></li>
-  
-    <li class="{{ request()->is('test/create') ? 'active' : "" }}"><a href="/test/create"><i class="fa"></i> <span>Create Test</span></a></li>
 
     <li class="{{ request()->is('regist') ? 'active' : "" }}"><a href="/regist"><i class="fa"></i> <span>Registration Training Record</span></a></li>
-  
-    <li class="{{ request()->is('training') ? 'active' : "" }}"><a href="/training"><i class="fa"></i> <span>Training Record</span></a></li>
 
     <li class="{{ request()->is('approval') ? 'active' : "" }}"><a href="/approval"><i class="fa"></i> <span>Approval Record</span></a></li>
+
+    @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
+
+    <li class="{{ request()->is('training') ? 'active' : "" }}"><a href="/training"><i class="fa"></i> <span>Training Record</span></a></li>
+
+    <li class="{{ request()->is('test/create') ? 'active' : "" }}"><a href="/test/create"><i class="fa"></i> <span>Create Test</span></a></li>
   
       {{-- <li class="{{ request()->is('setting') ? 'active' : "" }}"> --}}
         <li class="treeview">
@@ -39,6 +41,8 @@
           <li><a href="/role"><i class="fa fa-circle-o"></i>Role</a></li>
         </ul>
       </li>
+
+      @endif
   
       {{-- role:User
       @elseif(auth()->user()->role()->where('nameRole', '=', 'User')) --}}

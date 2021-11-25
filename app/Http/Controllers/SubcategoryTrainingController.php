@@ -118,4 +118,9 @@ class SubcategoryTrainingController extends Controller
         $subcategory->delete();
         return redirect('/subcategorytraining')->with('succes','succes delete data');
     }
+
+    public function subcategoryExport()
+    {
+        return Excel::download(new SubcategoryExport,'SubcategoryTraining.xlsx');
+    }
 }

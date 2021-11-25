@@ -17,7 +17,7 @@ class ApprovalRecordController extends Controller
      */
     public function index()
     {
-        $approval = Approval::all();
+        $approval = Approval::orderBy('created_at', 'DESC')->get();
         $trainings = Training::all();
         return view('approvalRecord',compact('approval', 'trainings'));
     }
