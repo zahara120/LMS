@@ -43,7 +43,12 @@ class RegistController extends Controller
         //dd($training_id);
         $request->request->add(['user_id' => Auth::user()->id]);
         $request->request->add(['training_id' => $training_id]);
-        Regist::create($request->all());
+        $regist = Regist::create($request->all());
+
+        $regist_id = $regist->id;
+
+        // $registration = Regist::find($regist_id);
+        // $registration->training()->attach($training_id); //buat ngisi table registration_training
         return redirect('/regist')->with('succes','succes regist Training');
     }
 

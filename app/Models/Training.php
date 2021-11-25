@@ -11,7 +11,7 @@ class Training extends Model
     protected $guarded = ['id'];
 
     public function approval(){
-        return $this->belongsTo('App\Models\Approval', 'approval_id');
+        return $this->belongsTo(Approval::class, 'approval_id');
     }
     
     public function lesson(){
@@ -27,4 +27,10 @@ class Training extends Model
     {
         return $this->belongsTo(Room::class);
     }
+
+    // public function regist()
+    // {
+    //     return $this->belongsToMany(Regist::class, 'registration_training', 
+    //     'regist_id', 'training_id');
+    // }
 }

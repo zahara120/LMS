@@ -13,7 +13,12 @@ class Regist extends Model
         return $this->belongsTo('App\Models\User');
     }
     public function training(){
-        return $this->belongsTo('App\Models\Training');
+        return $this->belongsTo(Training::class);
     }
+
+    // public function training(){
+    //     return $this->belongsToMany(Training::class, 'registration_training', 
+    //     'regist_id', 'training_id');
+    // }
     
 }
