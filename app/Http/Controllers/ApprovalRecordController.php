@@ -54,7 +54,7 @@ class ApprovalRecordController extends Controller
      */
     public function store(Request $request)
     {
-        if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists()){
+        if(Auth::user()->role()->where('roleName', '=', 'Admin')->exists()){
             $request->request->add(['user_id' => $request->user()->id]);
             $request->request->add(['status' => 1]);
             $approval = Approval::create($request->all());
