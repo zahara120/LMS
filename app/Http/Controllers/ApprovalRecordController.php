@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\CategoryTraining;
 use App\Models\Approval;
+use App\Models\Role;
+use App\Models\RoleUser;
 use App\Models\SubcategoryTraining;
 use App\Models\Training;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApprovalRecordController extends Controller
 {
@@ -51,7 +54,10 @@ class ApprovalRecordController extends Controller
      */
     public function store(Request $request)
     {
-        if(auth()->user()->role()->where('nameRole', '==', 'Admin')){
+        $user = Auth::user()->id;
+        $role = RoleUser::where('user_id', $user)->first();
+        // dd($role->id);
+        if($role->role_id == 1){
             $request->request->add(['user_id' => $request->user()->id]);
             $request->request->add(['status' => 1]);
             $approval = Approval::create($request->all());

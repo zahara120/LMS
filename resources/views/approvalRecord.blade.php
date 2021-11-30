@@ -75,8 +75,11 @@
                     <label class="label label-success">Approve</label>
                     @elseif($item->status == 2) 
                     <label class="label label-danger">Reject</label>
+                    <a href="" class="btn btn-xs btn-primary">
+                        <i class="fa fa-pencil"></i> Edit
+                    </a>
                     @endif
-                    </td>
+                </td>
                 <td>{{ $item->created_at }}</td>
                 {{-- <td>
                     <label class="label {{ ($item->status == 0) ? 'label-danger' :'label-success' }}">{{ ($item->status==0)?'Pending':'Approve' }}</label>
