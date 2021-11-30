@@ -51,26 +51,20 @@ class ApprovalRecordController extends Controller
      */
     public function store(Request $request)
     {
-
-        // dd($request);
-        // $approval = new Approval;
-        // $approval->training_id = $request->training_id;
-        // $approval->user_id = $request->user()->id;
-        // $approval->titleTraining = $request->titleTraining;
-        // $approval->category_id = $request->category_id;
-        // $approval->subcategory_id = $request->subcategory_id;
-        // $approval->quota = $request->quota;
-        // $approval->description = $request->description;
-        // $approval->objectiveTraining = $request->objectiveTraining;
-        // $approval->backgroundTraining = $request->backgroundTraining;
-        // $approval->save();
-        //return $request->all();
-        
-        $request->request->add(['user_id' => $request->user()->id]);
-        Approval::create($request->all());
-        
-
-        return redirect('/approval')->with('succes','succes add data');
+        if(auth()->user()->role()->where('nameRole', '==', 'Admin')){
+            $request->request->add(['user_id' => $request->user()->id]);
+            $request->request->add(['status' => 1]);
+            $approval = Approval::create($request->all());
+            $approval_id = $approval->id;
+            // return ke detail training
+            return redirect()->action(
+                [TrainingController::class, 'create'], ['id' => $approval_id]
+            );
+        }else{
+            $request->request->add(['user_id' => $request->user()->id]);
+            Approval::create($request->all());
+            return redirect('/approval')->with('succes','succes add data');
+        }
     }
 
     /**
