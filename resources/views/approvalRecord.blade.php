@@ -50,7 +50,6 @@
                 @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
                 <th >Action</th>
                 @endif
-                {{-- <th class="text-center">Action</th> --}}
             </tr> 
         </thead>
         <tbody>
@@ -75,8 +74,13 @@
                     <label class="label label-success">Approve</label>
                     @elseif($item->status == 2) 
                     <label class="label label-danger">Reject</label>
+                      @if(auth()->user()->role()->where('nameRole', '=', 'User')->exists())
+                        <a href="{{route('approval.edit',  $item->id)}}" class="btn btn-xs btn-primary">
+                            <i class="fa fa-pencil"></i> Edit
+                        </a>
+                      @endif
                     @endif
-                    </td>
+                </td>
                 <td>{{ $item->created_at }}</td>
                 {{-- <td>
                     <label class="label {{ ($item->status == 0) ? 'label-danger' :'label-success' }}">{{ ($item->status==0)?'Pending':'Approve' }}</label>
@@ -110,8 +114,6 @@
 
                       @if($buttonFlag < 1 &&  $item->status == 1)
                       <a class="btn btn-info" type ="button" href="/training/{{$item->id}}/approval/create"> Detail</a>
-                      {{-- @elseif ($item->status == 1)
-                      <a class="btn btn-info" type ="button" href="/training/{{$item->id}}/approval"> Detail</a> --}}
                       @else
                       <button class="btn btn-info "  disabled> Detail</button>
                       @endif

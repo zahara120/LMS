@@ -30,9 +30,11 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $table = 'users';
+
     public function role(){
         // return $this->belongsToMany(Role::class);
-        return $this->belongsToMany('App\Models\Role');
+        return $this->belongsToMany(Role::class);
     }
 
     /**

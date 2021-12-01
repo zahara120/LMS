@@ -144,7 +144,7 @@
 
         </div>
     <div class="box-footer">
-    <a href="/approval" type="button" class="btn btn-default">Cancel</a>
+    <a href="{{route('approval.index')}}" type="button" class="btn btn-default">Cancel</a>
     <button type="submit" class="btn btn-primary">Submit</button>
     </div>
     </form>

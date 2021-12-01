@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\SubcategoryTraining;
 use App\Models\CategoryTraining;
 use App\Models\Test;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ExamController extends Controller
 {

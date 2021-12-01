@@ -7,6 +7,7 @@ use App\Models\Approval;
 use App\Models\CategoryTraining;
 use App\Models\Provider;
 use App\Models\Lesson;
+use App\Models\Regist;
 use App\Models\RegistTraining;
 use App\Models\Training;
 use App\Models\Room;
@@ -47,6 +48,9 @@ class HomeController extends Controller
         $total_training = Training::count();
         $date = Carbon::today()->toDateString();
 
+        // $quota = Approval::select('id', 'titleTraining', 'quota', 'user_id');
+        // $count = count($quota);
+
         return view('home-page',compact('training','approval','provider','venue','category','subcategory','lesson','approval','date','total_training','total_user','registTrainings'));
-  }
+    }
 }

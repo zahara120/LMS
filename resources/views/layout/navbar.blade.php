@@ -9,9 +9,9 @@
 
     <li class="{{ request()->is('forum') ? 'active' : "" }}"><a href="/forum"><i class="fa"></i> <span>Forum</span></a></li>
 
-    <li class="{{ request()->is('regist') ? 'active' : "" }}"><a href="/regist"><i class="fa"></i> <span>Registration Training Record</span></a></li>
+    <li class="{{ request()->is('regist') ? 'active' : "" }}"><a href="{{route('regist.index')}}"><i class="fa"></i> <span>Registration Training Record</span></a></li>
 
-    <li class="{{ request()->is('approval') ? 'active' : "" }}"><a href="/approval"><i class="fa"></i> <span>Approval Record</span></a></li>
+    <li class="{{ request()->is('approval') ? 'active' : "" }}"><a href="{{route('approval.index')}}"><i class="fa"></i> <span>Approval Record</span></a></li>
 
     @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
 
@@ -48,7 +48,7 @@
       @elseif(auth()->user()->role()->where('nameRole', '=', 'User')) --}}
       {{-- @elseif(auth()->user()->role()->nameRole='User') --}}
   
-      <li class="{{ request()->is('approval/create') ? 'active' : "" }}"><a href="/approval/create"><i class="fa"></i> <span>Add Training Submission</span></a></li>
+      <li class="{{ request()->is('approval/create') ? 'active' : "" }}"><a href="{{route('approval.create')}}"><i class="fa"></i> <span>Add Training Submission</span></a></li>
       
       {{-- @endif --}}
       {{-- <li class="{{ request()->is('setting') ? 'active' : "" }}"><a href="/setting"><i class="fa"></i> <span>Setting</span></a></li> --}}

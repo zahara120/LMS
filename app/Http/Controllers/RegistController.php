@@ -33,8 +33,9 @@ class RegistController extends Controller
     public function create($training_id)
     {
         $training = Training::find($training_id);
+        $regist = Regist::all();
         $date = Carbon::today()->toDateString();
-        return view('detailTraining',compact('training','date'));
+        return view('detailTraining',compact('training','date','regist'));
     }
 
     /**
@@ -69,7 +70,6 @@ class RegistController extends Controller
      */
     public function show($id)
     {
-
         $regist = Regist::findOrFail($id);
         return view('registrationDetail', compact('regist'));
 

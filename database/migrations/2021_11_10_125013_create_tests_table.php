@@ -33,8 +33,8 @@ class CreateTestsTable extends Migration
 
             $table->string('nameTest')->nullable();
             $table->string('typeTest');
-            $table->datetime('startTime');
-            $table->datetime('endTime');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->longText('description')->nullable();
             $table->timestamps();
         });

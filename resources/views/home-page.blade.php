@@ -104,7 +104,7 @@
                     {{-- <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#editmodal">
                         <i class="fa fa-pencil"></i> Edit
                     </button> --}}
-                    <a href="/regist/{{$item->id}}/create" class="btn btn-xs btn-success" >
+                    <a href="{{route('regist.create', $item->id)}}" class="btn btn-xs btn-success" >
                         <i class="fa fa-eye"></i> Detail
                     </a>
                 </td>

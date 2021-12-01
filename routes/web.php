@@ -14,11 +14,9 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SubcategoryTrainingController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TrainingController;
-use App\Http\Controllers\TrainingSubmissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VenueController;
 use App\Http\Controllers\ExamController;
-use App\Models\CategoryTraining;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\QuestionController;
@@ -27,6 +25,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\RegistController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\QuestionOptionController;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -40,34 +39,43 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::view('/', 'welcome');
 
 //home page tampilan pendaftaran training
 Route::get('/dashboard',[HomeController::class,'index'])->name('home');
-
-//detail pendaftaran training
-Route::get('/regist/{training_id}/create', [RegistController::class, 'create']);
-
-//store pendaftaran training
-Route::post('/regist/{training_id}/store', [RegistController::class, 'store']);
-
-//record pendaftaran training
-Route::get('/regist', [RegistController::class, 'index']);
 
 //tampilan quiz test
 //Route::resource('/test', TestController::class);
 Route::get('/test', [TestController::class, 'index']);
 
-//pengajuan training
-Route::get('/approval/create', [ApprovalRecordController::class, 'create']);
+Route::name('regist.')->group(function () {
+    //detail pendaftaran training
+    Route::get('/regist/{training_id}/create', [RegistController::class, 'create'])->name('create');
+    
+    //store pendaftaran training
+    Route::post('/regist/{training_id}/store', [RegistController::class, 'store'])->name('store');
+    
+    //record pendaftaran training
+    Route::get('/regist', [RegistController::class, 'index'])->name('index');
+});
 
-//store pengajuan training
-Route::post('/approval', [ApprovalRecordController::class,'store']);
-
-//record pengajuan training
-Route::get('/approval', [ApprovalRecordController::class,'index']);
+Route::name('approval.')->group(function () {
+    //pengajuan training
+    Route::get('/approval/create', [ApprovalRecordController::class, 'create'])->name('create');
+    
+    //store pengajuan training
+    Route::post('/approval', [ApprovalRecordController::class,'store'])->name('store');
+    
+    //record pengajuan training
+    Route::get('/approval', [ApprovalRecordController::class,'index'])->name('index');
+    
+    //edit approval detail
+    Route::get('/approval/{approval}/edit', [ApprovalRecordController::class, 'edit'])->name('edit');
+    
+    //update approval detail
+    Route::put('/approval/{id}/update', [ApprovalRecordController::class, 'update'])->name('update');
+});
 
 //dropdown subcategory
 Route::post('api/fetch-subcategory', [TrainingController::class, 'getSubcategory']);
@@ -208,10 +216,10 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     // Route::resource('training.approval', TrainingController::class);
 
     //melihat data approval record di approval record
-    Route::get('/approval/{id}', [ApprovalRecordController::class, 'show']);
+    Route::get('/approval/{approval}', [ApprovalRecordController::class, 'show']);
 
     //submit approval detail
-    Route::put('/approval/{id}', [ApprovalRecordController::class, 'update']);
+    Route::put('/approval/{id}', [ApprovalRecordController::class, 'updateStatus']);
 
 
     //view all training

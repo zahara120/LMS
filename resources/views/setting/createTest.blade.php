@@ -51,7 +51,12 @@
                 <td class="text-center">{{ $loop->iteration }}</td>
                 <td>{{ $item->nameTest }}</td>
                 <td>{{ $item->typeTest }}</td>
-                <td>{{ $item->timeTest }}</td>
+                <?php 
+                    $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $item->start_date);
+                    $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $item->end_date);
+                    $duration = $to->diffInHours($from);
+                ?>
+                <td>{{ $duration }} Hours</td>
                 <td>{{ $item->description }}</td>
                 <td class="text-center" width="200px">
                     <a href=" " class="btn btn-xs btn-info" >
@@ -146,10 +151,26 @@
                 <!-- di html ataupun di javascript ga ngedukung tipe data durasi -->
                     <div class="bootstrap-timepicker">
                         <div class="form-group">
-                            <label>Duration:</label>
+                            <label>Start date:</label>
 
                             <div class="input-group">
-                                <input type="time" name="timeTest" class="form-control">
+                                <input type="datetime-local" name="start_date" class="form-control">
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+                        <!-- /.form group -->
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                <!-- time Picker -->
+                <!-- di html ataupun di javascript ga ngedukung tipe data durasi -->
+                    <div class="bootstrap-timepicker">
+                        <div class="form-group">
+                            <label>End date:</label>
+
+                            <div class="input-group">
+                                <input type="datetime-local" name="end_date" class="form-control">
                             </div>
                             <!-- /.input group -->
                         </div>

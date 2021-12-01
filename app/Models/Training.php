@@ -27,6 +27,11 @@ class Training extends Model
     {
         return $this->belongsTo(Room::class);
     }
+
+    public function regist()
+    {
+        return $this->hasMany(Regist::class);
+    }
     
     public function registTraining(){
         return $this->hasMany(RegistTraining::class);

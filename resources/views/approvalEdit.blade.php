@@ -1,22 +1,23 @@
 @extends('layout.template')
-@section('title','Add Training Submission')
+@section('title','Edit Training Submission')
 
 @section('content')
 
 <div class="box">
     <div class="box-header with-border">
-        <h3 class="box-title">Add Training Submission</h3>
+        <h3 class="box-title">Edit Training Submission</h3>
     </div>
 
-    <form role="form" action="{{route('approval.store')}}" method="post">
+    <form role="form" action="{{route('approval.update', $approval->id)}}" method="post">
         @csrf
+        @method('PUT')
         <div class="box-body">
 
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="titleTraining">Title Training :</label>
-                    <input type="text" name="titleTraining" class="form-control" id="titleTraining" placeholder="Judul Training">
+                    <input type="text" name="titleTraining" class="form-control" id="titleTraining" placeholder="Judul Training" value="{{$approval->titleTraining}}">
                 </div>
             </div>
         </div>  
@@ -47,25 +48,25 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="quota">Jumlah Peserta :</label>
-                    <input type="number" class="form-control" name="quota" placeholder="Jumlah Peserta">
+                    <input type="number" class="form-control" name="quota" placeholder="Jumlah Peserta" value="{{$approval->quota}}">
                 </div>
             </div> 
         </div>
 
         <div class="form-group">
             <label for="objectiveTraining">Objective Training :</label>
-            <input type="text" name="objectiveTraining" class="form-control" id="objectiveTraining" placeholder="Target Training">
+            <input type="text" name="objectiveTraining" class="form-control" id="objectiveTraining" placeholder="Target Training" value="{{$approval->objectiveTraining}}">
         </div>  
 
         <div class="form-group">
             <label for="backgroundTraining">Background Training :</label>
-            <input type="text" name="backgroundTraining" class="form-control" id="backgroundTraining" placeholder="Tujuan Training">
+            <input type="text" name="backgroundTraining" class="form-control" id="backgroundTraining" placeholder="Tujuan Training" value="{{$approval->backgroundTraining}}">
         </div>  
         
         <!-- /catatan -->
         <div class="form-group">
             <label>Catatan : </label>
-        <textarea class="form-control" name="description" rows="3" placeholder="Catatan..."></textarea>
+        <textarea class="form-control" name="description" rows="3" placeholder="Catatan...">{{$approval->description}}</textarea>
         </div>
 
         <!-- /file -->
