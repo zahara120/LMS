@@ -17,7 +17,7 @@
 
     <li class="{{ request()->is('training') ? 'active' : "" }}"><a href="/training"><i class="fa"></i> <span>Training Record</span></a></li>
 
-    <li class="{{ request()->is('test/create') ? 'active' : "" }}"><a href="/test/create"><i class="fa"></i> <span>Create Test</span></a></li>
+    <!-- <li class="{{ request()->is('test/create') ? 'active' : "" }}"><a href="/test/create"><i class="fa"></i> <span>Create Test</span></a></li> -->
   
       {{-- <li class="{{ request()->is('setting') ? 'active' : "" }}"> --}}
         <li class="treeview">

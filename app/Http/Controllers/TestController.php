@@ -21,9 +21,6 @@ class TestController extends Controller
         }
         return view('tests', compact('questions'));
 
-        // coba
-        //return view('setting.indexQuestion');
-
     }
 
     /**
@@ -44,16 +41,6 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->all();
-        
-        // $question = new Question();
-        // $question->question = $request->question;
-        // $question->save();
-
-        // $question_option = new QuestionOption();
-        // $question_option->option_text = $request->option_text;
-        // $question_option->save();
-
         if(count ($request->multiInput) >0){
         foreach ($request->multiInput as $key => $value){
                 //Question::create($value);
@@ -62,7 +49,6 @@ class TestController extends Controller
         }
 
         return redirect()->back();
-        //dd($data);
     }
 
     /**

@@ -22,8 +22,11 @@ use App\Models\CategoryTraining;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\RegistController;
+use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\QuestionOptionController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -54,7 +57,8 @@ Route::post('/regist/{training_id}/store', [RegistController::class, 'store']);
 Route::get('/regist', [RegistController::class, 'index']);
 
 //tampilan quiz test
-Route::resource('/test', TestController::class);
+//Route::resource('/test', TestController::class);
+Route::get('/test', [TestController::class, 'index']);
 
 //pengajuan training
 Route::get('/approval/create', [ApprovalRecordController::class, 'create']);
@@ -76,7 +80,7 @@ Route::resource('comment.forum',CommentController::class);
 Route::delete('/comment/{comment_id}/delete',[CommentController::class, 'destroy']);
 Route::delete('/comment/{child_id}/deleteChild',[CommentController::class, 'destroyChild']);
 
-//like commnet
+//like comment
 Route::get('/like/{forum_id}',[ForumController::class,'toggle']);
 
 Auth::routes();
@@ -129,9 +133,62 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::delete('/provider/{id}', [ProviderController::class, 'destroy']);
     Route::get('/exportProvider',[ProviderController::class,'ProviderExport']);
 
-    Route::resource('/question',QuestionController::class);
+    //Route::resource('/question',QuestionController::class);
+    //create question form test
+    Route::get('question/{id}/test/create', [QuestionController::class,'create']);
+    //store question
+    Route::post('/question/{test_id}/test', [QuestionController::class, 'store']);
+    //delete question
+    Route::delete('question/{id}', [QuestionController::class,'destroy']);
+    //edit question
+    Route::get('/question/{id}/edit', [QuestionController::class,'edit']);
+    //store/update question
+    Route::put('/question/{id}', [QuestionController::class, 'update']);
 
-    Route::resource('/answer',AnswerController::class);
+
+    //Route::resource('/answer',AnswerController::class);
+    //create answer form test
+    Route::get('answer/{id}/test/create', [AnswerController::class,'create']);
+    //store answer training
+    Route::post('/answer/{test_id}/test', [AnswerController::class, 'store']);
+    //delete answer
+    Route::delete('answer/{id}', [AnswerController::class,'destroy']);
+    //edit question
+    Route::get('/answer/{id}/edit', [AnswerController::class,'edit']);
+    //store/update question
+    Route::put('/answer/{id}', [AnswerController::class, 'update']);
+
+    //survey
+    //Route::resource('/survey', SurveyController::class);
+
+    //index survey
+    Route::get('/survey', [SurveyController::class, 'index']);
+    //create store survey
+    Route::post('/survey', [SurveyController::class,'store']);
+    //delete survey
+    Route::delete('/survey/{id}', [SurveyController::class, 'destroy']);
+
+    //create questionoption form survey
+    Route::get('/questionoption/{id}/survey/create', [QuestionOptionController::class,'create']);
+    //store answer training
+    Route::post('/questionoption/{survey_id}/survey', [QuestionOptionController::class, 'store']);
+    //delete answer
+    Route::delete('questionoption/{id}', [QuestionOptionController::class,'destroy']);
+    //edit question
+    Route::get('/questionoption/{id}/edit', [QuestionOptionController::class,'edit']);
+    //store/update question
+    Route::put('/questionoption/{id}', [QuestionOptionController::class, 'update']);
+
+    //create questionner form survey
+    Route::get('questionnaire/{id}/survey/create', [QuestionnaireController::class,'create']);
+    //store question
+    Route::post('/questionnaire/{survey_id}/survey', [QuestionnaireController::class, 'store']);
+    //delete question
+    Route::delete('questionnaire/{id}', [QuestionnaireController::class,'destroy']);
+    //edit question
+    Route::get('/questionnaire/{id}/edit', [QuestionnaireController::class,'edit']);
+    //store/update question
+    Route::put('/questionnaire/{id}', [QuestionnaireController::class, 'update']);
 
     // Roles
     //Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
@@ -170,7 +227,13 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::put('/regist/{regist_id}', [RegistController::class, 'update']);
 
     //create exam
-    Route::resource('/exam', ExamController::class);
+    //Route::resource('/exam', ExamController::class);
+     //create exam
+    Route::get('/exam', [ExamController::class,'index']);
+    //create store exam
+    Route::post('/exam', [ExamController::class,'store']);
+    //delete exam
+    Route::delete('/exam/{id}', [ExamController::class, 'destroy']);
 
     Route::post('api/fetch-room', [TrainingController::class, 'getRoom']);
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Answer;
+use App\Models\Test;
 use App\Models\QuestionOption;
 use App\Models\Question;
 
@@ -16,10 +16,7 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        $questionoption = QuestionOption::all();
-        //$answer = Answer::all();
-        $question = Question::all();
-        return view('setting.createAnswer',compact('question','questionoption'));
+        //
     }
 
     /**
@@ -27,9 +24,12 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($test_id)
     {
-        //
+        $test = Test::find($test_id);
+        $questionoption = QuestionOption::all();
+        $question = Question::all();
+        return view('setting.createAnswer',compact('question','questionoption','test'));
     }
 
     /**
@@ -38,16 +38,11 @@ class AnswerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $test_id)
     {
-        $request->validate([
-            'addmore.*.option_text' => 'required',
-            'addmore.*.correct' => 'required',
-        ]);
-        //dd($request);
-        foreach ($request->addmore as $key => $value) {
-            Answer::create($value);
-        }
+        $request->request->add(['test_id' => $test_id]);
+        QuestionOption::create($request->all());
+        return back()->with('success','success input question option');
     }
 
     /**
@@ -69,7 +64,8 @@ class AnswerController extends Controller
      */
     public function edit($id)
     {
-        //
+         $answer = QuestionOption::findorfail($id);
+        return view ('setting.editAnswer',compact('answer'));
     }
 
     /**
@@ -81,7 +77,9 @@ class AnswerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $answer = QuestionOption::findorfail($id);
+        $answer->update($request->all());
+        return back()->with('succes','succes edit data');
     }
 
     /**
@@ -92,6 +90,8 @@ class AnswerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $answer = QuestionOption::find($id);
+        $answer->delete();
+        return back();
     }
 }

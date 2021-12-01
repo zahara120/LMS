@@ -9,4 +9,13 @@ class Question extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    public function test()
+    {
+        return $this->belongsTo('App\Models\Test');
+    }
+
+    public function question_option()
+    {
+        return $this->hasMany('App\Models\QuestionOption');
+    }
 }

@@ -1,37 +1,15 @@
 @extends('layout.template')
-@section('title','Create Question')
+@section('title','Create Questionnaire')
 
 @section('content')
 
 <div class="box">
     <div class="box-header with-border">
 
-        <h3 class="box-title">Create Question</h3>
+        <h3 class="box-title">Create Questionnaire</h3>
     </div>
 
-        {{-- <form role="form"  action="/question/{{ $test->id }}/test" method="POST">
-            @csrf
-            <div class="box-body">
-
-            <div class="box-body">
-
-            <div class="form-group row mt-2">
-                <label class="col-sm-2 control-label">Question : </label>
-                <div class="col-sm-8">
-                <input type="text" class="form-control" name="question[]" placeholder="Pertanyaan">
-                </div>
-
-                <div class="col-lg-2">
-                    <a href="#" class="btn btn-primary addquestion" style="float:right">Add Question</a>
-                </div>
-            </div>
-
-            <div class="question"></div>
-
-            <button type="submit" class="btn btn-success">Submit</button>
-        </form> --}}
-
-        <form role="form"  action="/question/{{ $test->id }}/test" method="POST">
+        <form role="form"  action="/questionnaire/{{ $survey->id }}/survey" method="POST">
             @csrf
             {{-- <input type="hidden" name="question_id" value="{{  $item->id  }}"> --}}
 
@@ -40,19 +18,33 @@
             <div class="box-body">
 
             <div class="form-group row mt-2">
-                <label class="col-sm-2 control-label">Question : </label>
+                <label class="col-sm-2 control-label">Questionnaire : </label>
                 <div class="col-sm-8">
-                <input type="text" class="form-control" name="question[]" placeholder="Pertanyaan">
+                <input type="text" class="form-control" name="question" placeholder="Pertanyaan">
+                </div>
+            </div>
+            <div class="form-group row mt-2">
+                <label class="col-sm-2 control-label">Type Answer :</label>
+                <div class="col-lg-4">
+                    <div class="checkbox">
+                        <label><input type="radio" name="typeAnswer" id="essay" value="essay"> Essay</label>
+                    </div>
                 </div>
 
                 <div class="col-lg-2">
-                <button type="submit" class="btn btn-primary" style="float:right">Add Question</button>
+                    <div class="checkbox">
+                      <label><input type="radio" name="typeAnswer" id="multiplechoice" value="multiplechoice"> Multiple Choice</label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary" style="float:right">Add Question</button>
                 </div>
             </div>
         </form>
         
         <?php $i = 1; ?>
-        @foreach ($test->question as $item)
+        @foreach ($survey->questionnaire as $item)
+        <div class="box-footer">
             <div class="form-group row mt-2" >
                 <label class="col-sm-2 control-label">Question {{ $i }}:</label>
                 <div class="col-sm-8">
@@ -63,22 +55,32 @@
                     {{-- <a data-toggle="modal" data-target="#modal-edit" class="btn btn-xs btn-info">
                         <i class="fa fa-pencil"></i> Edit
                     </a> --}}
-                    <a href="{{url('/question/'.$item->id.'/edit')}}" class="btn btn-xs btn-primary">
+                    <a href="{{url('/questionnaire/'.$item->id.'/edit')}}" class="btn btn-xs btn-primary">
                         <i class="fa fa-pencil"></i> Edit
                     </a>
                 </div>
 
                 <div class="col-lg-1">
-                    <form action="/question/{{$item->id}}" method="post" onclick="return confirm('Are you sure want to delete this data?')">
+                    <form action="/questionnaire/{{$item->id}}" method="post" onclick="return confirm('Are you sure want to delete this data?')">
                         @csrf
                         @method('DELETE')
                         <button href="#" class="btn btn-xs btn-danger" style="float:right"><i class="fa fa-trash"></i>Delete</button>
                     </form>
                 </div>
-
             </div>
+    
+            <div class="form-group row mt-2">
+                <label class="col-sm-2 control-label">Type Answer :</label>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control" name="typeAnswer" value="{{ $item->typeAnswer }}" placeholder="Type Answer" disabled>
+                </div>
+            </div>
+            
+        </div>
         <?php $i++; ?>
         @endforeach
+
+
     </div> 
     </div>
 </div>

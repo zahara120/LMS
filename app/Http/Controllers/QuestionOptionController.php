@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Test;
-use App\Models\Question;
+use App\Models\Answer;
+use App\Models\Survey;
+use App\Models\Questionnaire;
 
-class QuestionController extends Controller
+class QuestionOptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -23,12 +24,12 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($test_id)
+    public function create($survey_id)
     {
-        $test = Test::find($test_id);
-        $question = Question::all();
-        $answer = QuestionOption::all();
-        return view('setting.createQuestion',compact('question','test','answer'));
+        $survey = Survey::find($survey_id);
+        $answer = Answer::all();
+        $questionnaire = Questionnaire::all();
+        return view('setting.createQuestionOption',compact('questionnaire','answer','survey'));
     }
 
     /**
@@ -39,25 +40,13 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $request->validate([
-            'addmore.*.question' => 'required',
-        ]);
-        $request->request->add(['test_id' => $test_id]);
-        foreach ($request->question as $value) {
-            Question::create([
-                'question' => $value,
-                'test_id' => $request->test_id
-            ]);
-        }
-        return back()->with('succes','succes add data');
-
+        //
     }
 
     /**
      * Display the specified resource.
-     * @param  int  $id
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -73,8 +62,7 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-         $question = Question::findorfail($id);
-        return view ('setting.editQuestion',compact('question'));
+        //
     }
 
     /**
@@ -86,9 +74,7 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $question = Question::findorfail($id);
-        $question->update($request->all());
-        return back()->with('succes','succes edit data');
+        //
     }
 
     /**
@@ -99,8 +85,6 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        $question = Question::find($id);
-        $question->delete();
-        return back()->with('succes','succes delete data');
+        //
     }
 }

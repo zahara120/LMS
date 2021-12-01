@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Test;
-use App\Models\Question;
+use App\Models\Survey;
+use App\Models\Questionnaire;
 
-class QuestionController extends Controller
+class QuestionnaireController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -23,12 +23,12 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($test_id)
+    public function create($survey_id)
     {
-        $test = Test::find($test_id);
-        $question = Question::all();
-        $answer = QuestionOption::all();
-        return view('setting.createQuestion',compact('question','test','answer'));
+        $survey = Survey::find($survey_id);
+        $questionnaire = Questionnaire::all();
+        //$answer = QuestionOption::all();
+        return view('setting.createQuestionnaire',compact('questionnaire','survey'));
     }
 
     /**
@@ -37,27 +37,25 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $survey_id)
     {
-        // dd($request);
         $request->validate([
             'addmore.*.question' => 'required',
         ]);
-        $request->request->add(['test_id' => $test_id]);
+        $request->request->add(['test_id' => $survey_id]);
         foreach ($request->question as $value) {
-            Question::create([
+            Questionnaire::create([
                 'question' => $value,
-                'test_id' => $request->test_id
+                'survey_id' => $request->survey_id
             ]);
         }
         return back()->with('succes','succes add data');
-
     }
 
     /**
      * Display the specified resource.
-     * @param  int  $id
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -73,8 +71,8 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-         $question = Question::findorfail($id);
-        return view ('setting.editQuestion',compact('question'));
+        $questionnaire = Questionnaire::findorfail($id);
+        return view ('setting.editQuestionnaire',compact('questionnaire'));
     }
 
     /**
@@ -86,8 +84,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $question = Question::findorfail($id);
-        $question->update($request->all());
+        $questionnaire = Questionnaire::findorfail($id);
+        $questionnaire->update($request->all());
         return back()->with('succes','succes edit data');
     }
 
@@ -99,8 +97,8 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        $question = Question::find($id);
-        $question->delete();
+        $questionnaire = Questionnaire::find($id);
+        $questionnaire->delete();
         return back()->with('succes','succes delete data');
     }
 }
