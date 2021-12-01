@@ -9,6 +9,7 @@ use App\Models\RoleUser;
 use App\Models\SubcategoryTraining;
 use App\Models\Training;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class ApprovalRecordController extends Controller
@@ -54,7 +55,7 @@ class ApprovalRecordController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->role()->where('roleName', '=', 'Admin')->exists()){
+        if(auth()->user()->role()->where('role_id', '=', 1)->exists()){
             $request->request->add(['user_id' => $request->user()->id]);
             $request->request->add(['status' => 1]);
             $approval = Approval::create($request->all());
@@ -63,10 +64,12 @@ class ApprovalRecordController extends Controller
             return redirect()->action(
                 [TrainingController::class, 'create'], ['id' => $approval_id]
             );
+            // return 'ini admin';
         }else{
             $request->request->add(['user_id' => $request->user()->id]);
             Approval::create($request->all());
             return redirect('/approval')->with('succes','succes add data');
+            // return 'ini user';
         }
     }
 
@@ -76,10 +79,9 @@ class ApprovalRecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Approval $approval)
     {
-        $approval = Approval::findOrFail($id);
-        return view('approvalDetail',compact('approval'));
+        return view('approvalDetail', compact('approval'));
     }
 
     /**
@@ -88,10 +90,10 @@ class ApprovalRecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Approval $approval)
     {
-        $approval = Approval::all();
-        return view('approvalRecord',compact('approval'));
+        $category = CategoryTraining::all();
+        return view('approvalEdit', compact('approval', 'category'));
     }
 
     /**
@@ -101,17 +103,17 @@ class ApprovalRecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, $id)
-    // {
-    //     $approval = Approval::find($id)->update(['status' => $request->status]);
-    //     // $approval = Approval::find($id);
-    //     return back();
-    // }
-
     public function update(Request $request, $approval_id)
     {
-        // dd($request->status);
-        // dd($approval_id);
+        $approval = Approval::findOrFail($approval_id);
+        $request->request->add(['status' => 0]);
+        $input = $request->all();
+        $approval->fill($input)->save();
+        return redirect('/approval');
+    }
+
+    public function updateStatus(Request $request, $approval_id)
+    {
         $approval = Approval::findOrFail($approval_id);
         $request->request->add(['status' => $request->status]);
         $request->request->add(['alasan' => $request->alasan]);

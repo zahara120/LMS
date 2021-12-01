@@ -14,11 +14,9 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SubcategoryTrainingController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TrainingController;
-use App\Http\Controllers\TrainingSubmissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VenueController;
 use App\Http\Controllers\ExamController;
-use App\Models\CategoryTraining;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\QuestionController;
@@ -64,6 +62,12 @@ Route::post('/approval', [ApprovalRecordController::class,'store']);
 
 //record pengajuan training
 Route::get('/approval', [ApprovalRecordController::class,'index']);
+
+//edit approval detail
+Route::get('/approval/{approval}/edit', [ApprovalRecordController::class, 'edit']);
+
+//update approval detail
+Route::put('/approval/{id}/update', [ApprovalRecordController::class, 'update']);
 
 //dropdown subcategory
 Route::post('api/fetch-subcategory', [TrainingController::class, 'getSubcategory']);
@@ -151,10 +155,10 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     // Route::resource('training.approval', TrainingController::class);
 
     //melihat data approval record di approval record
-    Route::get('/approval/{id}', [ApprovalRecordController::class, 'show']);
+    Route::get('/approval/{approval}', [ApprovalRecordController::class, 'show']);
 
     //submit approval detail
-    Route::put('/approval/{id}', [ApprovalRecordController::class, 'update']);
+    Route::put('/approval/{id}', [ApprovalRecordController::class, 'updateStatus']);
 
 
     //view all training
