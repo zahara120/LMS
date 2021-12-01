@@ -8,7 +8,7 @@
         <h3 class="box-title">Add Training Submission</h3>
     </div>
 
-    <form role="form" action="/approval" method="post">
+    <form role="form" action="{{route('approval.store')}}" method="post">
         @csrf
         <div class="box-body">
 

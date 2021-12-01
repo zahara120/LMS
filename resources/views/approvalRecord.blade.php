@@ -75,7 +75,7 @@
                     @elseif($item->status == 2) 
                     <label class="label label-danger">Reject</label>
                       @if(auth()->user()->role()->where('nameRole', '=', 'User')->exists())
-                        <a href="/approval/{{$item->id}}/edit" class="btn btn-xs btn-primary">
+                        <a href="{{route('approval.edit',  $item->id)}}" class="btn btn-xs btn-primary">
                             <i class="fa fa-pencil"></i> Edit
                         </a>
                       @endif

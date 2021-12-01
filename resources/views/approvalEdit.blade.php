@@ -8,7 +8,7 @@
         <h3 class="box-title">Edit Training Submission</h3>
     </div>
 
-    <form role="form" action="/approval/{{$approval->id}}/update" method="post">
+    <form role="form" action="{{route('approval.update', $approval->id)}}" method="post">
         @csrf
         @method('PUT')
         <div class="box-body">

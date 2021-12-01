@@ -32,15 +32,15 @@
     <div class="modal-footer">
         <?php $flag=''; ?>
         @foreach($regist as $r)
-            @if($r->training_id == $training->id or $training->end_date < $date)
+            @if($r->training_id == $training->id )
             <?php $flag++; ?>
             @endif
         @endforeach
-        @if($flag >= 1)
+        @if($flag >= 1 or $training->end_date < $date)
             <button class="btn btn-success" type="submit" disabled>Registration</button>
             <a href="{{url()->previous()}}" class="btn btn-danger">Cancel</a>
         @else
-        <form action="/regist/{{ $training->id }}/store" method="post">
+        <form action="{{route('regist.store', $training->id)}}" method="post">
             @csrf
             @method('Post')
             <button class="btn btn-success" type="submit">Registration</button>
