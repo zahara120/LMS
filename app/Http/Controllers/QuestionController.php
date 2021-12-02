@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Test;
 use App\Models\Question;
+use App\Models\QuestionOption;
 
 class QuestionController extends Controller
 {
@@ -37,7 +38,7 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $test_id)
     {
         // dd($request);
         $request->validate([

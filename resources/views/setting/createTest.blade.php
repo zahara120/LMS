@@ -59,7 +59,7 @@
                 <td>{{ $duration }} Hours</td>
                 <td>{{ $item->description }}</td>
                 <td class="text-center" width="200px">
-                    <a href=" " class="btn btn-xs btn-info" >
+                    {{-- <a href=" " class="btn btn-xs btn-info" >
                         <i class="fa fa-eye"></i> View
                     </a>
                     <a href="" class="btn btn-xs btn-primary">
@@ -67,7 +67,20 @@
                     </a>
                     <a href="" class="btn btn-xs btn-danger">
                         <i class="fa fa-trash"></i> Delete
-                    </a> 
+                    </a>  --}}
+                    <form action="{{ url('exam/'.$item->id) }}" class="inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
+                        @method('delete')
+                        @csrf         
+                        <button type="submit" class="btn btn-xs btn-danger" >
+                            <i class="fa fa-trash"></i> Delete
+                        </button> 
+                    </form>
+                    <a class="btn btn-xs btn-primary" type ="button" href="/question/{{$item->id}}/test/create"> 
+                        <i class="fa fa-pencil"></i> + Question
+                    </a>
+                    <a class="btn btn-xs btn-info" type ="button" href="/answer/{{$item->id}}/test/create"> 
+                        <i class="fa fa-pencil"></i> + Option Question
+                    </a>
                 </td>
             </tr>
             @endforeach

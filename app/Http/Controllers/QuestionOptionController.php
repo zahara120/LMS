@@ -38,9 +38,11 @@ class QuestionOptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $survey_id)
     {
-        //
+        $request->request->add(['survey_id' => $survey_id]);
+        Answer::create($request->all());
+        return back()->with('success','success input question option');
     }
 
     /**
@@ -62,7 +64,8 @@ class QuestionOptionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $questionoption = Answer::findorfail($id);
+        return view ('setting.editQuestionOption',compact('questionoption'));
     }
 
     /**
@@ -74,7 +77,9 @@ class QuestionOptionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $questionoption = Answer::findorfail($id);
+        $questionoption->update($request->all());
+        return back()->with('succes','succes edit data');
     }
 
     /**
@@ -85,6 +90,9 @@ class QuestionOptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $questionoption = Answer::find($id);
+        $questionoption->delete();
+        //return redirect('/answer')->with('succes','succes delete data');
+        return back();
     }
 }

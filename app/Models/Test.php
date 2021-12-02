@@ -9,4 +9,9 @@ class Test extends Model
 {
     protected $guarded = ['id'];
     use HasFactory;
+
+    public function question()
+    {
+        return $this->hasMany('App\Models\Question');
+    }
 }

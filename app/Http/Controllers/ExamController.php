@@ -89,6 +89,8 @@ class ExamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $test = Test::find($id);
+        $test->delete();
+        return redirect('/exam')->with('succes','succes delete data');
     }
 }

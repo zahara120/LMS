@@ -34,6 +34,7 @@
           <li><a href="/categorytraining"><i class="fa fa-circle-o"></i>Category Training</a></li>
           <li><a href="/subcategorytraining"><i class="fa fa-circle-o"></i>Subcategory Training</a></li>
           <li><a href="/exam"><i class="fa fa-circle-o"></i>Create Test</a></li>
+          <li><a href="/survey"><i class="fa fa-circle-o"></i>Create Survey</a></li>
           <li><a href="/venue"><i class="fa fa-circle-o"></i>Venue Training</a></li>
           <li><a href="/room"><i class="fa fa-circle-o"></i>Room Training</a></li>
           <li><a href="/provider"><i class="fa fa-circle-o"></i>Provider</a></li>
