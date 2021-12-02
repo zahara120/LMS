@@ -123,6 +123,32 @@
                 </div>
             </div>
 
+            <div class="form-group row mt-2">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Post Test :</label>
+                    <div class="col-lg-3">
+                        <select class="form-control select2" name="test_id" placeholder="LessonTraining" style="width: 100%;">
+                            {{-- @foreach($lesson as $item)
+                            <option value="{{ $item->id }}">{{ $item->nameLesson }}</option>
+                            @endforeach --}}
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <label>Pre Test :</label>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <select class="form-control select2" name="test_id" placeholder="LessonTraining" style="width: 100%;">
+                            {{-- @foreach($lesson as $item)
+                            <option value="{{ $item->id }}">{{ $item->nameLesson }}</option>
+                            @endforeach --}}
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
             <!-- /catatan -->
             <div class="form-group row mt-2">
                 <label class="col-sm-3 control-label">Catatan : </label>

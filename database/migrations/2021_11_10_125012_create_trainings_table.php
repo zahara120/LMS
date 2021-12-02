@@ -36,6 +36,11 @@ class CreateTrainingsTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
+            $table->foreignId('test_id')
+            ->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
             $table->string('mandatory');
             $table->string('mandatoryTraining');
             $table->string('catatan')->nullable();
