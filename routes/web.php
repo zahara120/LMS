@@ -100,13 +100,15 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::resource('/lesson',LessonController::class);
 
-    // Route::resource('/categorytraining',CategoryTrainingController::class);
-    Route::get('/categorytraining', [CategoryTrainingController::class,'index']);
-    Route::post('/categorytraining', [CategoryTrainingController::class,'store']);
-    Route::get('/categorytraining/{id}/edit', [CategoryTrainingController::class,'edit']);
-    Route::put('/categorytraining/{id}', [CategoryTrainingController::class, 'update']);
-    Route::delete('/categorytraining/{id}', [CategoryTrainingController::class, 'destroy']);
-    Route::get('/exportCategoryTraining',[CategoryTrainingController::class,'categoryExport']);
+    Route::name('category.')->group(function () {
+        // Route::resource('/categorytraining',CategoryTrainingController::class);
+        Route::get('/categorytraining', [CategoryTrainingController::class,'index'])->name('index');
+        Route::post('/categorytraining', [CategoryTrainingController::class,'store'])->name('store');
+        Route::get('/categorytraining/{id}/edit', [CategoryTrainingController::class,'edit'])->name('edit');
+        Route::put('/categorytraining/{id}', [CategoryTrainingController::class, 'update'])->name('update');
+        Route::delete('/categorytraining/{id}', [CategoryTrainingController::class, 'destroy'])->name('destroy');
+        Route::get('/exportCategoryTraining',[CategoryTrainingController::class,'categoryExport'])->name('categoryExport');
+    });
 
 
     //Route::resource('/subcategorytraining',SubcategoryTrainingController::class);
@@ -228,6 +230,11 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('training/{id}/approval/create', [TrainingController::class,'create']);
     //store training
     Route::post('training/{id}/approval', [TrainingController::class,'store']);
+    
+    Route::name('user.')->group(function () {
+        //index user 
+        Route::get('user/{training}', [UserController::class,'list'])->name('list');
+    });
 
     Route::get('/regist/{regist_id}', [RegistController::class, 'show']);
     

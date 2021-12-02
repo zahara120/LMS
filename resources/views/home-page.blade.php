@@ -101,12 +101,14 @@
                     {{$quota}}
                 </td>
                 <td class="text-center">
-                    {{-- <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#editmodal">
-                        <i class="fa fa-pencil"></i> Edit
-                    </button> --}}
                     <a href="{{route('regist.create', $item->id)}}" class="btn btn-xs btn-success" >
                         <i class="fa fa-eye"></i> Detail
                     </a>
+                    @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
+                    <a href="{{route('regist.create', $item->id)}}" class="btn btn-xs btn-primary" >
+                        <i class="fa fa-eye"></i> User
+                    </a>
+                    @endif
                 </td>
             </tr>
             @endforeach

@@ -97,8 +97,6 @@ class TrainingController extends Controller
         return redirect('/training')->with('succes','succes add data');;
     }
 
-
-
     /**
      * Display the specified resource.
      *
@@ -143,4 +141,6 @@ class TrainingController extends Controller
     {
         //
     }
+
+    
 }
