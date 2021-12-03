@@ -9,7 +9,7 @@
         <h3 class="box-title">Create Training</h3>
     </div>
 
-    <form role="form" action="/training/{{$approval->id}}/approval" method="post">
+    <form role="form" action="{{route('training.store', $approval->id)}}" method="post">
         @csrf
         <div class="box-body">
             @if ($errors->any())
