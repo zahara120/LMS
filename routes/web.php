@@ -211,7 +211,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     // Users
     //Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
-    Route::resource('/user', UserController::class);
+    Route::get('/user', [UserController::class, 'index']);
 
     // Route::resource('/training', TrainingController::class);
     
@@ -222,19 +222,18 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     //submit approval detail
     Route::put('/approval/{id}', [ApprovalRecordController::class, 'updateStatus']);
-
-
-    //view all training
-    Route::get('/training', [TrainingController::class,'index']);
-    //create training
-    Route::get('training/{id}/approval/create', [TrainingController::class,'create']);
-    //store training
-    Route::post('training/{id}/approval', [TrainingController::class,'store']);
     
-    Route::name('user.')->group(function () {
-        //index user 
-        Route::get('user/{training}', [UserController::class,'list'])->name('list');
+    Route::name('training.')->group(function(){
+        //view all training
+        Route::get('/training', [TrainingController::class,'index'])->name('index');
+        //create training
+        Route::get('training/{id}/approval/create', [TrainingController::class,'create'])->name('create');
+        //store training
+        Route::post('training/{id}/approval', [TrainingController::class,'store'])->name('store');
+        // show list user
+        Route::get('/user/{training}', [UserController::class,'list'])->name('user.list');
     });
+    
 
     Route::get('/regist/{regist_id}', [RegistController::class, 'show']);
     

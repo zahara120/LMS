@@ -22,7 +22,7 @@
 
         <div class="info-box-content">
             <span class="info-box-text">Jumlah User</span>
-            <span class="info-box-number">{{ $total_user }} <small>Peson</small></span>
+            <span class="info-box-number">{{ $total_user }} <small>Person</small></span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -34,7 +34,7 @@
   
           <div class="info-box-content">
               <span class="info-box-text">Jumlah User</span>
-              <span class="info-box-number">{{ $total_user }} <small>Peson</small></span>
+              <span class="info-box-number">{{ $total_user }} <small>Person</small></span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -104,10 +104,10 @@
                     <a href="{{route('regist.create', $item->id)}}" class="btn btn-xs btn-success" >
                         <i class="fa fa-eye"></i> Detail
                     </a>
-                    @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
-                    <a href="{{route('regist.create', $item->id)}}" class="btn btn-xs btn-primary" >
-                        <i class="fa fa-eye"></i> User
-                    </a>
+                    @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists() AND $quota >= 1)
+                        <a href="{{route('training.user.list', $item->id)}}" class="btn btn-xs btn-primary" >
+                            <i class="fa fa-eye"></i> User
+                        </a>
                     @endif
                 </td>
             </tr>

@@ -32,11 +32,12 @@
     <div class="modal-footer">
         <?php $flag=''; ?>
         @foreach($regist as $r)
-            @if($r->training_id == $training->id )
+            @if($r->training_id == $training->id)
+            <!-- jika user yang login udah ada di regist->user_id dan training_id nya sama dengan $training->id -->
             <?php $flag++; ?>
             @endif
         @endforeach
-        @if($flag >= 1 or $training->end_date < $date)
+        @if($flag > 1 AND auth()->user()->id == $r->user_id OR $training->end_date < $date)
             <button class="btn btn-success" type="submit" disabled>Registration</button>
             <a href="{{url()->previous()}}" class="btn btn-danger">Cancel</a>
         @else

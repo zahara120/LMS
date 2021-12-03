@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Training;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -22,10 +23,10 @@ class UserController extends Controller
         return view('setting.indexUser', compact('user','roles'));
     }
     
-    public function list()
+    public function list(Training $training)
     {
         // buat nampilin user sesuai training
-        
+        return view('userDetail', compact('training'));
     }
 
     /**
