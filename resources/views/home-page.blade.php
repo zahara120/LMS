@@ -105,7 +105,7 @@
                         <i class="fa fa-eye"></i> Detail
                     </a>
                     @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists() AND $quota >= 1)
-                        <a href="{{route('training.user.list', $item->id)}}" class="btn btn-xs btn-primary" >
+                        <a href="{{route('training.user.index', $item->id)}}" class="btn btn-xs btn-primary" >
                             <i class="fa fa-eye"></i> User
                         </a>
                     @endif

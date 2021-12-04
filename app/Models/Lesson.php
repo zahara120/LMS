@@ -18,7 +18,11 @@ class Lesson extends Model
         return $this->hasMany('App\Models\TypeLesson');
     }
 
+    public function training(){
+        return $this->hasMany(Training::class);
+    }
+
     public function category(){
-        return $this->belongsTo('App\Models\CategoryTraining');
+        return $this->belongsTo(CategoryTraining::class, 'category_trainings_id');
     }
 }

@@ -50,17 +50,13 @@
                 <td>{{ $item->start_date }}</td>
                 <td>{{ $item->end_date }}</td>
                 <td class="text-center" width="200px">
-                    {{-- <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#editmodal">
-                        <i class="fa fa-pencil"></i> Edit
-                    </button> --}}
                     <a href=" " class="btn btn-xs btn-info" >
                         <i class="fa fa-eye"></i> View
                     </a>
-                    <a href="" class="btn btn-xs btn-primary">
+                    <a href="training/{{$item->id}}/{{$item->approval->id}}/edit" class="btn btn-xs btn-primary">
                         <i class="fa fa-pencil"></i> Edit
                     </a>
                     
-
                     <form action="" class="inline" onclick="return confirm('Are you sure want to delete this data?')">
                         {{-- @method('delete')
                         @csrf          --}}

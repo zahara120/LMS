@@ -11,6 +11,7 @@ use App\Models\SubcategoryTraining;
 use App\Models\Training;
 use App\Models\Venue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class TrainingController extends Controller
 {
@@ -114,9 +115,13 @@ class TrainingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Training $training, Approval $approval)
     {
-        //
+        // dd($training);
+        $venue = Venue::all();
+        $room = Room::all();
+        $lesson = Lesson::all();
+        return view('editTraining', compact('training', 'approval', 'venue', 'room', 'lesson'));
     }
 
     /**
@@ -126,9 +131,19 @@ class TrainingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $training_id, $approval_id)
     {
-        //
+        // dd($request);
+        $training = Training::findOrFail($training_id);
+        $request->request->add(['approval_id' => $approval_id]);
+        $input = $request->all();
+        $training->fill($input)->save();
+
+        $approval = Approval::findOrFail($approval_id);
+        $request->request->add(['titleTraining' => $request->titleTraining]);
+        $input = $request->all();
+        $approval->fill($input)->save();
+        return redirect()->route('training.index');
     }
 
     /**

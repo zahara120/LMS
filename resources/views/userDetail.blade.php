@@ -9,6 +9,15 @@
 @endif
 
 <div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Data User Training</h3>
+        <div class="pull-right">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success btn-flat" data-toggle="modal" data-target="#provider">
+                insert trainee
+            </button>
+        </div>
+    </div>
     <div class="box-body table-responsive">
         <table id="table" class="table table-bordered table-striped">
         <thead>
@@ -33,9 +42,6 @@
                             @endforeach
                         </td>
                         <td class="text-center" width="200px">
-                            <a href=" " class="btn btn-xs btn-info" >
-                                <i class="fa fa-eye"></i> View
-                            </a>
                             <a href="" class="btn btn-xs btn-primary">
                                 <i class="fa fa-pencil"></i> Edit
                             </a>
@@ -62,7 +68,7 @@
           <h4 class="modal-title" id="myModalLabel">Add User</h4>
         </div>
         <div class="modal-body">
-            <form action="/user" method="post">
+            <form action="" method="post">
             @csrf
             <div class="form-group">
                 <label for="name">Name :</label>

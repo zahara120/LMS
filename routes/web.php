@@ -25,6 +25,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\RegistController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\QuestionOptionController;
+use App\Http\Controllers\TraineeController;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
@@ -225,13 +226,17 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     
     Route::name('training.')->group(function(){
         //view all training
-        Route::get('/training', [TrainingController::class,'index'])->name('index');
+        Route::get('training', [TrainingController::class,'index'])->name('index');
         //create training
         Route::get('training/{id}/approval/create', [TrainingController::class,'create'])->name('create');
+        //edit training
+        Route::get('training/{training}/{approval}/edit', [TrainingController::class,'edit'])->name('edit');
+        //update training
+        Route::put('training/{training}/{approval}/update', [TrainingController::class,'update'])->name('update');
         //store training
-        Route::post('training/{id}/approval', [TrainingController::class,'store'])->name('store');
+        Route::post('training/{id}/store', [TrainingController::class,'store'])->name('store');
         // show list user
-        Route::get('/user/{training}', [UserController::class,'list'])->name('user.list');
+        Route::get('user/{training}', [TraineeController::class,'index'])->name('user.index');
     });
     
 

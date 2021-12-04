@@ -22,12 +22,6 @@ class UserController extends Controller
 
         return view('setting.indexUser', compact('user','roles'));
     }
-    
-    public function list(Training $training)
-    {
-        // buat nampilin user sesuai training
-        return view('userDetail', compact('training'));
-    }
 
     /**
      * Show the form for creating a new resource.
