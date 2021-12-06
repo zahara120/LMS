@@ -95,7 +95,7 @@ class TrainingController extends Controller
 
         $request->request->add(['approval_id' => $approval_id]);
         Training::create($request->all());
-        return redirect('/training')->with('succes','succes add data');;
+        return redirect('/training')->with('succes','succes add data');
     }
 
     /**

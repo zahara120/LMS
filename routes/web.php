@@ -237,6 +237,10 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
         Route::post('training/{id}/store', [TrainingController::class,'store'])->name('store');
         // show list user
         Route::get('user/{training}', [TraineeController::class,'index'])->name('user.index');
+        // store user
+        Route::post('user/{training}/store', [TraineeController::class,'store'])->name('user.store');
+        // delete user FROM regist table
+        Route::delete('user/{regist}/delete', [TraineeController::class,'destroy'])->name('user.delete');
     });
     
 
