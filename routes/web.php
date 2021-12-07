@@ -49,6 +49,9 @@ Route::get('/dashboard',[HomeController::class,'index'])->name('home');
 //Route::resource('/test', TestController::class);
 Route::get('/test', [TestController::class, 'index']);
 
+//input test 
+Route::get('test/{id}/training/create', [TestController::class,'create']);
+
 Route::name('regist.')->group(function () {
     //detail pendaftaran training
     Route::get('/regist/{training_id}/create', [RegistController::class, 'create'])->name('create');

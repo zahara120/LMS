@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTestsTable extends Migration
+class CreateTestResultAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,30 +13,25 @@ class CreateTestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tests', function (Blueprint $table) {
+        Schema::create('test_result_answers', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('category_trainings_id')
+            
+            $table->foreignId('test_result_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
-            $table->foreignId('subcategory_trainings_id')
+            $table->foreignId('question_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
-            $table->foreignId('lesson_id')
+            $table->foreignId('question_option_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
-            $table->string('nameTest')->nullable();
-            $table->string('typeTest');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
-            $table->string('duration');
-            $table->longText('description')->nullable();
+            $table->tinyInteger('correct')->default(0);
             $table->timestamps();
         });
     }
@@ -48,6 +43,8 @@ class CreateTestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tests');
+        Schema::dropIfExists('test_result_answers');
     }
 }
+
+

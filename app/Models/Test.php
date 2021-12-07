@@ -14,4 +14,8 @@ class Test extends Model
     {
         return $this->hasMany('App\Models\Question');
     }
+
+    public function training(){
+        return $this->hasMany('App\Models\Training');
+    }
 }

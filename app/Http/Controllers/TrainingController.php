@@ -6,6 +6,7 @@ use App\Models\Approval;
 use App\Models\CategoryTraining;
 use App\Models\Provider;
 use App\Models\Lesson;
+use App\Models\Test;
 use App\Models\Room;
 use App\Models\SubcategoryTraining;
 use App\Models\Training;
@@ -49,7 +50,9 @@ class TrainingController extends Controller
         $provider = Provider::all();
         // $data['venue'] = Venue::get(["nameVenue","id"]);
         $venue = Venue::all();
-        return view('setting.createTraining',compact('approval','provider','venue','category','subcategory','lesson','approval'));
+        $posttest_id = Test::select("*")->where("typeTest","=","PostTest")->get();
+        $pretest_id = Test::select("*")->where("typeTest","=","PreTest")->get();
+        return view('setting.createTraining',compact('approval','provider','venue','category','subcategory','lesson','approval','posttest_id','pretest_id'));
     }
 
     public function getRoom(Request $request)

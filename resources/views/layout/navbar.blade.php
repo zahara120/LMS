@@ -5,7 +5,7 @@
   
       {{-- @if(auth()->user()->role()->nameRole='Admin') --}}
       
-    <li class="{{ request()->is('test') ? 'active' : "" }}"><a href="/test"><i class="fa"></i> <span>Quiz</span></a></li>
+    {{-- <li class="{{ request()->is('test') ? 'active' : "" }}"><a href="/test"><i class="fa"></i> <span>Quiz</span></a></li> --}}
 
     <li class="{{ request()->is('forum') ? 'active' : "" }}"><a href="/forum"><i class="fa"></i> <span>Forum</span></a></li>
 

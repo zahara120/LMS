@@ -10,6 +10,10 @@ class Lesson extends Model
     use HasFactory;
     protected $fillable = ['nameLesson','description','file','url'];
 
+    public function training(){
+        return $this->hasMany(Training::class);
+    }
+
     public function subcategory(){
         return $this->belongsTo('App\Models\SubcategoryTraining');
     }

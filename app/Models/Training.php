@@ -13,6 +13,16 @@ class Training extends Model
     public function approval(){
         return $this->belongsTo(Approval::class, 'approval_id');
     }
+
+    public function posttest()
+    {
+        return $this->belongsTo(Test::class);
+    }
+
+    public function pretest()
+    {
+        return $this->belongsTo(Test::class);
+    }
     
     public function lesson(){
         return $this->belongsTo('App\Models\Lesson', 'lesson_id');

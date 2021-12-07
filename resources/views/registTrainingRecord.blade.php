@@ -27,6 +27,8 @@
                  @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
                 <th >Action</th>
                 @endif
+
+                <th>Action</th>
             </tr> 
         </thead>
         <tbody>
@@ -60,6 +62,17 @@
                     @endif
                 </td>
                 @endif
+                <td class="text-center">
+                    @if($item->status == 1)
+                    <a href="test/{{ $item->training->id }}/training/create" class="btn btn-xs btn-success" >
+                        <i class="fa fa-eye"></i> Detail
+                    </a>
+                    @else
+                    <a href="#" class="btn btn-xs btn-success" disabled>
+                        <i class="fa fa-eye"></i> Detail
+                    </a>
+                    @endif
+                </td>
             </tr>
             @endif
             @endforeach

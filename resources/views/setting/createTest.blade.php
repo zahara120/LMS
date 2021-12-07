@@ -193,6 +193,11 @@
             </div>
 
             <div class="form-group">
+                <label for="nameTest">Duration :</label>
+                <input type="text" name="duration" class="form-control" id="duration" placeholder="Duration">
+            </div>
+
+            <div class="form-group">
                 <label>Description :</label>
                 <textarea class="form-control" name="description" rows="3" placeholder="Description ..."></textarea>
             </div>
