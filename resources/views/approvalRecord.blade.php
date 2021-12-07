@@ -113,7 +113,7 @@
                       @endforeach
 
                       @if($buttonFlag < 1 &&  $item->status == 1)
-                      <a class="btn btn-info" type ="button" href="/training/{{$item->id}}/approval/create"> Detail</a>
+                      <a class="btn btn-info" type ="button" href="{{route('training.create', $item->id)}}"> Detail</a>
                       @else
                       <button class="btn btn-info "  disabled> Detail</button>
                       @endif

@@ -25,7 +25,7 @@ class Training extends Model
     }
     
     public function lesson(){
-        return $this->belongsTo('App\Models\Lesson', 'lesson_id');
+        return $this->belongsTo(Lesson::class, 'lesson_id');
     }
 
     public function venue()

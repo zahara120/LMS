@@ -25,6 +25,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\RegistController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\QuestionOptionController;
+use App\Http\Controllers\TraineeController;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
@@ -103,13 +104,15 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::resource('/lesson',LessonController::class);
 
-    // Route::resource('/categorytraining',CategoryTrainingController::class);
-    Route::get('/categorytraining', [CategoryTrainingController::class,'index']);
-    Route::post('/categorytraining', [CategoryTrainingController::class,'store']);
-    Route::get('/categorytraining/{id}/edit', [CategoryTrainingController::class,'edit']);
-    Route::put('/categorytraining/{id}', [CategoryTrainingController::class, 'update']);
-    Route::delete('/categorytraining/{id}', [CategoryTrainingController::class, 'destroy']);
-    Route::get('/exportCategoryTraining',[CategoryTrainingController::class,'categoryExport']);
+    Route::name('category.')->group(function () {
+        // Route::resource('/categorytraining',CategoryTrainingController::class);
+        Route::get('/categorytraining', [CategoryTrainingController::class,'index'])->name('index');
+        Route::post('/categorytraining', [CategoryTrainingController::class,'store'])->name('store');
+        Route::get('/categorytraining/{id}/edit', [CategoryTrainingController::class,'edit'])->name('edit');
+        Route::put('/categorytraining/{id}', [CategoryTrainingController::class, 'update'])->name('update');
+        Route::delete('/categorytraining/{id}', [CategoryTrainingController::class, 'destroy'])->name('destroy');
+        Route::get('/exportCategoryTraining',[CategoryTrainingController::class,'categoryExport'])->name('categoryExport');
+    });
 
 
     //Route::resource('/subcategorytraining',SubcategoryTrainingController::class);
@@ -212,7 +215,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     // Users
     //Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
-    Route::resource('/user', UserController::class);
+    Route::get('/user', [UserController::class, 'index']);
 
     // Route::resource('/training', TrainingController::class);
     
@@ -223,14 +226,26 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     //submit approval detail
     Route::put('/approval/{id}', [ApprovalRecordController::class, 'updateStatus']);
-
-
-    //view all training
-    Route::get('/training', [TrainingController::class,'index']);
-    //create training
-    Route::get('training/{id}/approval/create', [TrainingController::class,'create']);
-    //store training
-    Route::post('training/{id}/approval', [TrainingController::class,'store']);
+    
+    Route::name('training.')->group(function(){
+        //view all training
+        Route::get('training', [TrainingController::class,'index'])->name('index');
+        //create training
+        Route::get('training/{id}/approval/create', [TrainingController::class,'create'])->name('create');
+        //edit training
+        Route::get('training/{training}/{approval}/edit', [TrainingController::class,'edit'])->name('edit');
+        //update training
+        Route::put('training/{training}/{approval}/update', [TrainingController::class,'update'])->name('update');
+        //store training
+        Route::post('training/{id}/store', [TrainingController::class,'store'])->name('store');
+        // show list user
+        Route::get('user/{training}', [TraineeController::class,'index'])->name('user.index');
+        // store user
+        Route::post('user/{training}/store', [TraineeController::class,'store'])->name('user.store');
+        // delete user FROM regist table
+        Route::delete('user/{regist}/delete', [TraineeController::class,'destroy'])->name('user.delete');
+    });
+    
 
     Route::get('/regist/{regist_id}', [RegistController::class, 'show']);
     
