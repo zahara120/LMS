@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ExamImport;
 use App\Models\SubcategoryTraining;
 use App\Models\CategoryTraining;
 use App\Models\Test;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExamController extends Controller
 {
@@ -43,6 +43,7 @@ class ExamController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+        // $request->request->add(['duration' => $request->]);
         Test::create($request->all());
         return redirect('/exam');
     }
@@ -92,5 +93,15 @@ class ExamController extends Controller
         $test = Test::find($id);
         $test->delete();
         return redirect('/exam')->with('succes','succes delete data');
+    }
+
+    public function examImport(Request $request)
+    {
+        $file = $request->file('file');
+        $nameFile = $file->getClientOriginalName();
+        $file->move('dataExam', $nameFile);
+
+        Excel::import(new ExamImport, public_path('/dataExam/'.$nameFile));
+        return redirect()->route('exam.index');
     }
 }

@@ -104,11 +104,6 @@
                     <a href="{{route('regist.create', $item->id)}}" class="btn btn-xs btn-success" >
                         <i class="fa fa-eye"></i> Detail
                     </a>
-                    @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists() AND $quota >= 1)
-                        <a href="{{route('training.user.index', $item->id)}}" class="btn btn-xs btn-primary" >
-                            <i class="fa fa-eye"></i> User
-                        </a>
-                    @endif
                 </td>
             </tr>
             @endforeach

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lesson extends Model
 {
     use HasFactory;
-    protected $fillable = ['nameLesson','description','file','url'];
+    protected $fillable = ['nameLesson','description','file'];
 
     public function training(){
         return $this->hasMany(Training::class);
@@ -20,10 +20,6 @@ class Lesson extends Model
 
     public function typelesson(){
         return $this->hasMany('App\Models\TypeLesson');
-    }
-
-    public function training(){
-        return $this->hasMany(Training::class);
     }
 
     public function category(){

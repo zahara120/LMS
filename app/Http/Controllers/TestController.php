@@ -68,7 +68,7 @@ class TestController extends Controller
         // return redirect()->back();
 
         $answers = [];
-        //dd($request);
+        // dd($request);
         $test_score = 0;
         foreach ($request->get('answers') as $question_id => $answer_id) {
             $question = Question::find($question_id);
@@ -105,11 +105,12 @@ class TestController extends Controller
         foreach ($request->get('answers') as $question_id => $answer_id) {
         TestResultAnswer::create([
             'question_id' => $question_id,
-            'option_id' => $answer_id,
+            'question_option_id' => $answer_id,
             'correct' => $correct,
             'test_result_id' => $test_result_id
         ]);
         }
+        return back()->with('success','success');
     }
 
     /**

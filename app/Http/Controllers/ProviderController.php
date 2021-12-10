@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ProviderImport;
 use App\Models\Provider;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProviderController extends Controller
 {
@@ -108,5 +110,15 @@ class ProviderController extends Controller
     public function ProviderExport()
     {
         return Excel::download(new ProviderExport,'Provider.xlsx');
+    }
+
+    public function ProviderImport(Request $request)
+    {
+        $file = $request->file('file');
+        $nameFile = $file->getClientOriginalName();
+        $file->move('dataProvider', $nameFile);
+
+        Excel::import(new ProviderImport, public_path('/dataProvider/'.$nameFile));
+        return redirect()->route('provider.index');
     }
 }

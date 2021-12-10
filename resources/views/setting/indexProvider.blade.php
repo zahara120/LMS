@@ -53,7 +53,7 @@
                     <a href=" " class="btn btn-xs btn-info" >
                         <i class="fa fa-eye"></i> View
                     </a>
-                    <a href="{{url('provider/'.$item->id.'/edit')}}" class="btn btn-xs btn-primary">
+                    <a href="{{url('/provider/'.$item->id.'/edit')}}" class="btn btn-xs btn-primary">
                         <i class="fa fa-pencil"></i> Edit
                     </a>
                     <form action="{{ url('provider/'.$item->id) }}" class="inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
@@ -136,20 +136,20 @@
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           <h4 class="modal-title" id="myModalLabel">Import Category Training</h4>
         </div>
-        <div class="modal-body">
-            <form action=" " method="post">
-            @csrf
-            <div class="form-group">
-                <label for="nameCategory">File :</label>
-                <input type="file" name="importCategory" class="form-control" id="importCategory">
-            </div>   
+        <form action="{{route('provider.import')}}" method="post" enctype="multipart/form-data">
+          <div class="modal-body">
+              @csrf
+              <div class="form-group">
+                  <label for="file">File :</label>
+                  <input type="file" name="file" class="form-control" required="required">
+              </div>   
+          </div>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary">Import</button>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Import</button>
+          </div>
         </form>
-        </div>
       </div>
     </div>
   </div>

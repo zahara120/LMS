@@ -18,7 +18,9 @@
     <div class="box-header">
         <h3 class="box-title">Data Training</h3>
         <div class="pull-right">
-            
+            <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">
+                create
+            </button>
         </div>
     </div>
     <div class="box-body table-responsive">
@@ -32,8 +34,8 @@
                 {{-- <th>Venue</th>
                 <th>Room</th> --}}
                 <th>Lesson</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th>Date</th>
+                <th>Quota</th>
                 <th class="text-center">Action</th>
             </tr> 
         </thead>
@@ -47,15 +49,30 @@
                 {{-- <td>{{ $item->venue->nameVenue }}</td>
                 <td>{{ $item->room->nameRoom }}</td> --}}
                 <td>{{ $item->lesson->nameLesson }}</td>
-                <td>{{ $item->start_date }}</td>
-                <td>{{ $item->end_date }}</td>
+                <td>{{ $item->start_date }} s.d. {{ $item->end_date }}</td>
+                <td>
+                    {{ $item->approval->quota }} / 
+                    <?php $quota = 0;?>
+                    @foreach($registTrainings as $rt)
+                        @if($rt->training_id == $item->id && $rt->regist->status == 1)
+                            <?php $quota++;?>
+                        @endif
+                    @endforeach
+                    {{$quota}}
+                </td>
                 <td class="text-center" width="200px">
-                    <a href=" " class="btn btn-xs btn-info" >
+                    <a href=" " class="btn btn-xs btn-warning" >
                         <i class="fa fa-eye"></i> View
                     </a>
                     <a href="training/{{$item->id}}/{{$item->approval->id}}/edit" class="btn btn-xs btn-primary">
                         <i class="fa fa-pencil"></i> Edit
                     </a>
+
+                    @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists() )
+                    <a href="{{route('training.user.index', $item->id)}}" class="btn btn-xs btn-success" >
+                        <i class="fa fa-eye"></i> User
+                    </a>
+                    @endif
                     
                     <form action="" class="inline" onclick="return confirm('Are you sure want to delete this data?')">
                         {{-- @method('delete')

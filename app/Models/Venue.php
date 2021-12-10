@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Venue extends Model
 {
-    //use HasFactory;
+    use HasFactory;
     protected $guarded = ['id'];
 
     public function room(){
