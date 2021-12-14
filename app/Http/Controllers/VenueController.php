@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\VenueExport;
+use App\Exports\VenueTemplate;
 use App\Imports\VenueImport;
 use App\Models\Venue;
 use Illuminate\Http\Request;
@@ -109,14 +110,19 @@ class VenueController extends Controller
     {
         return Excel::download(new VenueExport,'Venue.xlsx');
     }
-
+    
     public function venueImport(Request $request)
     {
         $file = $request->file('file');
         $nameFile = $file->getClientOriginalName();
         $file->move('dataVenue', $nameFile);
-
+        
         Excel::import(new VenueImport, public_path('/dataVenue/'.$nameFile));
         return redirect()->route('venue.index');
+    }
+
+    public function templateVenue()
+    {
+        return Excel::download(new VenueTemplate,'TemplateVenue.xlsx');
     }
 }

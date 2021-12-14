@@ -139,6 +139,7 @@
         <form action="{{route('category.import')}}" method="post" enctype="multipart/form-data">
             <div class="modal-body">
                 @csrf
+                Templates can be downloaded <a href="{{route('category.template')}}">here</a>
                 <div class="form-group">
                     <label for="file">File :</label>
                     <input type="file" name="file" class="form-control" required="required">

@@ -116,6 +116,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
         Route::delete('/categorytraining/{id}', [CategoryTrainingController::class, 'destroy'])->name('destroy');
         Route::get('/exportCategoryTraining',[CategoryTrainingController::class,'categoryExport'])->name('categoryExport');
         Route::post('/importCategoryTraining',[CategoryTrainingController::class,'categoryImport'])->name('import');
+        Route::get('/templateCategoryTraining',[CategoryTrainingController::class,'templateCategory'])->name('template');
     });
 
 
@@ -127,6 +128,8 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::delete('/subcategorytraining/{id}', [SubcategoryTrainingController::class, 'destroy']);
     Route::get('/exportSubcategoryTraining',[SubcategoryTrainingController::class,'subcategoryExport']);
     Route::post('/importSubcategoryTraining',[SubcategoryTrainingController::class,'subcategoryimport'])->name('subcategory.import');
+    Route::get('/templateSubcategoryTraining',[SubcategoryTrainingController::class,'templateSubcategory'])->name('subcategory.template');
+    
 
     //Route::resource('/venue',VenueController::class);
     Route::get('/venue', [VenueController::class,'index'])->name('venue.index');
@@ -136,6 +139,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::delete('/venue/{id}', [VenueController::class, 'destroy']);
     Route::get('/exportVenue',[VenueController::class,'venueExport']);
     Route::post('/importVenue',[VenueController::class,'venueImport'])->name('venue.import');
+    Route::get('/templateVenue',[VenueController::class,'templateVenue'])->name('venue.template');
     
     //Route::resource('/room',RoomController::class);
     Route::get('/room', [RoomController::class,'index'])->name('room.index');
@@ -145,6 +149,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::delete('/room/{id}', [RoomController::class, 'destroy']);
     Route::get('/exportRoom',[RoomController::class,'RoomExport']);
     Route::post('/importRoom',[RoomController::class,'roomImport'])->name('room.import');
+    Route::get('/templateRoom',[RoomController::class,'templateRoom'])->name('room.template');
 
     //Route::resource('/provider',ProviderController::class);
     Route::get('/provider', [ProviderController::class,'index'])->name('provider.index');
@@ -154,6 +159,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::delete('/provider/{id}', [ProviderController::class, 'destroy']);
     Route::get('/exportProvider',[ProviderController::class,'ProviderExport']);
     Route::post('/importProvider',[ProviderController::class,'ProviderImport'])->name('provider.import');
+    Route::get('/templateProvider',[ProviderController::class,'templateProvider'])->name('provider.template');
 
     //Route::resource('/question',QuestionController::class);
     //create question form test

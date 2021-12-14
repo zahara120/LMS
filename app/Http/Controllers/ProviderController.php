@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProviderTemplate;
 use App\Imports\ProviderImport;
 use App\Models\Provider;
 use Illuminate\Http\Request;
@@ -120,5 +121,10 @@ class ProviderController extends Controller
 
         Excel::import(new ProviderImport, public_path('/dataProvider/'.$nameFile));
         return redirect()->route('provider.index');
+    }
+
+    public function templateProvider()
+    {
+        return Excel::download(new ProviderTemplate,'TemplateProvider.xlsx');
     }
 }

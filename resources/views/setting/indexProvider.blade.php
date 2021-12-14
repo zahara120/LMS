@@ -134,11 +134,12 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title" id="myModalLabel">Import Category Training</h4>
+          <h4 class="modal-title" id="myModalLabel">Import Provider</h4>
         </div>
         <form action="{{route('provider.import')}}" method="post" enctype="multipart/form-data">
           <div class="modal-body">
               @csrf
+              Templates can be downloaded <a href="{{route('provider.template')}}">here</a>
               <div class="form-group">
                   <label for="file">File :</label>
                   <input type="file" name="file" class="form-control" required="required">

@@ -4,8 +4,12 @@ namespace App\Imports;
 
 use App\Models\SubcategoryTraining;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Imports\HeadingRowFormatter;
 
-class SubCategoryImport implements ToModel
+HeadingRowFormatter::default('none');
+
+class SubCategoryImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,9 +19,9 @@ class SubCategoryImport implements ToModel
     public function model(array $row)
     {
         return new SubcategoryTraining([
-            'category_trainings_id'     => $row[1],
-            'nameSubcategory'     => $row[2],
-            'description'     => $row[3],
+            'category_trainings_id'     => $row['Category Training ID'],
+            'nameSubcategory'     => $row['Subcategory Name'],
+            'description'     => $row['Description'],
         ]);
     }
 }

@@ -4,8 +4,12 @@ namespace App\Imports;
 
 use App\Models\Venue;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Imports\HeadingRowFormatter;
 
-class VenueImport implements ToModel
+HeadingRowFormatter::default('none');
+
+class VenueImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,7 +19,7 @@ class VenueImport implements ToModel
     public function model(array $row)
     {
         return new Venue([
-            'nameVenue' => $row[1]
+            'nameVenue' => $row['Venue Name']
         ]);
     }
 }
