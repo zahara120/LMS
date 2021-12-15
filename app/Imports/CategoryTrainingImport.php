@@ -22,4 +22,5 @@ class CategoryTrainingImport implements ToModel, WithHeadingRow
             'nameCategory' => $row['Category Name']
         ]);
     }
+    //
 }
