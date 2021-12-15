@@ -32,22 +32,32 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($training_id)
+    public function test($training_id)
     {
         $training = Training::find($training_id);
         $questions = Question::inRandomOrder()->limit(10)->get();
+        //$test = Test::all();
         foreach ($questions as &$question) {
             $question->options = QuestionOption::where('question_id', $question->id)->inRandomOrder()->get();
         }
-        $test_result = NULL;
-        if ($training->pretest) {
-            $test_result = TestResult::where('test_id', $training->pretest->id)
+
+        $total_test = NULL;
+
+        $pretest_result = NULL;
+        $posttest_result = NULL;
+        if ($training->posttest) {
+            $posttest_result = TestResult::where('test_id', $training->posttest->id)
                 ->where('user_id', \Auth::id())
                 ->first();
                 //dd($test_result);
+        }if($training->pretest){
+            $pretest_result = TestResult::where('test_id', $training->pretest->id)
+                ->where('user_id', \Auth::id())
+                ->first();
         }
-        return view('tests', compact('questions','training','test_result'));
-        //return view('test');
+        // dd($test_result);
+        //$duration = DB::select("select * ");
+        return view('layout.nav', compact('questions','training','pretest_result','posttest_result'));
     }
 
     /**
@@ -58,14 +68,6 @@ class TestController extends Controller
      */
     public function store(Request $request, $test_id)
     {
-        // if(count ($request->multiInput) >0){
-        // foreach ($request->multiInput as $key => $value){
-        //         //Question::create($value);
-        //         QuestionOption::create($value);
-        //     }
-        // }
-
-        // return redirect()->back();
 
         $answers = [];
         //dd($request);
@@ -78,11 +80,11 @@ class TestController extends Controller
                 ->where('correct', 1)->count() > 0;
             //     dd($answer_id);
             $correct = QuestionOption::where('question_id', $question_id)->where('id', $answer_id)->where('correct', 1)->count();
-            // $answers[] = [
-            //     'question_id' => $question_id,
-            //     'option_id' => $answer_id,
-            //     'correct' => $correct
-            // ];
+            $answers[] = [
+                'question_id' => $question_id,
+                'option_id' => $answer_id,
+                'correct' => $correct
+            ];
             if ($correct) {
                 $test_score += $question->score;
             }
@@ -92,7 +94,7 @@ class TestController extends Controller
              * Save all test result and show the points
              */
         }
-        //dd($test_score);
+        //dd($answers);
         $request->request->add(['test_id' => $test_id]);
         $test_result = TestResult::create([
             'test_id' => $test_id,
@@ -107,9 +109,12 @@ class TestController extends Controller
             'question_id' => $question_id,
             'option_id' => $answer_id,
             'correct' => $correct,
+            //'correct' => $score,
             'test_result_id' => $test_result_id
         ]);
         }
+      
+        return back()->with('succes','success');
     }
 
     /**

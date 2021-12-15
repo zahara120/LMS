@@ -44,16 +44,16 @@ class SubcategoryTrainingController extends Controller
         $request->validate([
 
             'nameSubcategory' => ['required', 'string', 'max:255'],
-            'category_id' => ['required'],
+            'category_trainings_id' => ['required'],
 
 	    ], [
 	        'nameSubcategory.required' => 'The name subcategory field is required',
-            'category_id.required' => 'The name category field is required',
+            'category_trainings_id.required' => 'The name category field is required',
 	    ]);
 
         $subcategory = new SubcategoryTraining;
         $subcategory->nameSubcategory = $request->nameSubcategory;
-        $subcategory->category_id = $request->category_id;
+        $subcategory->category_trainings_id = $request->category_trainings_id;
         $subcategory->description = $request->description;
         $subcategory->save();
 

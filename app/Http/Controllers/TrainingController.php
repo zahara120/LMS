@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Approval;
+use App\Models\RegistTraining;
 use App\Models\CategoryTraining;
 use App\Models\Provider;
 use App\Models\Lesson;
@@ -23,6 +24,7 @@ class TrainingController extends Controller
      */
     public function index()
     {
+        $registTrainings = RegistTraining::all();
         $approval = Approval::all();
         $category = CategoryTraining::all();
         $lesson = Lesson::all();
@@ -33,7 +35,7 @@ class TrainingController extends Controller
         $provider = Provider::all();
         // $data['venue'] = Venue::get(["nameVenue","id"]);
         $venue = Venue::all();
-        return view('recordTraining',compact('training','approval','provider','venue','category','subcategory','lesson','approval'));
+        return view('recordTraining',compact('training','approval','provider','venue','category','subcategory','lesson','approval','registTrainings'));
     }
 
     /**

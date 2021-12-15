@@ -23,9 +23,10 @@
         <div class="form-group row mt-2">
             <label class="col-sm-3 control-label">Name Venue :</label>
             <div class="col-sm-8">
-                <select class="form-control select2" name="nameVenue" value="{{ $room->venue->nameVenue }}" style="width: 100%;" >
+                <select class="form-control select2" name="venue_id" value="{{ $room->venue->nameVenue }}" style="width: 100%;" >
+                    {{-- <option value="{{ $room->venue->nameVenue }}"></option> --}}
                     @foreach($venue as $item)
-                        <option value="{{ $item->id }}">{{ $item->nameVenue }}</option>
+                        <option value="{{ $item->id }}" {{ $item->id == $room->venue->id ? 'selected' : '' }}>{{ $item->nameVenue }}</option>
                     @endforeach
                 </select>
             </div>

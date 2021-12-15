@@ -101,7 +101,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                     <label>Name Category Training : </label>
-                    <select class="form-control select2" name="category_id" placeholder="nameCategory" style="width: 100%;">
+                    <select class="form-control select2" name="category_trainings_id" placeholder="nameCategory" style="width: 100%;">
                         {{-- <option selected="">Name Category</option> --}}
                         @foreach($category as $item)
                         <option value="{{ $item->id }}">{{ $item->nameCategory }}</option>

@@ -23,9 +23,9 @@
         <div class="form-group row mt-2">
             <label class="col-sm-3 control-label">Name Category Training :</label>
             <div class="col-sm-8">
-                <select class="form-control select2" name="nameCategory"  value="{{ $subcategory->category->nameCategory }}" style="width: 100%;" >
+                <select class="form-control select2" name="category_trainings_id"  value="{{$subcategory->category->nameCategory}}" style="width: 100%;" >
                     @foreach($category as $item)
-                        <option value="{{ $item->id }}">{{ $item->nameCategory }}</option>
+                    <option value="{{ $item->id }}" {{ $item->id == $subcategory->category->id ? 'selected' : '' }}>{{ $item->nameCategory }}</option>
                     @endforeach
                 </select>
             </div>
@@ -34,7 +34,7 @@
         <div class="form-group row mt-2">
             <label class="col-sm-3 control-label">Description :</label>
             <div class="col-sm-8">
-                <input class="form-control select2" type="text" value="{{ $subcategory->description }}" >
+                <input class="form-control select2" name="description" type="text" value="{{ $subcategory->description }}" >
             </div>
         </div>
 

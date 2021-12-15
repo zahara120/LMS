@@ -64,7 +64,7 @@
                 @endif
                 <td class="text-center">
                     @if($item->status == 1)
-                    <a href="test/{{ $item->training->id }}/training/create" class="btn btn-xs btn-success" >
+                    <a href="training/{{ $item->training->id }}" class="btn btn-xs btn-success" >
                         <i class="fa fa-eye"></i> Detail
                     </a>
                     @else
