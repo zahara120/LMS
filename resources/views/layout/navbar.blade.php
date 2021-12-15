@@ -31,7 +31,7 @@
           {{-- <li><a href="/answer"><i class="fa fa-circle-o"></i>Create Answer</a></li>
           <li><a href="/question"><i class="fa fa-circle-o"></i>Create Question</a></li> --}}
           <li><a href="/lesson"><i class="fa fa-circle-o"></i>Lesson Training</a></li>
-          <li><a href="/categorytraining"><i class="fa fa-circle-o"></i>Category Training</a></li>
+          <li><a href="{{route('category.index')}}"><i class="fa fa-circle-o"></i>Category Training</a></li>
           <li><a href="/subcategorytraining"><i class="fa fa-circle-o"></i>Subcategory Training</a></li>
           <li><a href="/exam"><i class="fa fa-circle-o"></i>Create Test</a></li>
           <li><a href="/survey"><i class="fa fa-circle-o"></i>Create Survey</a></li>

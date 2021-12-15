@@ -70,7 +70,7 @@ class TestController extends Controller
     {
 
         $answers = [];
-        //dd($request);
+        // dd($request);
         $test_score = 0;
         foreach ($request->get('answers') as $question_id => $answer_id) {
             $question = Question::find($question_id);
@@ -107,14 +107,18 @@ class TestController extends Controller
         foreach ($request->get('answers') as $question_id => $answer_id) {
         TestResultAnswer::create([
             'question_id' => $question_id,
-            'option_id' => $answer_id,
+            'question_option_id' => $answer_id,
             'correct' => $correct,
             //'correct' => $score,
             'test_result_id' => $test_result_id
         ]);
         }
+<<<<<<< HEAD
       
         return back()->with('succes','success');
+=======
+        return back()->with('success','success');
+>>>>>>> 1f5aa52e0b203606da71601b6ec5a17e563e0eff
     }
 
     /**

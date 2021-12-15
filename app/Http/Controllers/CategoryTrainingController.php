@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exports\CategoryExport;
+use App\Exports\CategoryTemplate;
+use App\Imports\CategoryTrainingImport;
 use App\Models\CategoryTraining;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -127,5 +129,20 @@ class CategoryTrainingController extends Controller
     public function categoryExport()
     {
         return Excel::download(new CategoryExport,'CategoryTraining.xlsx');
+    }
+    
+    public function categoryImport(Request $request)
+    {
+        $file = $request->file('file');
+        $nameFile = $file->getClientOriginalName();
+        $file->move('dataCategoryTraining', $nameFile);
+        
+        Excel::import(new CategoryTrainingImport, public_path('/dataCategoryTraining/'.$nameFile));
+        return redirect()->route('category.index');
+    }
+
+    public function templateCategory()
+    {
+        return Excel::download(new CategoryTemplate,'TemplateCategoryTraining.xlsx');
     }
 }

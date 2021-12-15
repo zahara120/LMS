@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RoomTemplate;
+use App\Imports\RoomImport;
 use App\Models\Room;
 use App\Models\Venue;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RoomController extends Controller
 {
@@ -118,5 +121,20 @@ class RoomController extends Controller
     public function RoomExport()
     {
         return Excel::download(new RoomExport,'Room.xlsx');
+    }
+    
+    public function roomImport(Request $request)
+    {
+        $file = $request->file('file');
+        $nameFile = $file->getClientOriginalName();
+        $file->move('dataRoom', $nameFile);
+        
+        Excel::import(new RoomImport, public_path('/dataRoom/'.$nameFile));
+        return redirect()->route('room.index');
+    }
+
+    public function templateRoom()
+    {
+        return Excel::download(new RoomTemplate,'TemplateRoom.xlsx');
     }
 }

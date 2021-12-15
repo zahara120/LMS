@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SubcategoryExport;
+use App\Exports\SubcategoryTemplate;
+use App\Imports\SubCategoryImport;
 use App\Models\CategoryTraining;
 use App\Models\SubcategoryTraining;
 use Illuminate\Http\Request;
@@ -122,5 +125,20 @@ class SubcategoryTrainingController extends Controller
     public function subcategoryExport()
     {
         return Excel::download(new SubcategoryExport,'SubcategoryTraining.xlsx');
+    }
+    
+    public function subcategoryImport(Request $request)
+    {
+        $file = $request->file('file');
+        $nameFile = $file->getClientOriginalName();
+        $file->move('dataSubCategoryTraining', $nameFile);
+        
+        Excel::import(new SubCategoryImport, public_path('/dataSubCategoryTraining/'.$nameFile));
+        return redirect()->route('subcategory.index');
+    }
+
+    public function templateSubcategory()
+    {
+        return Excel::download(new SubcategoryTemplate,'TemplateSubcategoryTraining.xlsx');
     }
 }

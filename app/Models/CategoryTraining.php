@@ -8,7 +8,7 @@ use App\Models\SubcategoryTraining;
 
 class CategoryTraining extends Model
 {
-    //use HasFactory;
+    use HasFactory;
     protected $guarded = ['id'];
 
     public function subcategory(){

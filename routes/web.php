@@ -56,6 +56,9 @@ Route::get('training/{id}', [TestController::class,'test']);
 //strore test
 Route::post('/test/{id}/training', [TestController::class,'store']);
 
+//strore test
+Route::post('/test/{id}/training', [TestController::class,'store']);
+
 Route::name('regist.')->group(function () {
     //detail pendaftaran training
     Route::get('/regist/{training_id}/create', [RegistController::class, 'create'])->name('create');
@@ -115,40 +118,51 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
         Route::put('/categorytraining/{id}', [CategoryTrainingController::class, 'update'])->name('update');
         Route::delete('/categorytraining/{id}', [CategoryTrainingController::class, 'destroy'])->name('destroy');
         Route::get('/exportCategoryTraining',[CategoryTrainingController::class,'categoryExport'])->name('categoryExport');
+        Route::post('/importCategoryTraining',[CategoryTrainingController::class,'categoryImport'])->name('import');
+        Route::get('/templateCategoryTraining',[CategoryTrainingController::class,'templateCategory'])->name('template');
     });
 
 
     //Route::resource('/subcategorytraining',SubcategoryTrainingController::class);
-    Route::get('/subcategorytraining', [SubcategoryTrainingController::class,'index']);
+    Route::get('/subcategorytraining', [SubcategoryTrainingController::class,'index'])->name('subcategory.index');
     Route::post('/subcategorytraining', [SubcategoryTrainingController::class,'store']);
     Route::get('/subcategorytraining/{id}/edit', [SubcategoryTrainingController::class,'edit']);
     Route::put('/subcategorytraining/{id}', [SubcategoryTrainingController::class, 'update']);
     Route::delete('/subcategorytraining/{id}', [SubcategoryTrainingController::class, 'destroy']);
     Route::get('/exportSubcategoryTraining',[SubcategoryTrainingController::class,'subcategoryExport']);
+    Route::post('/importSubcategoryTraining',[SubcategoryTrainingController::class,'subcategoryimport'])->name('subcategory.import');
+    Route::get('/templateSubcategoryTraining',[SubcategoryTrainingController::class,'templateSubcategory'])->name('subcategory.template');
+    
 
     //Route::resource('/venue',VenueController::class);
-    Route::get('/venue', [VenueController::class,'index']);
+    Route::get('/venue', [VenueController::class,'index'])->name('venue.index');
     Route::post('/venue', [VenueController::class,'store']);
     Route::get('/venue/{id}/edit', [VenueController::class,'edit']);
     Route::put('/venue/{id}', [VenueController::class, 'update']);
     Route::delete('/venue/{id}', [VenueController::class, 'destroy']);
-    Route::get('/exportVenue',[VenueController::class,'VenueExport']);
-
+    Route::get('/exportVenue',[VenueController::class,'venueExport']);
+    Route::post('/importVenue',[VenueController::class,'venueImport'])->name('venue.import');
+    Route::get('/templateVenue',[VenueController::class,'templateVenue'])->name('venue.template');
+    
     //Route::resource('/room',RoomController::class);
-    Route::get('/room', [RoomController::class,'index']);
+    Route::get('/room', [RoomController::class,'index'])->name('room.index');
     Route::post('/room', [RoomController::class,'store']);
     Route::get('/room/{id}/edit', [RoomController::class,'edit']);
     Route::put('/room/{id}', [RoomController::class, 'update']);
     Route::delete('/room/{id}', [RoomController::class, 'destroy']);
     Route::get('/exportRoom',[RoomController::class,'RoomExport']);
+    Route::post('/importRoom',[RoomController::class,'roomImport'])->name('room.import');
+    Route::get('/templateRoom',[RoomController::class,'templateRoom'])->name('room.template');
 
     //Route::resource('/provider',ProviderController::class);
-    Route::get('/provider', [ProviderController::class,'index']);
+    Route::get('/provider', [ProviderController::class,'index'])->name('provider.index');
     Route::post('/provider', [ProviderController::class,'store']);
     Route::get('/provider/{id}/edit', [ProviderController::class,'edit']);
     Route::put('/provider/{id}', [ProviderController::class, 'update']);
     Route::delete('/provider/{id}', [ProviderController::class, 'destroy']);
     Route::get('/exportProvider',[ProviderController::class,'ProviderExport']);
+    Route::post('/importProvider',[ProviderController::class,'ProviderImport'])->name('provider.import');
+    Route::get('/templateProvider',[ProviderController::class,'templateProvider'])->name('provider.template');
 
     //Route::resource('/question',QuestionController::class);
     //create question form test
@@ -258,11 +272,13 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     //create exam
     //Route::resource('/exam', ExamController::class);
      //create exam
-    Route::get('/exam', [ExamController::class,'index']);
+    Route::get('/exam', [ExamController::class,'index'])->name('exam.index');
     //create store exam
     Route::post('/exam', [ExamController::class,'store']);
     //delete exam
     Route::delete('/exam/{id}', [ExamController::class, 'destroy']);
+    //import exam
+    Route::post('/importExam', [ExamController::class, 'examImport'])->name('exam.import');
 
     Route::post('api/fetch-room', [TrainingController::class, 'getRoom']);
 
