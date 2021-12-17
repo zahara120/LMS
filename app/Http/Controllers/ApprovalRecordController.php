@@ -55,6 +55,26 @@ class ApprovalRecordController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'category_trainings_id' =>  'required',
+            'subcategory_trainings_id' => 'required',
+            'titleTraining' => 'required',
+            'quota' => 'required',
+            'objectiveTraining' => 'required',
+            'backgroundTraining' => 'required',
+            'description' => 'required',
+        ],
+        [
+            'category_trainings_id.required' =>  'Category Training is required',
+            'subcategory_trainings_id.required' => 'Subcategory Training is required',
+            'titleTraining.required' => 'Title Training is required',
+            'quota.required' => 'Jumlah Peserta is required',
+            'objectiveTraining.required' => 'Objective Training is required',
+            'backgroundTraining.required' => 'Background Training is required',
+            'description.required' => 'Catatan is required',
+        ]
+        );
+
         if(auth()->user()->role()->where('role_id', '=', 1)->exists()){
             $request->request->add(['user_id' => $request->user()->id]);
             $request->request->add(['status' => 1]);
@@ -114,6 +134,9 @@ class ApprovalRecordController extends Controller
 
     public function updateStatus(Request $request, $approval_id)
     {
+        $validated = $request->validate([
+
+        ]);
         $approval = Approval::findOrFail($approval_id);
         $request->request->add(['status' => $request->status]);
         $request->request->add(['alasan' => $request->alasan]);

@@ -49,6 +49,10 @@ class QuestionnaireController extends Controller
         //         'survey_id' => $request->survey_id
         //     ]);
         // }
+        $validated = $request->validate([
+
+        ]);
+        
         $request->request->add(['survey_id' => $survey_id]);
         Questionnaire::create($request->all());
         return back()->with('succes','succes add data');

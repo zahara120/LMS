@@ -61,14 +61,14 @@
                 </div>
             </div>
 
-            <div id="ifoffline" style="display:none">
+            @if($training->mandatoryTraining == "offline")
                 <div class="form-group row mt-2">
                     <label class="col-sm-3 control-label">Location :</label>
                     <div class="col-lg-4">
                         <select class="form-control select2" id="venue_id" name="venue_id" placeholder="nameVenue" style="width: 100%;">
                             <option value="">Name Venue</option>
                             @foreach($venue as $item)
-                            <option value="{{ $item->id }}">{{ $item->nameVenue }}</option>
+                            <option value="{{ $item->id }}" {{ $item->id == $training->venue->id ? 'selected' : '' }}>{{ $item->nameVenue }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -76,12 +76,12 @@
                         <select class="form-control select2" id="room_id" name="room_id" placeholder="nameRoom" style="width: 100%;">
                             <option value="">Room</option>
                             @foreach($room as $item)
-                            <option value="{{ $item->id }}">{{ $item->nameRoom }}</option>
+                            <option value="{{ $item->id }}" {{ $item->id == $training->room->id ? 'selected' : '' }}>{{ $item->nameRoom }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-            </div>
+            @endif
 
             <div class="form-group row mt-2">
                 <div class="form-group">

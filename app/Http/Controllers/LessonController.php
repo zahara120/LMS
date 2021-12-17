@@ -42,6 +42,17 @@ class LessonController extends Controller
         $this->validate($request,[
             // 'file'=> 'mimetypes:video/avi,video/mpeg,video/quicktime',
             'file' => 'required|mimes:mp4,ogx,oga,ogv,ogg,webm',
+            'nameLesson' => 'required',
+            'category_trainings_id' => 'required',
+            'subcategory_trainings_id' => 'required',
+            'url' => 'required'
+        ],
+        [
+            'file.required' => 'Video is required',
+            'nameLesson.required' => 'Name Lesson is required',
+            'category_trainings_id.required' => 'Category Training is required',
+            'subcategory_trainings_id.required' => 'Subcategory Training is required',
+            'url.required' => 'Link Zoom is required'
         ]);
 
         $lesson = new Lesson();

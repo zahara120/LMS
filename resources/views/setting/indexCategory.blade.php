@@ -104,19 +104,21 @@
           <h4 class="modal-title" id="myModalLabel">Add Category Training</h4>
         </div>
         <div class="modal-body">
-            {{-- {!! Form::open(array('url' => '/categorytraining','method' => 'POST')) !!} --}}
             <form action="/categorytraining" method="post">
             @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group">
                 <label for="nameCategory">Name Category Training :</label>
-                <input type="text" name="nameCategory" class="form-control" id="nameCategory" placeholder="Nama Category Training">
-                @if ($errors->has('nameCategory'))
-                <span class="help-block">
-                <strong>{{ $errors->first('nameCategory') }}</strong>
-                    </span>
-                @endif
-            </div>   
-
+                <input id="nameCategory" type="text" class="form-control @error('nameCategory') is-invalid @enderror" name="nameCategory" value="{{ old('nameCategory') }}" required autocomplete="nameCategory" autofocus>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -155,7 +157,6 @@
       </div>
     </div>
   </div>
-
 <!-- Modal Edit -->
 {{-- <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

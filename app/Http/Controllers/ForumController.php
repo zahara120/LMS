@@ -44,6 +44,17 @@ class ForumController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+        $request->validate([
+            'titleForum' => 'required',
+            'subcategory_trainings_id' => 'required',
+            'content' => 'required'
+        ],
+        [
+            'titleForum.required' => 'Title Forum is required',
+            'subcategory_trainings_id.required' => 'Subcategory Training is required',
+            'content.required' => 'Content  is required'
+        ]);
+        // dd($request);
         $request->request->add(['user_id' => auth()->user()->id]);
         $request->request->add(['subcategory_trainings_id' => $request->subcategory_trainings_id]);
         Forum::create($request->all());

@@ -86,7 +86,7 @@
         <div class="modal-body">
             <form action="/venue" method="post">
             @csrf
-            <div class="form-group">
+            <div class="form-group {{$errors->has('nameVenue') ? ' has-error' : ' '}}">
                 <label for="nameVenue">Name Venue :</label>
                 <input type="text" name="nameVenue" class="form-control" id="nameVenue" placeholder="Nama Venue Training">
                 @if ($errors->has('nameVenue'))

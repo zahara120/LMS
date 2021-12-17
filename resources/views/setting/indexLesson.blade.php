@@ -116,61 +116,66 @@
         <div class="modal-body">
             <form action="/lesson" method="post" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
+            <div class="form-group{{$errors->has('nameLesson') ? ' has-error' : ' '}}">
                 <label for="nameLesson">Name Lesson :</label>
-                <input type="text" name="nameLesson" class="form-control" placeholder="Nama Lesson Training">
+                <input type="text" name="nameLesson" class="form-control" name="nameLesson" value="{{ old('nameLesson') }}" placeholder="Nama Lesson Training">
                 @if ($errors->has('nameLesson'))
-                <span class="help-block">
-                <strong>{{ $errors->first('nameLesson') }}</strong>
-                    </span>
+                <span class="help-block"><strong>{{ $errors->first('nameLesson') }}</strong></span>
                 @endif
             </div>   
 
             <div class="row">
                 <div class="col-md-4">
-                    <div class="form-group">
-                    <label>Category Training : </label>
-                    <select class="form-control select2" id="category_id" name="category_trainings_id" placeholder="categoryTraining" style="width: 100%;">
-                        <option value="">Name Category</option>
-                        @foreach($category as $item)
-                        <option value="{{ $item->id }}">{{ $item->nameCategory }}</option>
-                        @endforeach
-                    </select>
+                    <div class="form-group{{$errors->has('category_trainings_id') ? ' has-error' : ' '}}">
+                        <label>Category Training : </label>
+                        <select class="form-control select2" id="category_id" name="category_trainings_id" placeholder="categoryTraining" style="width: 100%;">
+                            <option value="">Name Category</option>
+                            @foreach($category as $item)
+                            <option value="{{ $item->id }}">{{ $item->nameCategory }}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('category_trainings_id'))
+                            <span class="help-block"><strong>{{ $errors->first('category_trainings_id') }}</strong></span>
+                        @endif
                     </div>
-                    </div>
+                </div>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group {{$errors->has('subcategory_trainings_id') ? ' has-error' : ' '}}">
                         <label>Subcategory Training :</label>
                         <select class="form-control select2" id="subcategory_id" name="subcategory_trainings_id" placeholder="subcategoryTraining" style="width: 100%;">
                         </select>
+                        @if ($errors->has('subcategory_trainings_id'))
+                            <span class="help-block"><strong>{{ $errors->first('subcategory_trainings_id') }}</strong></span>
+                        @endif
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group {{$errors->has('file') ? ' has-error' : ' '}}">
                 <label class="control-label">Video :</label>
                 <div class="controls">
                     <div id="uniform-undefined">
                         <input type="file" name="file" class="form-control">
+                        @if ($errors->has('file'))
+                            <span class="help-block"><strong>{{ $errors->first('file') }}</strong></span>
+                        @endif
                         {{-- <span class="filename">No file selected</span> --}}
                         {{-- <span class="action">Choose File</span> --}}
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group {{$errors->has('url') ? ' has-error' : ' '}}">
                 <label for="url">Link Zoom :</label>
-                <input type="text" name="url" class="form-control" placeholder="Link Zoom">
-                {{-- @if ($errors->has('url'))
-                <span class="help-block">
-                <strong>{{ $errors->first('url') }}</strong>
-                </span>
-                @endif --}}
+                <input type="text" name="url" class="form-control" value="{{ old('url') }}" placeholder="Link Zoom">
+                @if ($errors->has('url'))
+                    <span class="help-block"><strong>{{ $errors->first('url') }}</strong></span>
+                @endif
             </div> 
 
             <div class="form-group">
                 <label>Description :</label>
-                <textarea class="form-control" name="description" rows="3" placeholder="Description ..."></textarea>
+                <textarea class="form-control" name="description" rows="3" placeholder="Description ...">{{ old('description') }}</textarea>
             </div>
 
             {{-- <div class="form-group">

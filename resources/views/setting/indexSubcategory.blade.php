@@ -87,9 +87,9 @@
         <div class="modal-body">
             <form action="/subcategorytraining" method="post">
             @csrf
-            <div class="form-group">
+            <div class="form-group {{$errors->has('nameSubcategory') ? ' has-error' : ' '}}">
                 <label for="nameSubcategory">Name Subcategory Training :</label>
-                <input type="text" name="nameSubcategory" class="form-control" id="nameSubcategory" placeholder="Nama Subcategory Training">
+                <input type="text" name="nameSubcategory" value="{{ old('nameSubcategory') }}" class="form-control" id="nameSubcategory" placeholder="Nama Subcategory Training">
                 @if ($errors->has('nameSubcategory'))
                 <span class="help-block">
                 <strong>{{ $errors->first('nameSubcategory') }}</strong>
@@ -99,7 +99,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('category_trainings_id') ? ' has-error' : ' '}}">
                     <label>Name Category Training : </label>
                     <select class="form-control select2" name="category_trainings_id" placeholder="nameCategory" style="width: 100%;">
                         {{-- <option selected="">Name Category</option> --}}
@@ -107,16 +107,22 @@
                         <option value="{{ $item->id }}">{{ $item->nameCategory }}</option>
                         @endforeach
                     </select>
+                    @if ($errors->has('category_trainings_id'))
+                        <span class="help-block"><strong>{{ $errors->first('category_trainings_id') }}</strong></span>
+                    @endif
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group {{$errors->has('file') ? ' has-error' : ' '}}">
                 <label>Description :</label>
-                <textarea class="form-control" name="description" rows="3" placeholder="Description ..."></textarea>
+                <textarea class="form-control" name="description" rows="3" placeholder="Description ...">{{ old('description') }}</textarea>
+                @if ($errors->has('description'))
+                    <span class="help-block"><strong>{{ $errors->first('description') }}</strong></span>
+                @endif
             </div>
 
-            {{-- <div class="form-group">
+            {{-- <div class="form-group {{$errors->has('file') ? ' has-error' : ' '}}">
                 <label for="description">Description :</label>
                 <input type="text" name="description" class="form-control" id="description" placeholder="Description">
                 @if ($errors->has('description'))

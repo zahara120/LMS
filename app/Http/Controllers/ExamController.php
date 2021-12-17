@@ -44,6 +44,27 @@ class ExamController extends Controller
     {
         // dd($request);
         // $request->request->add(['duration' => $request->]);
+        $request->validate([
+            'category_trainings_id' => 'required',
+            'subcategory_trainings_id' => 'required',
+            'lesson_id' => 'required',
+            'typeTest' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'duration' => 'required',
+            'nameTest' => 'required',
+        ],
+        [
+            'category_trainings_id.required' => 'Category Training  is required',
+            'subcategory_trainings_id.required' => 'Subcategory Training  is required',
+            'lesson_id.required' => 'Lesson is required',
+            'typeTest.required' => 'Type Test is required',
+            'start_date.required' => 'Start date is required',
+            'end_date.required' => 'End date is required',
+            'duration.required' => 'Duration  is required',
+            'nameTest.required' => 'Name test is required',
+        ]);
+        
         Test::create($request->all());
         return redirect('/exam');
     }

@@ -94,8 +94,22 @@ class TrainingController extends Controller
     {
         // dd($request);
         $this->validate($request, [
+            'lesson_id' => 'required',
+            'posttest_id' => 'required',
+            'pretest_id' => 'required',
+            'mandatory' => 'required',
+            'mandatoryTraining' => 'required',
             'start_date'  => 'required|date',
             'end_date'    => 'required|date|after:start_date',
+        ],
+        [
+            'lesson_id.required' => 'Lesson Training is required',
+            'posttest_id.required' => 'Post Test is required',
+            'pretest_id.required' => 'Pre Test is required',
+            'mandatory.required' => 'Mandatory for Employee is required',
+            'mandatoryTraining.required' => 'Metode Training is required',
+            'start_date.required'  => 'Start Date is required',
+            'end_date.required'    => 'End Date is required'
         ]);
 
         $request->request->add(['approval_id' => $approval_id]);

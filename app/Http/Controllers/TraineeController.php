@@ -29,6 +29,10 @@ class TraineeController extends Controller
 
     public function store(Request $request, Training $training)
     {
+        $validated = $request->validate([
+
+        ]);
+        
         // dd($request);
         // store ke regist
         $request->request->add(['user_id' => $request->user_id]);

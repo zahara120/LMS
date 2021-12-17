@@ -40,6 +40,10 @@ class AnswerController extends Controller
      */
     public function store(Request $request, $test_id)
     {
+        $validated = $request->validate([
+
+        ]);
+
         $request->request->add(['test_id' => $test_id]);
         QuestionOption::create($request->all());
         return back()->with('success','success input question option');

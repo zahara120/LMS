@@ -92,12 +92,12 @@
         <div class="modal-body">
             <form action="/survey" method="post">
             @csrf
-            <div class="form-group">
+            <div class="form-group {{$errors->has('nameSurvey') ? ' has-error' : ' '}}">
                 <label for="nameTest">Name Survey :</label>
                 <input type="text" name="nameSurvey" class="form-control" id="nameSurvey" placeholder="Nama Survey">
-                @if ($errors->has('nameTest'))
+                @if ($errors->has('nameSurvey'))
                 <span class="help-block">
-                <strong>{{ $errors->first('nameTest') }}</strong>
+                <strong>{{ $errors->first('nameSurvey') }}</strong>
                     </span>
                 @endif
             </div>   

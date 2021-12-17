@@ -48,10 +48,12 @@ class SubcategoryTrainingController extends Controller
 
             'nameSubcategory' => ['required', 'string', 'max:255'],
             'category_trainings_id' => ['required'],
+            'description' => 'required',
 
 	    ], [
 	        'nameSubcategory.required' => 'The name subcategory field is required',
             'category_trainings_id.required' => 'The name category field is required',
+            'description.required' => 'Description is required',
 	    ]);
 
         $subcategory = new SubcategoryTraining;

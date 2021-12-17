@@ -5,8 +5,16 @@
 
 <div class="box">
     <div class="box-header with-border">
-
         <h3 class="box-title">Create Question</h3>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
 
         {{-- <form role="form"  action="/question/{{ $test->id }}/test" method="POST">
@@ -42,7 +50,7 @@
             <div class="form-group row mt-2">
                 <label class="col-sm-2 control-label">Question : </label>
                 <div class="col-sm-8">
-                <input type="text" class="form-control" name="question[]" placeholder="Pertanyaan">
+                    <input type="text" class="form-control" name="question[]" placeholder="Pertanyaan">
                 </div>
 
                 <div class="col-lg-2">
@@ -156,13 +164,13 @@ $('.addquestion').on('click',function(){
         <div class="modal-body">
             <form action="/room" method="post">
             @csrf
-            <div class="form-group">
+            <div class="form-group {{$errors->has('nameRoom') ? ' has-error' : ' '}}">
                 <label for="nameRoom">Question :</label>
-                <input type="text" name="nameRoom" class="form-control" id="nameRoom" placeholder="Nama Room Training">
+                <input type="text" name="nameRoom" value="{{ old('nameRoom') }}" class="form-control" id="nameRoom" placeholder="Nama Room Training">
                 @if ($errors->has('nameRoom'))
                 <span class="help-block">
-                <strong>{{ $errors->first('nameRoom') }}</strong>
-                    </span>
+                    <strong>{{ $errors->first('nameRoom') }}</strong>
+                </span>
                 @endif
             </div>   
         </div>

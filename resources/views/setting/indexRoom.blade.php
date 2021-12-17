@@ -85,9 +85,9 @@
         <div class="modal-body">
             <form action="/room" method="post">
             @csrf
-            <div class="form-group">
+            <div class="form-group {{$errors->has('nameRoom') ? ' has-error' : ' '}}">
                 <label for="nameRoom">Name Room :</label>
-                <input type="text" name="nameRoom" class="form-control" id="nameRoom" placeholder="Nama Room Training">
+                <input type="text" name="nameRoom" class="form-control" value="{{ old('nameRoom') }}" id="nameRoom" placeholder="Nama Room Training">
                 @if ($errors->has('nameRoom'))
                 <span class="help-block">
                 <strong>{{ $errors->first('nameRoom') }}</strong>
@@ -97,7 +97,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('venue_id') ? ' has-error' : ' '}}">
                     <label>Name Venue : </label>
                     <select class="form-control select2" name="venue_id" placeholder="nameVenue" style="width: 100%;">
                         {{-- <option selected="">Name Category</option> --}}
@@ -105,6 +105,9 @@
                         <option value="{{ $item->id }}">{{ $item->nameVenue }}</option>
                         @endforeach
                     </select>
+                    @if ($errors->has('venue_id'))
+                        <span class="help-block"><strong>{{ $errors->first('venue_id') }}</strong></span>
+                    @endif
                     </div>
                 </div>
             </div>

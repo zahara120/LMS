@@ -103,46 +103,61 @@
         <div class="modal-body">
             <form action="/exam" method="post">
             @csrf
-            <div class="form-group">
+            <div class="form-group {{$errors->has('nameTest') ? ' has-error' : ' '}}">
                 <label for="nameTest">Name test :</label>
-                <input type="text" name="nameTest" class="form-control" id="nameTest" placeholder="Nama Test">
+                <input type="text" name="nameTest" class="form-control" value="{{ old('nameTest') }}" id="nameTest" placeholder="Nama Test">
                 @if ($errors->has('nameTest'))
                 <span class="help-block">
-                <strong>{{ $errors->first('nameTest') }}</strong>
-                    </span>
+                    <strong>{{ $errors->first('nameTest') }}</strong>
+                </span>
                 @endif
             </div>   
 
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('typeTest') ? ' has-error' : ' '}}">
                     <label>Type Test : </label>
                     <select class="form-control select2" name="typeTest" placeholder="Type Test" style="width: 100%;">
                         {{-- <option selected="">Name Category</option> --}}
                         <option value="PreTest">Pre-Test</option>
                         <option value="PostTest">Post-Test</option>
                     </select>
+                    @if ($errors->has('typeTest'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('typeTest') }}</strong>
+                    </span>
+                    @endif
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('category_trainings_id') ? ' has-error' : ' '}}">
                     <label>Category Training : </label>
-                    <select class="form-control select2" id="category_id" name="category_trainings_id" placeholder="categoryTraining" style="width: 100%;">
+                    <select class="form-control select2" id="category_id" name="category_trainings_id" class="form-control" value="{{ old('category_trainings_id') }}" placeholder="categoryTraining" style="width: 100%;">
                         <option value="">Name Category</option>
                         @foreach($category as $item)
                         <option value="{{ $item->id }}">{{ $item->nameCategory }}</option>
                         @endforeach
                     </select>
+                    @if ($errors->has('category_trainings_id'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('category_trainings_id') }}</strong>
+                    </span>
+                    @endif
                     </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group {{$errors->has('subcategory_trainings_id') ? ' has-error' : ' '}}">
                         <label>Subcategory Training :</label>
-                        <select class="form-control select2" id="subcategory_id" name="subcategory_trainings_id" placeholder="subcategoryTraining" style="width: 100%;">
+                        <select class="form-control select2" id="subcategory_id" name="subcategory_trainings_id" class="form-control" value="{{ old('subcategory_trainings_id') }}" placeholder="subcategoryTraining" style="width: 100%;">
                         </select>
+                        @if ($errors->has('subcategory_trainings_id'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('subcategory_trainings_id') }}</strong>
+                        </span>
+                        @endif
                     </div>
                 </div>
                     
@@ -150,10 +165,15 @@
             
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('lesson_id') ? ' has-error' : ' '}}">
                     <label>Lesson : </label>
-                    <select class="form-control select2" id="lesson_id" name="lesson_id" placeholder="subcategoryTraining" style="width: 100%;">
+                    <select class="form-control select2" id="lesson_id" name="lesson_id" class="form-control" value="{{ old('lesson_id') }}" placeholder="subcategoryTraining" style="width: 100%;">
                     </select>
+                    @if ($errors->has('lesson_id'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('lesson_id') }}</strong>
+                    </span>
+                    @endif
                     </div>
                 </div>
             </div>
@@ -163,11 +183,16 @@
                 <!-- time Picker -->
                 <!-- di html ataupun di javascript ga ngedukung tipe data durasi -->
                     <div class="bootstrap-timepicker">
-                        <div class="form-group">
+                        <div class="form-group {{$errors->has('start_date') ? ' has-error' : ' '}}">
                             <label>Start date:</label>
 
                             <div class="input-group">
-                                <input type="datetime-local" name="start_date" class="form-control">
+                                <input type="datetime-local" name="start_date" class="form-control" value="{{ old('start_date') }}">
+                                @if ($errors->has('start_date'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('start_date') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <!-- /.input group -->
                         </div>
@@ -179,11 +204,16 @@
                 <!-- time Picker -->
                 <!-- di html ataupun di javascript ga ngedukung tipe data durasi -->
                     <div class="bootstrap-timepicker">
-                        <div class="form-group">
+                        <div class="form-group {{$errors->has('end_date') ? ' has-error' : ' '}}">
                             <label>End date:</label>
 
                             <div class="input-group">
-                                <input type="datetime-local" name="end_date" class="form-control">
+                                <input type="datetime-local" name="end_date" class="form-control" value="{{ old('end_date') }}">
+                                @if ($errors->has('end_date'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('end_date') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <!-- /.input group -->
                         </div>
@@ -192,14 +222,24 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group {{$errors->has('duration') ? ' has-error' : ' '}}">
                 <label for="nameTest">Duration :</label>
-                <input type="text" name="duration" class="form-control" id="duration" placeholder="Duration">
+                <input type="text" name="duration" class="form-control" class="form-control" value="{{ old('duration') }}" id="duration" placeholder="Duration">
+                @if ($errors->has('duration'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('duration') }}</strong>
+                </span>
+                @endif
             </div>
 
-            <div class="form-group">
+            <div class="form-group {{$errors->has('description') ? ' has-error' : ' '}}">
                 <label>Description :</label>
-                <textarea class="form-control" name="description" rows="3" placeholder="Description ..."></textarea>
+                <textarea class="form-control" name="description" class="form-control" value="{{ old('description') }}" rows="3" placeholder="Description ..."></textarea>
+                @if ($errors->has('description'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('description') }}</strong>
+                </span>
+                @endif
             </div>
 
             {{-- <div class="form-group">

@@ -118,19 +118,23 @@
         <div class="modal-body">
             <form action="/forum" method="post">
             @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group">
                 <label for="nameSubcategory">Title Forum :</label>
-                <input type="text" name="titleForum" class="form-control" id="titleForum" placeholder="Judul Forum">
-                @if ($errors->has('titleForum'))
-                <span class="help-block">
-                <strong>{{ $errors->first('titleForum') }}</strong>
-                    </span>
-                @endif
+                <input type="text" name="titleForum" class="form-control @error('titleForum') is-invalid @enderror" name="titleForum" value="{{ old('titleForum') }}" required autocomplete="titleForum" autofocus placeholder="Judul Forum">
             </div>   
 
             <div class="form-group">
                 <label>Subcategory Training :</label>
-                <select class="form-control select2" id="subcategory_id" name="subcategory_trainings_id" placeholder="categoryTraining" style="width: 100%;">
+                <select class="form-control select2 @error('subcategory_trainings_id') is-invalid @enderror" id="subcategory_id" name="subcategory_trainings_id" value="{{ old('subcategory_trainings_id') }}" required autocomplete="subcategory_trainings_id" autofocus placeholder="categoryTraining" style="width: 100%;">
                     <option value="">Name Subategory</option>
                     @foreach($subcategory as $item)
                     <option value="{{ $item->id }}">{{ $item->nameSubcategory }}</option>
@@ -140,7 +144,7 @@
 
             <div class="form-group">
                 <label>Content :</label>
-                <textarea class="form-control" name="content" rows="3" placeholder="Content ..."></textarea>
+                <textarea class="form-control @error('content') is-invalid @enderror" name="content" value="{{ old('content') }}" required autocomplete="titleForum" autofocus name="content" rows="3" placeholder="Content ..."></textarea>
             </div>
 
         </div>

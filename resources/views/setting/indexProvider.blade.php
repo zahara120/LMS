@@ -85,25 +85,28 @@
         <div class="modal-body">
             <form action="/provider" method="post">
             @csrf
-            <div class="form-group">
+            <div class="form-group {{$errors->has('nameProvider') ? ' has-error' : ' '}}">
                 <label for="nameProvider">Name Provider :</label>
-                <input type="text" name="nameProvider" class="form-control" id="nameProvider" placeholder="Nama Provider Training">
+                <input type="text" name="nameProvider" value="{{ old('nameProvider') }}" class="form-control" id="nameProvider" placeholder="Nama Provider Training">
                 @if ($errors->has('nameProvider'))
                 <span class="help-block">
-                <strong>{{ $errors->first('nameProvider') }}</strong>
-                    </span>
+                    <strong>{{ $errors->first('nameProvider') }}</strong>
+                </span>
                 @endif
             </div>   
 
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('typeProvider') ? ' has-error' : ' '}}">
                     <label>Type Provider : </label>
                     <select class="form-control select2" name="typeProvider" placeholder="Type Provider" style="width: 100%;">
                         {{-- <option selected="">Name Category</option> --}}
-                        <option value="External">External</option>
-                        <option value="Internal">Internal</option>
+                        <option value="External"{{old('typeProvider') == 'External' ? ' selected' : ' '}}>External</option>
+                        <option value="Internal"{{old('typeProvider') == 'Internal' ? ' selected' : ' '}}>Internal</option>
                     </select>
+                    @if ($errors->has('typeProvider'))
+                        <span class="help-block"><strong>{{ $errors->first('typeProvider') }}</strong></span>
+                    @endif
                     </div>
                 </div>
             </div>

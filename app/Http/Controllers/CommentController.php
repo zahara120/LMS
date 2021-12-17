@@ -35,6 +35,13 @@ class CommentController extends Controller
      */
     public function store(Request $request, $forum_id)
     {
+        $request->validate([
+            'content' => 'required'
+        ],
+    [
+        'content' => 'Content is required'
+    ]);
+        
         $request->request->add(['user_id' => auth()->user()->id]);
         $request->request->add(['forum_id' => $forum_id]);
         Comment::create($request->all());

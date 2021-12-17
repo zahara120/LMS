@@ -7,7 +7,15 @@
     <div class="box-header with-border">
         <h3 class="box-title">Add Training Submission</h3>
     </div>
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form role="form" action="{{route('approval.store')}}" method="post">
         @csrf
         <div class="box-body">

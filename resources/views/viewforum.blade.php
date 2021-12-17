@@ -40,6 +40,15 @@
 
     {{-- <div class="row"> --}}
     <div class="modal-body">
+      @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
     <form action = "/comment/{{$forum->id}}/forum" style="display:none" id="comment" method="post">
        @csrf
       <input type="hidden" name="forum_id" value="{{ $forum->id }}"> 

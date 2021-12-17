@@ -68,7 +68,29 @@ class TestController extends Controller
      */
     public function store(Request $request, $test_id)
     {
-
+        $request->validate([
+            'nameTest' => 'required',
+            'typeTest' => 'required',
+            'category_trainings_id' => 'required',
+            'subcategory_trainings_id' => 'required',
+            'lesson_id' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'duration' => 'required',
+            'description' => 'required'
+        ],
+        [
+            'nameTest.required' => 'Name test is required',
+            'typeTest.required' => 'Type Test is required',
+            'category_trainings_id.required' => 'Category Training is required',
+            'subcategory_trainings_id.required' => 'Subcategory Training is required',
+            'lesson_id.required' => 'Lesson is required',
+            'start_date.required' => 'Start date is required',
+            'end_date.required' => 'End date is required',
+            'duration.required' => 'Duration is required',
+            'description.required' => 'Description is required'
+        ]);
+        
         $answers = [];
         // dd($request);
         $test_score = 0;
@@ -105,20 +127,15 @@ class TestController extends Controller
         $test_result_id = $test_result->id;
         
         foreach ($request->get('answers') as $question_id => $answer_id) {
-        TestResultAnswer::create([
-            'question_id' => $question_id,
-            'question_option_id' => $answer_id,
-            'correct' => $correct,
-            //'correct' => $score,
-            'test_result_id' => $test_result_id
-        ]);
+            TestResultAnswer::create([
+                'question_id' => $question_id,
+                'question_option_id' => $answer_id,
+                'correct' => $correct,
+                //'correct' => $score,
+                'test_result_id' => $test_result_id
+            ]);
         }
-<<<<<<< HEAD
-      
         return back()->with('succes','success');
-=======
-        return back()->with('success','success');
->>>>>>> 1f5aa52e0b203606da71601b6ec5a17e563e0eff
     }
 
     /**

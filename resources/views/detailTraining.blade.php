@@ -37,7 +37,7 @@
             <?php $flag++; ?>
             @endif
         @endforeach
-        @if($flag > 1 AND auth()->user()->id == $r->user_id OR $training->end_date < $date)
+        @if($flag >= 1 AND auth()->user()->id == $r->user_id OR $training->end_date < $date)
             <button class="btn btn-success" type="submit" disabled>Registration</button>
             <a href="{{url()->previous()}}" class="btn btn-danger">Cancel</a>
         @else

@@ -36,6 +36,14 @@ class SurveyController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'nameSurvey' => 'required'
+        ],
+        [
+            'nameSurvey.required' => 'Name Survey is required'
+            
+        ]);
+        
         Survey::create($request->all());
         return redirect('/survey')->with('succes','succes add data');
     }

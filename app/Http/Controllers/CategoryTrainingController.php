@@ -61,7 +61,6 @@ class CategoryTrainingController extends Controller
 	    ], [
             'nameCategory.unique' => 'The name category already registered',
 	        'nameCategory.required' => 'The name category field is required',
-
 	    ]);
 
         //return $request->all();
