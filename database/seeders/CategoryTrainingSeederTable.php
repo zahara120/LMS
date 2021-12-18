@@ -27,7 +27,6 @@ class CategoryTrainingSeederTable extends Seeder
                 'id'             => 4,
                 'nameCategory'           => 'Finance',
             ],
-        ]
-        );
+        ]);
     }
 }

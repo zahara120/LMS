@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             RoomSeederTable::class,
             SubcategoryTrainingSeederTable::class,
             LessonSeederTable::class,
+            AlertSeederTable::class,
         ]);
     }
 }

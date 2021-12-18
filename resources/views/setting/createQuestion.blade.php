@@ -6,7 +6,8 @@
 <div class="box">
     <div class="box-header with-border">
         <h3 class="box-title">Create Question</h3>
-        @if ($errors->any())
+    </div>
+        @if($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -15,33 +16,8 @@
                 </ul>
             </div>
         @endif
-    </div>
-
-        {{-- <form role="form"  action="/question/{{ $test->id }}/test" method="POST">
-            @csrf
-            <div class="box-body">
-
-            <div class="box-body">
-
-            <div class="form-group row mt-2">
-                <label class="col-sm-2 control-label">Question : </label>
-                <div class="col-sm-8">
-                <input type="text" class="form-control" name="question[]" placeholder="Pertanyaan">
-                </div>
-
-                <div class="col-lg-2">
-                    <a href="#" class="btn btn-primary addquestion" style="float:right">Add Question</a>
-                </div>
-            </div>
-
-            <div class="question"></div>
-
-            <button type="submit" class="btn btn-success">Submit</button>
-        </form> --}}
-
         <form role="form"  action="/question/{{ $test->id }}/test" method="POST">
             @csrf
-            {{-- <input type="hidden" name="question_id" value="{{  $item->id  }}"> --}}
 
             <div class="box-body">
 
@@ -50,7 +26,7 @@
             <div class="form-group row mt-2">
                 <label class="col-sm-2 control-label">Question : </label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" name="question[]" placeholder="Pertanyaan">
+                    <input type="text" class="form-control" name="question" placeholder="Pertanyaan">
                 </div>
 
                 <div class="col-lg-2">

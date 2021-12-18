@@ -46,7 +46,6 @@ class QuestionOptionController extends Controller
         [
             'option_text.required' => 'Answer Option is required'
         ]);
-        
         $request->request->add(['survey_id' => $survey_id]);
         Answer::create($request->all());
         return back()->with('success','success input question option');

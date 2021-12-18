@@ -42,20 +42,13 @@ class QuestionController extends Controller
     {
         // dd($request);
         $request->validate([
-            'addmore.*.question' => 'required',
             'question' => 'required'
         ],
         [
-            'addmore.*.question.required' => 'Question is required',
             'question.required' => 'Question is required',
         ]);
         $request->request->add(['test_id' => $test_id]);
-        foreach ($request->question as $value) {
-            Question::create([
-                'question' => $value,
-                'test_id' => $request->test_id
-            ]);
-        }
+        Question::create($request->all());
         return back()->with('succes','succes add data');
 
     }

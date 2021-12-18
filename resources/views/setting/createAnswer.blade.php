@@ -7,6 +7,15 @@
     <div class="box-header">
         <h3 class="box-title">Create Answer</h3>
     </div>
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="box-body" id="template">
             {{-- <button value="{{$test->test_id}}" class="button-add-more-question">Add more questions</button> --}}
             <?php $i = 1; ?>
@@ -23,13 +32,10 @@
             <form role="form"  action="/answer/{{ $test->id }}/test" method="POST">
                 @csrf
                 <input type="hidden" name="question_id" value="{{  $item->id  }}">
-                <div class="form-group {{$errors->has('option_text') ? ' has-error' : ' '}} row mt-2">
+                <div class="form-group row mt-2">
                     <label class="col-sm-2 control-label">Answer Option :</label>
                     <div class="col-lg-4">
                     <input type="text" class="form-control" name="option_text" value="{{ old('option_text') }}" placeholder="Pilihan Pertanyaan">
-                        @if ($errors->has('option_text'))
-                            <span class="help-block"><strong>{{ $errors->first('option_text') }}</strong></span>
-                        @endif
                     </div>
     
                     <div class="col-lg-2">
