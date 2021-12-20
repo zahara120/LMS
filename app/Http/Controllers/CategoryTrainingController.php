@@ -9,7 +9,7 @@ use App\Models\CategoryTraining;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-
+use App\Models\Alert;
 
 class CategoryTrainingController extends Controller
 {
@@ -32,8 +32,11 @@ class CategoryTrainingController extends Controller
         // $category = CategoryTraining::with('subcategory')->get();
         // $category = CategoryTraining::with('subcategory')->simplePaginate(5);
         $category = CategoryTraining::paginate(10);
+        $alert = Alert::where('label', '=', 'Error')->get();
+        // dd($alert);
         //$category = CategoryTraining::all();
-        return view('setting.indexCategory',compact('category'));
+        // return view('setting.indexCategory',compact('category'));
+        return view('setting.indexCategory',compact('category', 'alert'));
     }
 
     /**
@@ -64,7 +67,6 @@ class CategoryTrainingController extends Controller
 	    ]);
 
         //return $request->all();
-
         CategoryTraining::create($request->all());
 
         return redirect('/categorytraining')->with('succes','succes add data');
