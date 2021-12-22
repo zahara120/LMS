@@ -67,25 +67,62 @@
             <a type="button" data-toggle="modal" data-target="#modal-default">here</a>
         </div>
 
-        <div class="modal fade" id="modal-default">
+        <!-- modal change password -->
+        <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Default Modal</h4>
-                </div>
-                <div class="modal-body">
-                <p>One fine body&hellip;</p>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route('user.changePassword')}}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group {{$errors->has('password') ? ' has-error' : ' '}}">
+                            <label for="password">Old Password :</label>
+                            <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}">
+                            @if ($errors->has('password'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
+                            <!-- ini udah pake yang di database -->
+                            <!-- {{$errors}} -->
+                            <!-- @error('nameCategory')
+                                <span class="help-block">
+                                    @foreach($alert as $item)
+                                        <strong>{{ $item->message }}</strong>
+                                    @endforeach
+                                </span>
+                            @enderror -->
+                        </div>
+                        <div class="form-group {{$errors->has('newPassword') ? ' has-error' : ' '}}">
+                            <label for="newPassword">New Password :</label>
+                            <input id="newPassword" type="password" class="form-control" name="newPassword" value="{{ old('newPassword') }}">
+                            @if ($errors->has('newPassword'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('newPassword') }}</strong>
+                                </span>
+                            @endif
+                            <!-- ini udah pake yang di database -->
+                            <!-- {{$errors}} -->
+                            <!-- @error('nameCategory')
+                                <span class="help-block">
+                                    @foreach($alert as $item)
+                                        <strong>{{ $item->message }}</strong>
+                                    @endforeach
+                                </span>
+                            @enderror -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div> 
+                        </form>
                 </div>
             </div>
-            <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
         </div>
     @endif
     <div class="box-body table-responsive">
