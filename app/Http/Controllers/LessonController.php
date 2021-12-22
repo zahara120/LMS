@@ -6,6 +6,7 @@ use App\Models\CategoryTraining;
 use App\Models\SubcategoryTraining;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LessonController extends Controller
 {
@@ -20,6 +21,7 @@ class LessonController extends Controller
         $category = CategoryTraining::all();
         $http = Lesson::where('url', 'like', 'https://%')->get();
         $www = Lesson::where('url', 'like', 'www.%.com')->get();
+        // dd($www);
         return view('setting.indexLesson',compact('lesson','category','http','www'));
     }
 

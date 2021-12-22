@@ -51,11 +51,10 @@
             <tr>
                 <td class="text-center">{{ $loop->iteration }}</td>
                 <td>{{ $item->nameLesson }}</td>
-                <!-- MASIH ERRROR SALAH LOGIC -->
-                @if($item->url == 'https://%')
-                    <td><a href="{{$item->url}}" target="_blank">{{ $item->url }}</a></td>
-                @else
+                @if (strpos($item->url, 'www') !== false)
                     <td><a href="https://{{$item->url}}/" target="_blank">{{ $item->url }}</a></td>
+                @elseif (strpos($item->url, 'https') !== false)
+                    <td><a href="{{$item->url}}" target="_blank">{{ $item->url }}</a></td>
                 @endif
                 <td>{{ $item->file }}</td>
                 <td>{{ $item->description }}</td>
