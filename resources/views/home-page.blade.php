@@ -59,6 +59,35 @@
     <div class="box-header with-border">
         <h3 class="box-title">Home Page</h3>
     </div>
+    @if($password == true)
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> Change Password!</h4>
+            Your password is still the default, please change the password 
+            <a type="button" data-toggle="modal" data-target="#modal-default">here</a>
+        </div>
+
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Default Modal</h4>
+                </div>
+                <div class="modal-body">
+                <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    @endif
     <div class="box-body table-responsive">
         <table id="table" class="table table-bordered table-striped">
         <thead>

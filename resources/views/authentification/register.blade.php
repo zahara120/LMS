@@ -65,6 +65,7 @@
         </span>
         @enderror
       </div> --}}
+      {{--
       <div class="form-group has-feedback">
         <input type="password" name="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
@@ -85,7 +86,9 @@
 
             </label>
           </div>
-        </div>
+        </div> --}}
+
+      <div class="row">
         <!-- /.col -->
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>

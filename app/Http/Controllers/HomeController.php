@@ -15,6 +15,8 @@ use App\Models\SubcategoryTraining;
 use App\Models\Venue;
 use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -47,10 +49,11 @@ class HomeController extends Controller
         $total_user = User::count();
         $total_training = Training::count();
         $date = Carbon::today()->toDateString();
-
+        $password = Hash::check('hris9090', Auth::user()->password);
+        // dd($password);
         // $quota = Approval::select('id', 'titleTraining', 'quota', 'user_id');
         // $count = count($quota);
 
-        return view('home-page',compact('training','approval','provider','venue','category','subcategory','lesson','approval','date','total_training','total_user','registTrainings'));
+        return view('home-page',compact('password' ,'training','approval','provider','venue','category','subcategory','lesson','approval','date','total_training','total_user','registTrainings'));
     }
 }

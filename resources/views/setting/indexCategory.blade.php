@@ -115,6 +115,10 @@
                     </span>
                 @endif -->
                 <!-- ini udah pake yang di database -->
+                <!-- {{$errors}} -->
+                @if ($errors->has('nameCategory'))
+                    ini harus unique
+                @endif
                 @error('nameCategory')
                     <span class="help-block">
                         @foreach($alert as $item)

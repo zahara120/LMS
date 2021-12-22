@@ -51,7 +51,11 @@
             <tr>
                 <td class="text-center">{{ $loop->iteration }}</td>
                 <td>{{ $item->nameLesson }}</td>
-                <td>{{ $item->url }}</td>
+                @if($item->url == 'https://%')
+                    <td><a href="{{$item->url}}" target="_blank">{{ $item->url }}</a></td>
+                @else
+                    <td><a href="https://{{$item->url}}/" target="_blank">{{ $item->url }}</a></td>
+                @endif
                 <td>{{ $item->file }}</td>
                 <td>{{ $item->description }}</td>
                 <td class="text-center" width="200px">

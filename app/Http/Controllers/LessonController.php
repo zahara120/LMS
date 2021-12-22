@@ -18,7 +18,9 @@ class LessonController extends Controller
     {
         $lesson = Lesson::all();
         $category = CategoryTraining::all();
-        return view('setting.indexLesson',compact('lesson','category'));
+        $http = Lesson::where('url', 'like', 'https://%')->get();
+        $www = Lesson::where('url', 'like', 'www.%.com')->get();
+        return view('setting.indexLesson',compact('lesson','category','http','www'));
     }
 
     /**
