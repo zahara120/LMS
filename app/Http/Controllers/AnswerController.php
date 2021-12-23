@@ -40,8 +40,11 @@ class AnswerController extends Controller
      */
     public function store(Request $request, $test_id)
     {
-        $validated = $request->validate([
-
+        $request->validate([
+            'option_text' => 'required'
+        ],
+        [
+            'option_text.required' => 'Answer Option is required'
         ]);
 
         $request->request->add(['test_id' => $test_id]);

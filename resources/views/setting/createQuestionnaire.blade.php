@@ -5,10 +5,17 @@
 
 <div class="box">
     <div class="box-header with-border">
-
         <h3 class="box-title">Create Questionnaire</h3>
     </div>
-
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form role="form"  action="/questionnaire/{{ $survey->id }}/survey" method="POST">
             @csrf
             {{-- <input type="hidden" name="question_id" value="{{  $item->id  }}"> --}}

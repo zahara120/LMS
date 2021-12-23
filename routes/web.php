@@ -43,6 +43,9 @@ use Illuminate\Support\Facades\Auth;
 
 Route::view('/', 'welcome');
 
+//change password
+Route::put('/user/changePassword', [UserController::class, 'updatePassword'])->name('user.changePassword');
+
 //home page tampilan pendaftaran training
 Route::get('/dashboard',[HomeController::class,'index'])->name('home');
 
@@ -233,7 +236,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     // Users
     //Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::get('/user', [UserController::class, 'index']);
-
+    
     // Route::resource('/training', TrainingController::class);
     
     // Route::resource('training.approval', TrainingController::class);

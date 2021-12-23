@@ -6,6 +6,8 @@ use App\Models\Role;
 use App\Models\Training;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -82,9 +84,22 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updatePassword(Request $request)
     {
-        //
+        // dd($request);
+        //validate
+        $request->validate([
+            'password' => 'required',
+            'newPassword' => 'required'
+        ]);
+        // to check the old password
+        if (Hash::check($request->password, Auth::user()->password)) {
+            // store the new password
+            $request->user()->fill([
+                'password' => Hash::make($request->newPassword)
+            ])->save();
+            return back();
+        }
     }
 
     /**

@@ -39,9 +39,14 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request, $survey_id)
     {
-        // $request->validate([
-        //     'addmore.*.question' => 'required',
-        // ]);
+        $request->validate([
+            'question' => 'required',
+            'typeAnswer' => 'required'
+        ],
+        [
+            'question.required' => 'Questionnaire is required',
+            'typeAnswer.required' => 'Type Answer is required'
+        ]);
         // $request->request->add(['test_id' => $survey_id]);
         // foreach ($request->question as $value) {
         //     Questionnaire::create([
@@ -49,9 +54,6 @@ class QuestionnaireController extends Controller
         //         'survey_id' => $request->survey_id
         //     ]);
         // }
-        $validated = $request->validate([
-
-        ]);
         
         $request->request->add(['survey_id' => $survey_id]);
         Questionnaire::create($request->all());

@@ -5,12 +5,18 @@
 
 <div class="box">
     <div class="box-header">
-
         <h3 class="box-title">Create Question Option</h3>
     </div>
-
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
             <div class="box-body form-horizontal" id="template">
-
             {{-- <button value="{{$test->test_id}}" class="button-add-more-question">Add more questions</button> --}}
             <?php $i = 1; ?>
             @foreach ($survey->questionnaire as $item)
@@ -18,11 +24,8 @@
             <div class="form-group row mt-2" >
                 <label class="col-sm-2 control-label">Question {{ $i }}:</label>
                 <div class="col-sm-8">
-                <input type="text" class="form-control" name="addmore[][question]" value="{{ $item->question }}" placeholder="Pertanyaan" disabled>
+                    <input type="text" class="form-control" name="addmore[][question]" value="{{ $item->question }}" placeholder="Pertanyaan" disabled>
                 </div>
-
-                
-
             </div>
 
             @if($item->typeAnswer == 'multiplechoice')

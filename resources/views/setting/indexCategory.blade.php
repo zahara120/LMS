@@ -109,9 +109,20 @@
             <div class="form-group {{$errors->has('nameCategory') ? ' has-error' : ' '}}">
                 <label for="nameCategory">Name Category Training :</label>
                 <input id="nameCategory" type="text" class="form-control" name="nameCategory" value="{{ old('nameCategory') }}">
-                @if ($errors->has('nameCategory'))
-                    <span class="help-block"><strong>{{ $errors->first('nameCategory') }}</strong></span>
-                @endif
+                <!-- @if ($errors->has('nameCategory'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('nameCategory') }}</strong>
+                    </span>
+                @endif -->
+                <!-- ini udah pake yang di database -->
+                <!-- {{$errors}} -->
+                @error('nameCategory')
+                    <span class="help-block">
+                        @foreach($alert as $item)
+                            <strong>{{ $item->message }}</strong>
+                        @endforeach
+                    </span>
+                @enderror
             </div>
         </div>
         <div class="modal-footer">
