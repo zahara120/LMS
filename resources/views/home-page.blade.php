@@ -79,6 +79,9 @@
                         <form action="{{route('user.changePassword')}}" method="post">
                         @csrf
                         @method('PUT')
+                        @foreach ($errors->all() as $error)
+                        <p class="text-danger">{{ $error }}</p>
+                        @endforeach
                         <div class="form-group {{$errors->has('password') ? ' has-error' : ' '}}">
                             <label for="password">Old Password :</label>
                             <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}">
@@ -114,6 +117,15 @@
                                     @endforeach
                                 </span>
                             @enderror -->
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirmation">Confirmation New Password :</label>
+                            <input id="password_confirmation" placeholder="Confirmation New Password" type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}">
+                            @if ($errors->has('password_confirmation'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                </span>
+                            @endif
                         </div>
                     </div>
                     <div class="modal-footer">
