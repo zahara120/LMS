@@ -90,8 +90,18 @@ class UserController extends Controller
         //validate
         $request->validate([
             'password' => 'required',
-            'newPassword' => 'required|same:password'
+            'newPassword' => ['required','confirmed']
         ]);
+        if(strcmp($request->password, $request->newPassword) == 0){
+        //Current password and new password are same
+        return redirect()->with("error","New Password cannot be same as your current password. Please choose a different password.");
+        }
+        
+        //jika password yang di input tidak sama dengan passsword yang ada di db
+        if (!(Hash::check($request->password, Auth::user()->password))) {
+            // store the new password
+            return redirect()->with("error","Incorect password.");
+        }
         // to check the old password
         if (Hash::check($request->password, Auth::user()->password)) {
             // store the new password
