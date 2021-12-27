@@ -56,7 +56,8 @@
                     $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $item->end_date);
                     $duration = $to->diffInHours($from);
                 ?>
-                <td>{{ $duration }} Hours</td>
+                <!-- <td>{{ $duration }} Hours</td> -->
+                <td>{{ $item->duration }}</td>
                 <td>{{ $item->description }}</td>
                 <td class="text-center" width="200px">
                     {{-- <a href=" " class="btn btn-xs btn-info" >
@@ -222,7 +223,7 @@
                 </div>
             </div>
 
-            <div class="form-group {{$errors->has('duration') ? ' has-error' : ' '}}">
+            <!-- <div class="form-group {{$errors->has('duration') ? ' has-error' : ' '}}">
                 <label for="nameTest">Duration :</label>
                 <input type="text" name="duration" class="form-control" class="form-control" value="{{ old('duration') }}" id="duration" placeholder="Duration">
                 @if ($errors->has('duration'))
@@ -230,7 +231,7 @@
                     <strong>{{ $errors->first('duration') }}</strong>
                 </span>
                 @endif
-            </div>
+            </div> -->
 
             <div class="form-group {{$errors->has('description') ? ' has-error' : ' '}}">
                 <label>Description :</label>

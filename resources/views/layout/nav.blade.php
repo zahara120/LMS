@@ -1,6 +1,5 @@
 @extends('layout.template')
 @section('title','Training')
-
 @section('content')
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
@@ -13,7 +12,8 @@
         <div class="active tab-pane" id="pretest">
             <div class="panel-body">
             <p>
-                Exam Time:    &nbsp; <span class="js-timeout" >{{$training->pretest->duration}}</span>
+                <!-- Exam Time:    &nbsp; <span class="js-timeout" >{{$training->pretest->duration}}</span> -->
+                Exam Time: <span class="js-timeout" >{{$training->pretest->duration}}</span>
             </p>
             <p>
                 Name Test : {{ $training->pretest->nameTest }}.
@@ -65,6 +65,7 @@
                 <p>
                     Exam Time:    &nbsp; <span class="js-timeout" >{{$training->posttest->duration}}</span>
                 </p>
+                @include('layout.countdown')
                 {{-- <div class="icon-bar" >
                     <button class="btn btn-lg">Exam Time CountDown : <span class="js-timeout"></span>  </button>
                 </div> --}}

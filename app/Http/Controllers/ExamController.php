@@ -6,6 +6,7 @@ use App\Imports\ExamImport;
 use App\Models\SubcategoryTraining;
 use App\Models\CategoryTraining;
 use App\Models\Test;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -51,7 +52,7 @@ class ExamController extends Controller
             'typeTest' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'duration' => 'required',
+            // 'duration' => 'required',
             'nameTest' => 'required',
         ],
         [
@@ -61,10 +62,17 @@ class ExamController extends Controller
             'typeTest.required' => 'Type Test is required',
             'start_date.required' => 'Start date is required',
             'end_date.required' => 'End date is required',
-            'duration.required' => 'Duration  is required',
+            // 'duration.required' => 'Duration  is required',
             'nameTest.required' => 'Name test is required',
         ]);
         
+        $startTime = Carbon::parse($request->start_date);
+        $endTime = Carbon::parse($request->end_date);
+
+        $totalDuration =  $startTime->diff($endTime)->format('%H:%I:%S');
+        // dd($totalDuration);
+        // dd($request);
+        $request->request->add(['duration' => $totalDuration]);
         Test::create($request->all());
         return redirect('/exam');
     }

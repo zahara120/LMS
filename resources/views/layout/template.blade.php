@@ -25,6 +25,8 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('style/dist/css/skins/_all-skins.min.css')}}">
+  <!-- filePond progress bar -->
+  <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,6 +35,12 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
+  <!-- countdown 2 -->
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+  <script src="//cdn.rawgit.com/hilios/jQuery.countdown/2.2.0/dist/jquery.countdown.min.js"></script>
+  
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -158,6 +166,8 @@
 <!-- ./wrapper -->
 
 <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+<!-- filePond progress bar -->
+<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 @yield('scripts')
 <!-- jQuery 3 -->
 <script src="{{asset('style/bower_components/jquery/dist/jquery.min.js')}}"></script>
@@ -226,6 +236,5 @@
       autoclose: true
     })
 </script>
-
 </body>
 </html>

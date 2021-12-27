@@ -79,10 +79,15 @@
                         <form action="{{route('user.changePassword')}}" method="post">
                         @csrf
                         @method('PUT')
+                            @if(session()->has('error'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('error') }}
+                                </div>
+                            @endif
                         <div class="form-group {{$errors->has('password') ? ' has-error' : ' '}}">
                             <label for="password">Old Password :</label>
                             <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}">
-                            @if ($errors->has('password'))
+                            @if($errors->has('password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
                                 </span>

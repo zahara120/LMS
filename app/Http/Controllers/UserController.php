@@ -90,7 +90,7 @@ class UserController extends Controller
         //validate
         $request->validate([
             'password' => 'required',
-            'newPassword' => 'required'
+            'newPassword' => 'required|same:password'
         ]);
         // to check the old password
         if (Hash::check($request->password, Auth::user()->password)) {
@@ -100,6 +100,22 @@ class UserController extends Controller
             ])->save();
             return back();
         }
+        else if(!Hash::check($request->password, Auth::user()->password)){
+            return back()->with('error', 'Incorrect Password!');
+        }
+
+        // if(Hash::check($request->password, $request->newPassword)){
+        //     return back()->with('error', 'password cannot be same!');
+        // }else{
+        //     return back()->with('error', 'success!');
+        // }
+        // if (Hash::check($request->password, $request->newPassword)) {
+        //     return 'password cannot be same';
+        // }
+        // if($request->password == $request->newPassword){
+        //     // return back()->with('error', 'Password cannot be same!');
+        //     return 'password cannot be same';
+        // }
     }
 
     /**
