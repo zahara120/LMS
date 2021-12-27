@@ -10,6 +10,7 @@ use App\http\Controllers\PageController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ApproverController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SubcategoryTrainingController;
 use App\Http\Controllers\TestController;
@@ -55,6 +56,10 @@ Route::get('/test', [TestController::class, 'index']);
 
 //input test 
 Route::get('training/{id}', [TestController::class,'test']);
+
+//approver
+Route::get('/approver', [ApproverController::class,'index']);
+Route::post('/approver', [ApproverController::class,'store']);
 
 //strore test
 Route::post('/test/{id}/training', [TestController::class,'store']);

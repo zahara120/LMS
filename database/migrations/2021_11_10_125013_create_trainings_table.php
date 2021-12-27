@@ -48,7 +48,7 @@ class CreateTrainingsTable extends Migration
 
             $table->string('mandatory');
             $table->string('mandatoryTraining');
-             $table->string('url')->nullable();
+            $table->string('url')->nullable();
             $table->string('catatan')->nullable();
             $table->string('publish')->nullable();
             $table->date('start_date');
