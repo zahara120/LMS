@@ -83,7 +83,7 @@
                         @foreach ($errors->all() as $error)
                         <p class="text-danger">{{ $error }}</p>
                         @endforeach
-                        
+        
                         <div class="form-group {{$errors->has('password') ? ' has-error' : ' '}}">
                             <label for="password">Old Password :</label>
                             <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}">
