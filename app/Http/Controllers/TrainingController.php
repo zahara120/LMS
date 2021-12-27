@@ -140,7 +140,9 @@ class TrainingController extends Controller
         $venue = Venue::all();
         $room = Room::all();
         $lesson = Lesson::all();
-        return view('editTraining', compact('training', 'approval', 'venue', 'room', 'lesson'));
+        $posttest_id = Test::select("*")->where("typeTest","=","PostTest")->get();
+        $pretest_id = Test::select("*")->where("typeTest","=","PreTest")->get();
+        return view('editTraining', compact('training', 'approval', 'venue', 'room', 'lesson','posttest_id','pretest_id'));
     }
 
     /**

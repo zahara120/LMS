@@ -1,6 +1,5 @@
 @extends('layout.template')
 @section('title','Training')
-
 @section('content')
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
@@ -13,8 +12,11 @@
         <div class="active tab-pane" id="pretest">
             <div class="panel-body">
             <p>
-                Exam Time:    &nbsp; <span class="js-timeout" >{{$training->pretest->duration}}</span>
+                Exam Time: <span id="timerPretest">{{$training->pretest->duration}}</span>
             </p>
+            <div class="icon-bar" >
+                <button id="btn1" class="btn btn-sm btn-success" onclick="countdownPretest()">Start Exam<span class="js-timeout"></span>  </button>
+            </div>
             <p>
                 Name Test : {{ $training->pretest->nameTest }}.
             </p>
@@ -63,11 +65,12 @@
         <div class="tab-pane" id="posttest">
             <div class="panel-body">
                 <p>
-                    Exam Time:    &nbsp; <span class="js-timeout" >{{$training->posttest->duration}}</span>
+                    Exam Time:    &nbsp; <span id="timer">{{$training->posttest->duration}}</span>
                 </p>
-                {{-- <div class="icon-bar" >
-                    <button class="btn btn-lg">Exam Time CountDown : <span class="js-timeout"></span>  </button>
-                </div> --}}
+                
+                <div class="icon-bar" >
+                    <button id="btn2" class="btn btn-sm btn-success" onclick="countdownPosttest()">Start Exam<span class="js-timeout"></span>  </button>
+                </div>
                 <p>
                     Name Test : {{ $training->posttest->nameTest }}.
                 </p>
@@ -110,6 +113,59 @@
       <!-- /.tab-content -->
     </div>
     <!-- /.nav-tabs-custom -->
-  
+    <script type="text/javascript">
+        function countdownPosttest() {
+            var end_date = '<?php echo $training->posttest->end_date ?>';
+            const tanggalTujuan = new Date(end_date).getTime();
+            
+            const countdown = setInterval(function() {
+                var start_date = '<?php echo $training->posttest->start_date ?>';
+                // const sekarang = new Date(start_date).getTime();
+                const sekarang = new Date().getTime();
+                const selisih = tanggalTujuan - sekarang;
+    
+                const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+                const jam = Math.floor(selisih % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+                const menit = Math.floor(selisih % (1000 * 60 * 60) / (1000 * 60));
+                const detik = Math.floor(selisih % (1000 * 60) / 1000);
+    
+                const timer = document.getElementById('timer');
+                timer.innerHTML = hari + ' day ' + jam + ' hours ' + menit + ' minutes ' 
+                + detik + ' seconds';
+    
+                if(selisih <= 0){
+                    clearInterval(countdown);
+                    timer.innerHTML = 'time out!';
+                    document.getElementById("btn2").disabled = true;
+                }
+            }, 1000);
+        }
 
+        function countdownPretest() {
+            var end_date = '<?php echo $training->pretest->end_date ?>';
+            const tanggalTujuan = new Date(end_date).getTime();
+            
+            const countdown = setInterval(function() {
+                var start_date = '<?php echo $training->pretest->start_date ?>';
+                // const sekarang = new Date(start_date).getTime();
+                const sekarang = new Date().getTime();
+                const selisih = tanggalTujuan - sekarang;
+    
+                const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+                const jam = Math.floor(selisih % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+                const menit = Math.floor(selisih % (1000 * 60 * 60) / (1000 * 60));
+                const detik = Math.floor(selisih % (1000 * 60) / 1000);
+    
+                const timerPretest = document.getElementById('timerPretest');
+                timerPretest.innerHTML = hari + ' day ' + jam + ' hours ' + menit + ' minutes ' 
+                + detik + ' seconds';
+    
+                if(selisih <= 0){
+                    clearInterval(countdown);
+                    document.getElementById("btn1").disabled = true;
+                    timerPretest.innerHTML = 'time out!';
+                }
+            }, 1000);
+        }
+    </script>
 @endsection

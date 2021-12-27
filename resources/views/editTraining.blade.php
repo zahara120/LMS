@@ -119,9 +119,9 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Post Test :</label>
                     <div class="col-lg-3">
-                        <select class="form-control select2" name="test_id" placeholder="LessonTraining" style="width: 100%;">
-                            @foreach($lesson as $item)
-                                <option value="{{ $item->id }}">{{ $item->nameLesson }}</option>
+                        <select class="form-control select2" name="posttest_id" style="width: 100%;">
+                            @foreach($posttest_id as $item)
+                                <option value="{{ $item->id }}">{{ $item->nameTest }}</option>
                             @endforeach 
                         </select>
                     </div>
@@ -131,9 +131,9 @@
                     </div>
 
                     <div class="col-lg-3">
-                        <select class="form-control select2" name="test_id" placeholder="LessonTraining" style="width: 100%;">
-                            @foreach($lesson as $item)
-                                <option value="{{ $item->id }}">{{ $item->nameLesson }}</option>
+                        <select class="form-control select2" name="pretest_id" style="width: 100%;">
+                            @foreach($pretest_id as $item)
+                                <option value="{{ $item->id }}">{{ $item->nameTest }}</option>
                             @endforeach
                         </select>
                     </div>

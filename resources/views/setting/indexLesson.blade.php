@@ -55,7 +55,10 @@
                     <td><a href="https://{{$item->url}}/" target="_blank">{{ $item->url }}</a></td>
                 @elseif (strpos($item->url, 'https') !== false)
                     <td><a href="{{$item->url}}" target="_blank">{{ $item->url }}</a></td>
+                @else
+                   <td><a href="#">{{ $item->url }}</a></td>
                 @endif
+
                 <td>{{ $item->file }}</td>
                 <td>{{ $item->description }}</td>
                 <td class="text-center" width="200px">
@@ -104,8 +107,6 @@
         });
     });
 </script>
-
-
 @endsection
 
 
@@ -155,18 +156,24 @@
                 </div>
             </div>
 
-            <div class="form-group {{$errors->has('file') ? ' has-error' : ' '}}">
+            <!-- <div class="form-group {{$errors->has('file') ? ' has-error' : ' '}} mt-4">
                 <label class="control-label">Video :</label>
-                <div class="controls">
-                    <div id="uniform-undefined">
-                        <input type="file" name="file" class="form-control">
+                <div class="controls mt-4">
+                    <div id="uniform-undefined mt-4">
+                        <input type="file" name="file" class="form-control mt-4">
                         @if ($errors->has('file'))
                             <span class="help-block"><strong>{{ $errors->first('file') }}</strong></span>
                         @endif
-                        {{-- <span class="filename">No file selected</span> --}}
-                        {{-- <span class="action">Choose File</span> --}}
                     </div>
                 </div>
+            </div> -->
+
+            <div class="form-group {{$errors->has('file') ? ' has-error' : ' '}}">
+                <label class="control-label">Video :</label>
+                <input type="file" name="file" class="form-control input-lg" id="file">
+                @if ($errors->has('file'))
+                    <span class="help-block"><strong>{{ $errors->first('file') }}</strong></span>
+                @endif
             </div>
 
             <div class="form-group {{$errors->has('url') ? ' has-error' : ' '}}">
@@ -201,6 +208,26 @@
       </div>
     </div>
   </div> 
+
+@section('scripts')
+    <!-- filePond progress bar -->
+    <script>
+        // Get a reference to the file input element
+        const inputElement = document.querySelector('input[id="file"]');
+
+        // Create a FilePond instance
+        const pond = FilePond.create(inputElement);
+
+        FilePond.setOptions({
+            server: {
+                url: '/lesson',
+                headers: {
+                    'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                }
+            }
+        });
+    </script>
+@endsection
 
   <!-- Modal Upload Import -->
 <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

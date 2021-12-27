@@ -79,13 +79,15 @@
                         <form action="{{route('user.changePassword')}}" method="post">
                         @csrf
                         @method('PUT')
+
                         @foreach ($errors->all() as $error)
                         <p class="text-danger">{{ $error }}</p>
                         @endforeach
+        
                         <div class="form-group {{$errors->has('password') ? ' has-error' : ' '}}">
                             <label for="password">Old Password :</label>
                             <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}">
-                            @if ($errors->has('password'))
+                            @if($errors->has('password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
                                 </span>

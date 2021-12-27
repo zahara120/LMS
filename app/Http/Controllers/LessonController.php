@@ -19,10 +19,7 @@ class LessonController extends Controller
     {
         $lesson = Lesson::all();
         $category = CategoryTraining::all();
-        $http = Lesson::where('url', 'like', 'https://%')->get();
-        $www = Lesson::where('url', 'like', 'www.%.com')->get();
-        // dd($www);
-        return view('setting.indexLesson',compact('lesson','category','http','www'));
+        return view('setting.indexLesson',compact('lesson','category'));
     }
 
     /**
@@ -45,7 +42,7 @@ class LessonController extends Controller
     {
         $this->validate($request,[
             // 'file'=> 'mimetypes:video/avi,video/mpeg,video/quicktime',
-            'file' => 'required|mimes:mp4,ogx,oga,ogv,ogg,webm',
+            'file' => 'required|mimes:jpg,png,mp4,ogx,oga,ogv,ogg,webm',
             'nameLesson' => 'required',
             'category_trainings_id' => 'required',
             'subcategory_trainings_id' => 'required',
@@ -58,21 +55,25 @@ class LessonController extends Controller
             'subcategory_trainings_id.required' => 'Subcategory Training is required',
             'url.required' => 'Link Zoom is required'
         ]);
-
+        // dd($request);
         $lesson = new Lesson();
         $lesson->category_trainings_id = $request->category_trainings_id;
         $lesson->subcategory_trainings_id = $request->subcategory_trainings_id;
         $lesson->nameLesson = $request->nameLesson;
         $lesson->url = $request->url;
         $lesson->description = $request->description;
+
         //upload video
-        $file=$request->file;
-		        
-        $filename=time().'.'.$file->getClientOriginalExtension();
-    
-        $request->file->move('videos',$filename);
-    
-        $lesson->file=$filename;
+        if($request->hasFile('file')){
+            $file = $request->file;
+                    
+            $filename = time().'.'.$file->getClientOriginalExtension();
+        
+            $request->file->move('videos',$filename);
+        
+            $lesson->file = $filename;
+        }
+
         // if($request->hasFile('video')){
         //     $video_tmp = $request->file('video');
         //     //$video_tmp = Input::file('video');
