@@ -15,12 +15,7 @@ class CreateApprovalsTable extends Migration
     {
         Schema::create('approvals', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('user_id')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
-
+            
             $table->foreignId('category_trainings_id')
             ->constrained()
             ->onUpdate('cascade')
@@ -33,7 +28,6 @@ class CreateApprovalsTable extends Migration
 
             // $table->unsignedInteger('training_id')->default(0)->nullable();
             $table->string('titleTraining')->unique();
-            $table->boolean('status')->default(0)->nullable();
             $table->integer('quota');
             $table->mediumText('objectiveTraining');
             $table->mediumText('backgroundTraining');
