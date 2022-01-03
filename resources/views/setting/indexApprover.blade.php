@@ -83,16 +83,16 @@
         <div class="modal-body">
             <form action="/approver" method="post">
             @csrf
-            <div class="form-group">
+            <div class="form-group {{$errors->has('user_id') ? ' has-error' : ' '}}">
                 <label for="name">Name :</label>
-                <select class="form-control select2" name="user_id" placeholder="user" style="width: 100%;">
+                <select class="form-control select2" name="user_id" value="{{ old('user_id') }}" placeholder="user" style="width: 100%;">
                     @foreach($user as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
-                @if ($errors->has('name'))
+                @if ($errors->has('user_id'))
                 <span class="help-block">
-                <strong>{{ $errors->first('name') }}</strong>
+                <strong>{{ $errors->first('user_id') }}</strong>
                     </span>
                 @endif
             </div>   
@@ -107,6 +107,11 @@
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
                     </select>
+                    @if ($errors->has('approversatu_id'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('approversatu_id') }}</strong>
+                        </span>
+                    @endif
                     </div>
                 </div>
             </div>
@@ -121,6 +126,11 @@
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
+                        @if ($errors->has('approverdua_id'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('approverdua_id') }}</strong>
+                            </span>
+                        @endif
                         </div>
                     </div>
                 </div>
@@ -135,6 +145,11 @@
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
+                        @if ($errors->has('approvertiga_id'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('approvertiga_id') }}</strong>
+                            </span>
+                        @endif
                         </div>
                     </div>
                 </div>

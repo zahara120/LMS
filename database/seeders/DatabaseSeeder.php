@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             SubcategoryTrainingSeederTable::class,
             LessonSeederTable::class,
             AlertSeederTable::class,
+            RoleUserSeederTable::class,
         ]);
     }
 }

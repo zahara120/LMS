@@ -21,6 +21,11 @@ class CreateApprovalDetailsTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
+            $table->foreignId('approver_id')
+            ->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
             $table->foreignId('user_id')
             ->constrained()
             ->onUpdate('cascade')

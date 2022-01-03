@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Approval extends Model
 {
-    protected $guarded = ['id'];
     use HasFactory;
+    protected $guarded = ['id'];
+
     public function category(){
         return $this->belongsTo('App\Models\CategoryTraining', 'category_trainings_id');
     }
-    public function user(){
-        return $this->belongsTo('App\Models\User');
+    
+    public function approval_detail(){
+        return $this->hasMany('App\Models\ApprovalDetail');
     }
 }

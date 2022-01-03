@@ -69,7 +69,7 @@ class ExamController extends Controller
         $startTime = Carbon::parse($request->start_date);
         $endTime = Carbon::parse($request->end_date);
 
-        $totalDuration =  $startTime->diff($endTime)->format('%H:%I:%S');
+        $totalDuration =  $startTime->diff($endTime)->format('%D Days :%H:%I:%S');
         // dd($totalDuration);
         // dd($request);
         $request->request->add(['duration' => $totalDuration]);

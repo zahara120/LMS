@@ -61,8 +61,10 @@
                 <?php $number++ ?>
                 <td class="text-center">{{ $number }}</td>
                 @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
-                <td>{{ $item->user->nip }}</td>
-                <td>{{ $item->user->name }}</td>
+                  @foreach($approval_detail as $items )
+                  <td>{{ $items->user->nip }}</td>
+                  <td>{{ $items->user->name }}</td>
+                  @endforeach
                 @endif
                 <td>{{ $item->titleTraining }}</td>
                 <td>{{ $item->category->nameCategory }}</td>

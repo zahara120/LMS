@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CategoryTraining;
 use App\Models\Approval;
+use App\Models\ApprovalDetail;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\SubcategoryTraining;
@@ -22,8 +23,9 @@ class ApprovalRecordController extends Controller
     public function index()
     {
         $approval = Approval::orderBy('created_at', 'DESC')->get();
+        $approval_detail = ApprovalDetail::all();
         $trainings = Training::all();
-        return view('approvalRecord',compact('approval', 'trainings'));
+        return view('approvalRecord',compact('approval', 'trainings', 'approval_detail'));
     }
 
     /**
@@ -76,10 +78,19 @@ class ApprovalRecordController extends Controller
         );
 
         if(auth()->user()->role()->where('role_id', '=', 1)->exists()){
-            $request->request->add(['user_id' => $request->user()->id]);
-            $request->request->add(['status' => 1]);
             $approval = Approval::create($request->all());
             $approval_id = $approval->id;
+            
+            //store approval detail table
+            $request->request->add(['approval_id' => $approval_id]);
+            //pake dummy data dulu
+            $request->request->add(['approver_id' => 1]);
+            $request->request->add(['user_id' => Auth::user()->id]);
+            $request->request->add(['approversatu_id' => 2]);
+            $request->request->add(['approverdua_id' => 1]);
+            $request->request->add(['approvertiga_id' => 3]);
+            ApprovalDetail::create($request->all());
+
             // return ke detail training
             return redirect()->action(
                 [TrainingController::class, 'create'], ['id' => $approval_id]

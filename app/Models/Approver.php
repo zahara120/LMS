@@ -29,4 +29,8 @@ class Approver extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function approval_detail(){
+        return $this->hasMany('App\Models\ApprovalDetail');
+    }
 }

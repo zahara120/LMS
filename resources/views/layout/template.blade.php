@@ -162,9 +162,9 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
 <!-- filePond progress bar -->
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-@yield('scripts')
 <!-- jQuery 3 -->
 <script src="{{asset('style/bower_components/jquery/dist/jquery.min.js')}}"></script>
+@yield('scripts')
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('style/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 
