@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\CategoryTraining;
 use App\Models\Approval;
 use App\Models\ApprovalDetail;
+use App\Models\Approver;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\SubcategoryTraining;
 use App\Models\Training;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ApprovalRecordController extends Controller
 {
@@ -36,6 +39,7 @@ class ApprovalRecordController extends Controller
     public function create()
     {
         $category = CategoryTraining::all();
+        
         return view('trainingSubmission',compact('category'));
     }
 
@@ -80,15 +84,19 @@ class ApprovalRecordController extends Controller
         if(auth()->user()->role()->where('role_id', '=', 1)->exists()){
             $approval = Approval::create($request->all());
             $approval_id = $approval->id;
-            
             //store approval detail table
             $request->request->add(['approval_id' => $approval_id]);
             //pake dummy data dulu
             $request->request->add(['approver_id' => 1]);
             $request->request->add(['user_id' => Auth::user()->id]);
-            $request->request->add(['approversatu_id' => 2]);
-            $request->request->add(['approverdua_id' => 1]);
-            $request->request->add(['approvertiga_id' => 3]);
+            
+            $approver_satu = Approver::where('user_id', Auth::user()->id)->value('approversatu_id');
+            $approver_dua = Approver::where('user_id', Auth::user()->id)->value('approverdua_id');
+            $approver_tiga = Approver::where('user_id', Auth::user()->id)->value('approvertiga_id');
+
+            $request->request->add(['approversatu_id' => $approver_satu]);
+            $request->request->add(['approverdua_id' => $approver_dua]);
+            $request->request->add(['approvertiga_id' => $approver_tiga]);
             ApprovalDetail::create($request->all());
 
             // return ke detail training

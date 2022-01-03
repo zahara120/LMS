@@ -104,9 +104,10 @@
           <h4 class="modal-title" id="myModalLabel">Add Category Training</h4>
         </div>
         <div class="modal-body">
+            <div class="alert alert-danger" style="display:none"></div>
             <form action="/categorytraining" method="post">
             @csrf
-            <div class="form-group {{$errors->has('nameCategory') ? ' has-error' : ' '}}">
+            <div class="form-group">
                 <label for="nameCategory">Name Category Training :</label>
                 <input id="nameCategory" type="text" class="form-control" name="nameCategory" value="{{ old('nameCategory') }}">
                 <!-- @if ($errors->has('nameCategory'))
@@ -116,24 +117,62 @@
                 @endif -->
                 <!-- ini udah pake yang di database -->
                 <!-- {{$errors}} -->
-                @error('nameCategory')
+                <!-- @error('nameCategory')
                     <span class="help-block">
                         @foreach($alert as $item)
                             <strong>{{ $item->message }}</strong>
                         @endforeach
                     </span>
-                @enderror
+                @enderror -->
             </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="submit" class="btn btn-primary" id="formSubmit">Add</button>
         </form>
         </div> 
       </div>
     </div>
   </div>
 
+  @section('scripts')
+  <script>
+        $(document).ready(function(){
+            $('#formSubmit').click(function(e){
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{ url('/categorytraining') }}",
+                    method: 'post',
+                    data: {
+                        nameCategory: $('#nameCategory').val()
+                    },
+                    success: function(result){
+                        if(result.errors)
+                        {
+                            $('.alert-danger').html('');
+
+                            $.each(result.errors, function(key, value){
+                                $('.alert-danger').show();
+                                $('.alert-danger').append('<li>'+value+'</li>');
+                            });
+                        }
+                        else
+                        {
+                            $('.alert-danger').hide();
+                            $('#myModal').modal('hide');
+                            location.reload();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+  @endsection
 
 <!-- Modal Upload Import -->
 <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

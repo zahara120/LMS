@@ -57,18 +57,30 @@ class CategoryTrainingController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        // $request->validate([
 
+        //     'nameCategory' => ['required', 'string', 'max:255', 'unique:category_trainings'],
+
+	    // ], [
+        //     'nameCategory.unique' => 'The name category already registered',
+	    //     'nameCategory.required' => 'The name category field is required',
+	    // ]);
+
+        // //return $request->all();
+        // CategoryTraining::create($request->all());
+        // return redirect('/categorytraining')->with('succes','succes add data');
+
+        // TEST MODAL VALIDATION
+        $validator = \Validator::make($request->all(), [
             'nameCategory' => ['required', 'string', 'max:255', 'unique:category_trainings'],
+        ]);
 
-	    ], [
-            'nameCategory.unique' => 'The name category already registered',
-	        'nameCategory.required' => 'The name category field is required',
-	    ]);
-
-        //return $request->all();
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        
         CategoryTraining::create($request->all());
-
         return redirect('/categorytraining')->with('succes','succes add data');
     }
 

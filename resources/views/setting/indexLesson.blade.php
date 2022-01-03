@@ -119,14 +119,15 @@
           <h4 class="modal-title" id="myModalLabel">Add Lesson</h4>
         </div>
         <div class="modal-body">
+            <div class="alert alert-danger" style="display:none"></div>
             <form action="/lesson" method="post" enctype="multipart/form-data">
             @csrf
-            <div class="form-group{{$errors->has('nameLesson') ? ' has-error' : ' '}}">
+            <div class="form-group">
                 <label for="nameLesson">Name Lesson :</label>
-                <input type="text" name="nameLesson" class="form-control" name="nameLesson" value="{{ old('nameLesson') }}" placeholder="Nama Lesson Training">
-                @if ($errors->has('nameLesson'))
+                <input type="text" name="nameLesson" class="form-control" name="nameLesson" id="nameLesson" value="{{ old('nameLesson') }}" placeholder="Nama Lesson Training">
+                <!-- @if ($errors->has('nameLesson'))
                 <span class="help-block"><strong>{{ $errors->first('nameLesson') }}</strong></span>
-                @endif
+                @endif -->
             </div>   
 
             <div class="row">
@@ -136,22 +137,22 @@
                         <select class="form-control select2" id="category_id" name="category_trainings_id" placeholder="categoryTraining" style="width: 100%;">
                             <option value="">Name Category</option>
                             @foreach($category as $item)
-                            <option value="{{ $item->id }}">{{ $item->nameCategory }}</option>
+                            <option id="category_id" value="{{ $item->id }}">{{ $item->nameCategory }}</option>
                             @endforeach
                         </select>
-                        @if ($errors->has('category_trainings_id'))
+                        <!-- @if ($errors->has('category_trainings_id'))
                             <span class="help-block"><strong>{{ $errors->first('category_trainings_id') }}</strong></span>
-                        @endif
+                        @endif -->
                     </div>
                 </div>
                     <div class="col-md-4">
-                        <div class="form-group {{$errors->has('subcategory_trainings_id') ? ' has-error' : ' '}}">
+                        <div class="form-group">
                         <label>Subcategory Training :</label>
                         <select class="form-control select2" id="subcategory_id" name="subcategory_trainings_id" placeholder="subcategoryTraining" style="width: 100%;">
                         </select>
-                        @if ($errors->has('subcategory_trainings_id'))
+                        <!-- @if ($errors->has('subcategory_trainings_id'))
                             <span class="help-block"><strong>{{ $errors->first('subcategory_trainings_id') }}</strong></span>
-                        @endif
+                        @endif -->
                     </div>
                 </div>
             </div>
@@ -168,25 +169,25 @@
                 </div>
             </div> -->
 
-            <div class="form-group {{$errors->has('file') ? ' has-error' : ' '}}">
+            <div class="form-group">
                 <label class="control-label">Video :</label>
                 <input type="file" name="file" class="form-control input-lg" id="file">
-                @if ($errors->has('file'))
+                <!-- @if ($errors->has('file'))
                     <span class="help-block"><strong>{{ $errors->first('file') }}</strong></span>
-                @endif
+                @endif -->
             </div>
 
-            <div class="form-group {{$errors->has('url') ? ' has-error' : ' '}}">
+            <div class="form-group">
                 <label for="url">Link Zoom :</label>
-                <input type="text" name="url" class="form-control" value="{{ old('url') }}" placeholder="Link Zoom">
-                @if ($errors->has('url'))
+                <input type="text" name="url" id="url" class="form-control" value="{{ old('url') }}" placeholder="Link Zoom">
+                <!-- @if ($errors->has('url'))
                     <span class="help-block"><strong>{{ $errors->first('url') }}</strong></span>
-                @endif
+                @endif -->
             </div> 
 
             <div class="form-group">
                 <label>Description :</label>
-                <textarea class="form-control" name="description" rows="3" placeholder="Description ...">{{ old('description') }}</textarea>
+                <textarea class="form-control" name="description" id="description" rows="3" placeholder="Description ...">{{ old('description') }}</textarea>
             </div>
 
             {{-- <div class="form-group">
@@ -202,7 +203,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="submit" id="formSubmit" class="btn btn-primary">Add</button>
         </form>
         </div>
       </div>
@@ -225,6 +226,47 @@
                     'X-CSRF-TOKEN' : '{{ csrf_token() }}'
                 }
             }
+        });
+
+        //modal validation
+        $(document).ready(function(){
+            $('#formSubmit').click(function(e){
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{ url('/lesson') }}",
+                    method: 'post',
+                    data: {
+                        nameLesson: $('#nameLesson').val(),
+                        category_idd: $('#category_id').val(),
+                        subcategory_id: $('#subcategory_id').val(),
+                        file: $('#file').val(),
+                        url: $('#url').val(),
+                        description: $('#description').val()
+                    },
+                    success: function(result){
+                        if(result.errors)
+                        {
+                            $('.alert-danger').html('');
+
+                            $.each(result.errors, function(key, value){
+                                $('.alert-danger').show();
+                                $('.alert-danger').append('<li>'+value+'</li>');
+                            });
+                        }
+                        else
+                        {
+                            $('.alert-danger').hide();
+                            $('#myModal').modal('hide');
+                            location.reload();
+                        }
+                    }
+                });
+            });
         });
     </script>
 @endsection

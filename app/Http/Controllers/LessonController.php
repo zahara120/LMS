@@ -40,9 +40,9 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $validator = \Validator::make($request->all(),[
             // 'file'=> 'mimetypes:video/avi,video/mpeg,video/quicktime',
-            'file' => 'required|mimes:jpg,png,mp4,ogx,oga,ogv,ogg,webm',
+            // 'file' => 'required|mimes:jpg,png,mp4,ogx,oga,ogv,ogg,webm',
             'nameLesson' => 'required',
             'category_trainings_id' => 'required',
             'subcategory_trainings_id' => 'required',
@@ -56,6 +56,11 @@ class LessonController extends Controller
             'url.required' => 'Link Zoom is required'
         ]);
         // dd($request);
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+
         $lesson = new Lesson();
         $lesson->category_trainings_id = $request->category_trainings_id;
         $lesson->subcategory_trainings_id = $request->subcategory_trainings_id;
@@ -73,18 +78,6 @@ class LessonController extends Controller
         
             $lesson->file = $filename;
         }
-
-        // if($request->hasFile('video')){
-        //     $video_tmp = $request->file('video');
-        //     //$video_tmp = Input::file('video');
-        //     //mendapatkan nama file
-        //     $video_name = $video_tmp->getClientOriginalName();
-        //     //proses upload 
-        //     $video_path = 'videos/';
-        //     $video_tmp->move($video_path,$video_name);
-        //     //$product->image=$fileName;
-        // }
-
         $lesson->save();
         
         return redirect('/lesson')->with('succes','succes add data');

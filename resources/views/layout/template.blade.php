@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- validation modal -->
+  <meta name="_token" content="{{csrf_token()}}" />
+  
   <title>Training | @yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -23,11 +26,12 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('style/dist/css/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
+  folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('style/dist/css/skins/_all-skins.min.css')}}">
   <!-- filePond progress bar -->
   <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" crossorigin="anonymous"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -164,10 +168,9 @@
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 <!-- jQuery 3 -->
 <script src="{{asset('style/bower_components/jquery/dist/jquery.min.js')}}"></script>
-@yield('scripts')
+@yield('scripts') 
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('style/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-
 <!-- DataTables -->
 <script src="{{asset('style/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('style/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>

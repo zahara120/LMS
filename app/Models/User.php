@@ -70,4 +70,9 @@ class User extends Authenticatable
     public function regist(){
         return $this->hasMany('App\Models\Regist');
     }
+
+    public function approver()
+    {
+        return $this->hasMany(Approver::class);
+    }
 }
