@@ -26,10 +26,14 @@ class ApprovalRecordController extends Controller
     public function index()
     {
         $approval = Approval::orderBy('created_at', 'DESC')->get();
-        // dd($approval);
         $approval_detail = ApprovalDetail::all();
+        $user_id = ApprovalDetail::where('user_id', Auth::user()->id)->value('user_id');
         $trainings = Training::all();
-        return view('approvalRecord',compact('approval', 'trainings', 'approval_detail'));
+
+        $approver_satu = Approver::where('approversatu_id', Auth::user()->id)->value('approversatu_id');
+        $approver_dua = Approver::where('approverdua_id', Auth::user()->id)->value('approverdua_id');
+        $approver_tiga = Approver::where('approvertiga_id', Auth::user()->id)->value('approvertiga_id');
+        return view('approvalRecord',compact('approval', 'trainings', 'approval_detail','user_id','approver_satu','approver_dua','approver_tiga'));
     }
 
     /**
@@ -40,7 +44,6 @@ class ApprovalRecordController extends Controller
     public function create()
     {
         $category = CategoryTraining::all();
-        
         return view('trainingSubmission',compact('category'));
     }
 
@@ -63,13 +66,14 @@ class ApprovalRecordController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            //approval
             'category_trainings_id' =>  'required',
             'subcategory_trainings_id' => 'required',
             'titleTraining' => 'required',
             'quota' => 'required',
             'objectiveTraining' => 'required',
             'backgroundTraining' => 'required',
-            'description' => 'required',
+            'description' => 'required'
         ],
         [
             'category_trainings_id.required' =>  'Category Training is required',
@@ -82,35 +86,36 @@ class ApprovalRecordController extends Controller
         ]
         );
 
+        $approval = Approval::create($request->all());
+        $approval_id = $approval->id;
+        //store approval detail table
+        $request->request->add(['approval_id' => $approval_id]);
+        //pake dummy data dulu
+        $approver_id = Approver::where('user_id', Auth::user()->id)->value('id');
+        $request->request->add(['approver_id' => $approver_id]);
+        $request->request->add(['user_id' => Auth::user()->id]);
+        
+        $approver_satu = Approver::where('user_id', Auth::user()->id)->value('approversatu_id');
+        $approver_dua = Approver::where('user_id', Auth::user()->id)->value('approverdua_id');
+        $approver_tiga = Approver::where('user_id', Auth::user()->id)->value('approvertiga_id');
+
+        $request->request->add(['approversatu_id' => $approver_satu]);
+        $request->request->add(['approverdua_id' => $approver_dua]);
+        $request->request->add(['approvertiga_id' => $approver_tiga]);
+        
         if(auth()->user()->role()->where('role_id', '=', 1)->exists()){
-            $approval = Approval::create($request->all());
-            $approval_id = $approval->id;
-            //store approval detail table
-            $request->request->add(['approval_id' => $approval_id]);
-            //pake dummy data dulu
-            $request->request->add(['approver_id' => 1]);
-            $request->request->add(['user_id' => Auth::user()->id]);
-            
-            $approver_satu = Approver::where('user_id', Auth::user()->id)->value('approversatu_id');
-            $approver_dua = Approver::where('user_id', Auth::user()->id)->value('approverdua_id');
-            $approver_tiga = Approver::where('user_id', Auth::user()->id)->value('approvertiga_id');
-
-            $request->request->add(['approversatu_id' => $approver_satu]);
-            $request->request->add(['approverdua_id' => $approver_dua]);
-            $request->request->add(['approvertiga_id' => $approver_tiga]);
             $request->request->add(['status_tiga' => 1]);
+        }
 
-            ApprovalDetail::create($request->all());
+        ApprovalDetail::create($request->all());
 
+        if(auth()->user()->role()->where('role_id', '=', 1)->exists()){
             // return ke detail training
             return redirect()->action(
                 [TrainingController::class, 'create'], ['id' => $approval_id]
             );
-            // return 'ini admin';
         }else{
-            Approval::create($request->all());
             return redirect('/approval')->with('succes','succes add data');
-            // return 'ini user';
         }
     }
 

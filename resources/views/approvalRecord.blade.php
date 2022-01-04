@@ -55,9 +55,9 @@
         <tbody>
             <?php $number = 0;?>
             @foreach ($approval as $item)
-            @if(Auth::user()->id == $item->user_id || Auth::user()->role()->where('nameRole', '=', 'Admin')->exists())
+            @if(Auth::user()->id == $user_id || Auth::user()->role()->where('nameRole', '=', 'Admin')->exists() 
+            || Auth::user()->id == $approver_satu || Auth::user()->id == $approver_dua || Auth::user()->id == $approver_tiga)
             <tr>
-                <!-- <td class="text-center">{{ $loop->iteration }}</td> -->
                 <?php $number++ ?>
                 <td class="text-center">{{ $number }}</td>
                 @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
