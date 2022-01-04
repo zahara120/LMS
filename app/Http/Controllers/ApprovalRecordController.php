@@ -26,6 +26,7 @@ class ApprovalRecordController extends Controller
     public function index()
     {
         $approval = Approval::orderBy('created_at', 'DESC')->get();
+        // dd($approval);
         $approval_detail = ApprovalDetail::all();
         $trainings = Training::all();
         return view('approvalRecord',compact('approval', 'trainings', 'approval_detail'));
@@ -97,6 +98,8 @@ class ApprovalRecordController extends Controller
             $request->request->add(['approversatu_id' => $approver_satu]);
             $request->request->add(['approverdua_id' => $approver_dua]);
             $request->request->add(['approvertiga_id' => $approver_tiga]);
+            $request->request->add(['status_tiga' => 1]);
+
             ApprovalDetail::create($request->all());
 
             // return ke detail training
@@ -105,7 +108,6 @@ class ApprovalRecordController extends Controller
             );
             // return 'ini admin';
         }else{
-            $request->request->add(['user_id' => $request->user()->id]);
             Approval::create($request->all());
             return redirect('/approval')->with('succes','succes add data');
             // return 'ini user';
