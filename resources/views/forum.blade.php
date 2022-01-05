@@ -17,8 +17,7 @@
     </div>
 
     {{-- <div class="right">
-        <a href="" class="btn btn-sm btn-primary">Add New Post
-    </div> --}}
+        <a href="" class="btn btn-sm btn-primary">Add New Post</div> --}}
     @foreach($forum as $item)
     <div class="box-header with-border">
         <!-- Post -->

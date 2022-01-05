@@ -90,7 +90,6 @@ class ApprovalRecordController extends Controller
         $approval_id = $approval->id;
         //store approval detail table
         $request->request->add(['approval_id' => $approval_id]);
-        //pake dummy data dulu
         $approver_id = Approver::where('user_id', Auth::user()->id)->value('id');
         $request->request->add(['approver_id' => $approver_id]);
         $request->request->add(['user_id' => Auth::user()->id]);
@@ -160,10 +159,8 @@ class ApprovalRecordController extends Controller
 
     public function updateStatus(Request $request, $approval_id)
     {
-        $validated = $request->validate([
-
-        ]);
-        $approval = Approval::findOrFail($approval_id);
+        $approval_detail = ApprovalDetail::findOrFail($approval_id);
+        // dd($approval_detail);
         $request->request->add(['status' => $request->status]);
         $request->request->add(['alasan' => $request->alasan]);
         $input = $request->all();

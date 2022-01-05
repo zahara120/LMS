@@ -38,60 +38,59 @@
     </div>
     <div class="box-body table-responsive">
         <table id="table" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th class="text-center">No</th>
-                <th>Name Category</th>
-                <th class="text-center">Action</th>
-            </tr> 
-        </thead>
-        <tbody>
-            @foreach ($category as $key=>$item)
-            <tr>
-                <td class="text-center">{{ $category->firstItem() + $key }}</td>
-                <td>{{ $item->nameCategory }}</td>
-                <td class="text-center" width="200px">
-                
-                    <a href="{{url('/categorytraining/'.$item->id)}}" class="btn btn-xs btn-info" >
-                        <i class="fa fa-eye"></i> View
-                    </a>
-                    <a href="{{url('/categorytraining/'.$item->id.'/edit')}}" class="btn btn-xs btn-primary">
-                        <i class="fa fa-pencil"></i> Edit
-                    </a>
+            <thead>
+                <tr>
+                    <th class="text-center">No</th>
+                    <th>Name Category</th>
+                    <th class="text-center">Action</th>
+                </tr> 
+            </thead>
+            <tbody>
+                @foreach ($category as $key=>$item)
+                <tr>
+                    <td class="text-center">{{ $category->firstItem() + $key }}</td>
+                    <td>{{ $item->nameCategory }}</td>
+                    <td class="text-center" width="200px">
                     
-                    {{-- <a href="/daftar/destroy/{{$student->id_siswa}}" class="btn btn-xs btn-danger" onclick="return confirm('yakin?');">Delete</a> --}}
+                        <a href="{{url('/categorytraining/'.$item->id)}}" class="btn btn-xs btn-info" >
+                            <i class="fa fa-eye"></i> View
+                        </a>
+                        <a href="{{url('/categorytraining/'.$item->id.'/edit')}}" class="btn btn-xs btn-primary">
+                            <i class="fa fa-pencil"></i> Edit
+                        </a>
+                        
+                        {{-- <a href="/daftar/destroy/{{$student->id_siswa}}" class="btn btn-xs btn-danger" onclick="return confirm('yakin?');">Delete</a> --}}
 
-                    <form action="{{ url('categorytraining/'.$item->id) }}" class="inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
-                    @method('delete')
-                    @csrf         
-                    <button type="submit" class="btn btn-xs btn-danger" >
-                        <i class="fa fa-trash"></i> Delete
-                    </button> 
-                    </form>
+                        <form action="{{ url('categorytraining/'.$item->id) }}" class="inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
+                        @method('delete')
+                        @csrf         
+                        <button type="submit" class="btn btn-xs btn-danger" >
+                            <i class="fa fa-trash"></i> Delete
+                        </button> 
+                        </form>
 
-                    {{-- <a href="{{ url('categorytraining/'.$item->id) }}" class="btn btn-xs btn-danger"  onclick="return confirm('Are you sure want to delete this data?');">
-                        <i class="fa fa-trash"></i> Delete
-                    </a>  --}}
-                </td>
-            </tr>
-            @endforeach
-        </tbody> 
-    </table>
-    {{-- pagination --}}
-    {{-- <div class="pull-right">
-        {{ $category->links()}}
-    </div>
-    <div class="pull-left">
-        Showing
-        {{ $category->firstItem() }}
-        to
-        {{ $category->lastItem() }}
-        of
-        {{ $category->total() }}
-    </div>
-    </div> --}}
+                        {{-- <a href="{{ url('categorytraining/'.$item->id) }}" class="btn btn-xs btn-danger"  onclick="return confirm('Are you sure want to delete this data?');">
+                            <i class="fa fa-trash"></i> Delete
+                        </a>  --}}
+                    </td>
+                </tr>
+                @endforeach
+            </tbody> 
+        </table>
+        {{-- pagination --}}
+        {{-- <div class="pull-right">
+            {{ $category->links()}}
+        </div>
+        <div class="pull-left">
+            Showing
+            {{ $category->firstItem() }}
+            to
+            {{ $category->lastItem() }}
+            of
+            {{ $category->total() }}
+        </div>--}}
+    </div> 
 </div>
-
 @endsection
 
 
@@ -163,9 +162,10 @@
                         }
                         else
                         {
-                            $('.alert-danger').hide();
-                            $('#myModal').modal('hide');
+                            // $('.alert-danger').hide();
+                            // $('#myModal').modal('hide');
                             location.reload();
+                            // window.location.href = '/categorytraining';
                         }
                     }
                 });

@@ -250,7 +250,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('/approval/{approval}', [ApprovalRecordController::class, 'show']);
 
     //submit approval detail
-    Route::put('/approval/{id}', [ApprovalRecordController::class, 'updateStatus']);
+    Route::put('/approval/{id}/{detail_id}', [ApprovalRecordController::class, 'updateStatus']);
     
     Route::name('training.')->group(function(){
         //view all training

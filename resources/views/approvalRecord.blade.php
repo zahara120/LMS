@@ -61,7 +61,7 @@
                 <?php $number++ ?>
                 <td class="text-center">{{ $number }}</td>
                 @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
-                  @foreach($approval_detail as $items )
+                  @foreach($item->approval_detail as $items )
                   <td>{{ $items->user->nip }}</td>
                   <td>{{ $items->user->name }}</td>
                   @endforeach
@@ -99,11 +99,13 @@
                         </select>
                     </div>
                     </form> --}}
-                    @if($item->status == 0)
-                      <a href="/approval/{{$item->id}}" type="button" class="btn btn-warning status">Status</a>
-                    @else
-                      <a type="button" class="btn btn-warning status" disabled>Status</a>
-                    @endif
+                    @foreach($item->approval_detail as $detail)
+                      @if($approver_satu == Auth::user()->id && $detail->status_satu == 0 || $approver_dua == Auth::user()->id && $detail->status_dua == 0 || $approver_tiga == Auth::user()->id && $detail->status_tiga == 0)
+                        <a href="/approval/{{$item->id}}/{{$detail->id}}" type="button" class="btn btn-warning status">Status</a>
+                      @else
+                        <a type="button" class="btn btn-warning status" disabled>Status</a>
+                      @endif
+                    @endforeach
             
                     <div class="col-md-4">
                     <?php $buttonFlag = 0;?>
