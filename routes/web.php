@@ -251,6 +251,10 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     //submit approval detail
     Route::put('/approval/{id}', [ApprovalRecordController::class, 'updateStatus']);
+
+    //create training tanpa submission
+    Route::get('/training/create', [TrainingController::class,'createtraining']);
+    Route::post('/training', [TrainingController::class,'storetraining']);
     
     Route::name('training.')->group(function(){
         //view all training
