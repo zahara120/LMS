@@ -55,7 +55,8 @@
         <tbody>
             <?php $number = 0;?>
             @foreach ($approval as $item)
-            @if(Auth::user()->id == $user_id || Auth::user()->role()->where('nameRole', '=', 'Admin')->exists() 
+            @foreach ($item->approval_detail as $detail)
+            @if(Auth::user()->id == $detail->user_id || Auth::user()->role()->where('nameRole', '=', 'Admin')->exists() 
             || Auth::user()->id == $approver_satu || Auth::user()->id == $approver_dua || Auth::user()->id == $approver_tiga)
             <tr>
                 <?php $number++ ?>
@@ -126,6 +127,7 @@
                 @endif
             </tr>
             @endif
+            @endforeach
             @endforeach
         </tbody> 
     </table>

@@ -247,10 +247,10 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     // Route::resource('training.approval', TrainingController::class);
 
     //melihat data approval record di approval record
-    Route::get('/approval/{approval}', [ApprovalRecordController::class, 'show']);
+    Route::get('/approval/{approval}/{detail_id}', [ApprovalRecordController::class, 'show']);
 
     //submit approval detail
-    Route::put('/approval/{id}/{detail_id}', [ApprovalRecordController::class, 'updateStatus']);
+    Route::put('/approval/{detail_id}', [ApprovalRecordController::class, 'updateStatus']);
     
     Route::name('training.')->group(function(){
         //view all training

@@ -37,6 +37,7 @@ class CreateApprovalDetailsTable extends Migration
             ->onDelete('cascade');
 
             $table->boolean('status_satu')->default(0)->nullable();
+            $table->string('alasan_satu')->nullable();
             
             $table->foreignId('approverdua_id')
             ->constrained('users')
@@ -44,6 +45,7 @@ class CreateApprovalDetailsTable extends Migration
             ->onDelete('cascade');
             
             $table->boolean('status_dua')->default(0)->nullable();
+            $table->string('alasan_dua')->nullable();
             
             $table->foreignId('approvertiga_id')
             ->constrained('users')
@@ -51,6 +53,7 @@ class CreateApprovalDetailsTable extends Migration
             ->onDelete('cascade');
             
             $table->boolean('status_tiga')->default(0)->nullable();
+            $table->string('alasan_tiga')->nullable();
             $table->timestamps();
         });
     }

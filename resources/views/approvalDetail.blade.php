@@ -56,7 +56,7 @@
                 <input class="form-control select2" type="text" value="{{$approval->description}}}" disabled>
             </div>
         </div>
-        <form class="form-horizontal" role="form" action="/approval/{{$approval->id}}" method="post">
+        <form class="form-horizontal" role="form" action="/approval/{{$approval_detail->id}}" method="post">
         @csrf
         @method('PUT')
             <div class="form-group row mt-2">
