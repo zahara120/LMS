@@ -6,9 +6,6 @@
 <div class="box">
     <div class="box-header with-border">
         <h3 class="box-title">Add Training Submission</h3>
-        <h3 class="box-title">{{$approver_satu}}</h3>
-        <h3 class="box-title">{{$approver_dua}}</h3>
-        <h3 class="box-title">{{$approver_tiga}}</h3>
     </div>
     @if ($errors->any())
         <div class="alert alert-danger">

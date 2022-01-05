@@ -90,7 +90,6 @@ class ApprovalRecordController extends Controller
         $approval_id = $approval->id;
         //store approval detail table
         $request->request->add(['approval_id' => $approval_id]);
-        //pake dummy data dulu
         $approver_id = Approver::where('user_id', Auth::user()->id)->value('id');
         $request->request->add(['approver_id' => $approver_id]);
         $request->request->add(['user_id' => Auth::user()->id]);
@@ -125,9 +124,10 @@ class ApprovalRecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Approval $approval)
+    public function show(Approval $approval, $approvalDetail_id)
     {
-        return view('approvalDetail', compact('approval'));
+        $approval_detail = ApprovalDetail::findOrFail($approvalDetail_id);
+        return view('approvalDetail', compact('approval', 'approval_detail'));
     }
 
     /**
@@ -158,16 +158,31 @@ class ApprovalRecordController extends Controller
         return redirect('/approval');
     }
 
-    public function updateStatus(Request $request, $approval_id)
+    public function updateStatus(Request $request, $approvalDetail_id)
     {
-        $validated = $request->validate([
+        $approval_detail = ApprovalDetail::findOrFail($approvalDetail_id);
+        // dd($approval_detail);
+        $approver_satu = Approver::where('approversatu_id', Auth::user()->id)->value('approversatu_id');
+        $approver_dua = Approver::where('approverdua_id', Auth::user()->id)->value('approverdua_id');
+        $approver_tiga = Approver::where('approvertiga_id', Auth::user()->id)->value('approvertiga_id');
+        // dd($approver_satu,$approver_dua,$approver_tiga);
 
-        ]);
-        $approval = Approval::findOrFail($approval_id);
-        $request->request->add(['status' => $request->status]);
-        $request->request->add(['alasan' => $request->alasan]);
+        if($approver_satu == Auth::user()->id){
+            $request->request->add(['status_satu' => $request->status]);
+            $request->request->add(['alasan_satu' => $request->alasan]);
+        }
+        elseif($approver_dua == Auth::user()->id){
+            $request->request->add(['status_dua' => $request->status]);
+            $request->request->add(['alasan_dua' => $request->alasan]);
+        }
+        elseif($approver_tiga == Auth::user()->id){
+            $request->request->add(['status_tiga' => $request->status]);
+            $request->request->add(['alasan_tiga' => $request->alasan]);
+        }
+
         $input = $request->all();
-        $approval->fill($input)->save();
+        // dd($request);
+        $approval_detail->fill($input)->save();
         return redirect('/approval');
     }
     

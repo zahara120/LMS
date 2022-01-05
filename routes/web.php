@@ -247,7 +247,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     // Route::resource('training.approval', TrainingController::class);
 
     //melihat data approval record di approval record
-    Route::get('/approval/{approval}', [ApprovalRecordController::class, 'show']);
+    Route::get('/approval/{approval}/{detail_id}', [ApprovalRecordController::class, 'show']);
 
     //submit approval detail
     Route::put('/approval/{id}', [ApprovalRecordController::class, 'updateStatus']);
@@ -255,6 +255,8 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     //create training tanpa submission
     Route::get('/training/create', [TrainingController::class,'createtraining']);
     Route::post('/training', [TrainingController::class,'storetraining']);
+
+    // Route::put('/approval/{detail_id}', [ApprovalRecordController::class, 'updateStatus']);
     
     Route::name('training.')->group(function(){
         //view all training
