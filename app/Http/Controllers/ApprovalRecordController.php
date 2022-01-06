@@ -165,7 +165,6 @@ class ApprovalRecordController extends Controller
         $approver_satu = Approver::where('approversatu_id', Auth::user()->id)->value('approversatu_id');
         $approver_dua = Approver::where('approverdua_id', Auth::user()->id)->value('approverdua_id');
         $approver_tiga = Approver::where('approvertiga_id', Auth::user()->id)->value('approvertiga_id');
-        // dd($approver_satu,$approver_dua,$approver_tiga);
 
         if($approver_satu == Auth::user()->id){
             $request->request->add(['status_satu' => $request->status]);

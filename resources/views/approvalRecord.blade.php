@@ -120,7 +120,7 @@
                       @if($buttonFlag < 1 &&  $item->status == 1)
                       <a class="btn btn-info" type ="button" href="{{route('training.create', $item->id)}}"> Detail</a>
                       @else
-                      <button class="btn btn-info "  disabled> Detail</button>
+                      <button class="btn btn-info" disabled> Detail</button>
                       @endif
                     </div> 
                 </td>
