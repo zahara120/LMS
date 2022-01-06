@@ -71,35 +71,30 @@
                 <td>{{ $item->category->nameCategory }}</td>
                 <td>{{ $item->quota }}</td>
                 <td>
-                    @if ($item->status==0)
-                    <label class="label label-warning">Pending</label>
-                    @elseif ($item->status==1)
-                    <label class="label label-success">Approve</label>
-                    @elseif($item->status == 2) 
-                    <label class="label label-danger">Reject</label>
+                @foreach($item->approval_detail as $detail)
+                    
+                    <!-- kalo belom di approve sama approver 3 -->
+                    @if($detail->status_tiga == 0)
+                      <label class="label label-warning">Pending</label>
+
+                    <!-- kalo udah di approve sama approver 3 -->
+                    @elseif($detail->status_tiga == 1)
+                      <label class="label label-success">Approve</label>
+                    
+                    <!-- kalo udah di reject sama approver 3 -->
+                    @elseif($detail->status_tiga == 2) 
+                      <label class="label label-danger">Reject</label>
                       @if(auth()->user()->role()->where('nameRole', '=', 'User')->exists())
                         <a href="{{route('approval.edit',  $item->id)}}" class="btn btn-xs btn-primary">
                             <i class="fa fa-pencil"></i> Edit
                         </a>
                       @endif
                     @endif
+                @endforeach
                 </td>
                 <td>{{ $item->created_at }}</td>
-                {{-- <td>
-                    <label class="label {{ ($item->status == 0) ? 'label-danger' :'label-success' }}">{{ ($item->status==0)?'Pending':'Approve' }}</label>
-                </td> --}}
                 @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
                 <td class="text-center">
-                    {{-- <form role="form" action="/approval/{id}" method="post">
-                    @csrf
-                    <div class="form-group col-md-6">
-                        <select name="status">
-                          <option value="0" @if($item->status==0)selected @endif>Pending</option>
-                          <option value="1" @if($item->status==1)selected @endif>Approve</option>
-                          <option value="2" @if($item->status==2)selected @endif>Reject</option> 
-                        </select>
-                    </div>
-                    </form> --}}
                     @foreach($item->approval_detail as $detail)
                       @if($approver_satu == Auth::user()->id && $detail->status_satu == 0 || $approver_dua == Auth::user()->id && $detail->status_dua == 0 || $approver_tiga == Auth::user()->id && $detail->status_tiga == 0)
                         <a href="/approval/{{$item->id}}/{{$detail->id}}" type="button" class="btn btn-warning status">Status</a>
@@ -116,8 +111,8 @@
                         <?php $buttonFlag++ ?>
                         @endif
                       @endforeach
-
-                      @if($buttonFlag < 1 &&  $item->status == 1)
+                      <!-- kalo approver 3 nya udah approve -->
+                      @if($buttonFlag < 1 &&  $detail->status_tiga == 1)
                       <a class="btn btn-info" type ="button" href="{{route('training.create', $item->id)}}"> Detail</a>
                       @else
                       <button class="btn btn-info" disabled> Detail</button>

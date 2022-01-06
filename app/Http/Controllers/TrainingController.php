@@ -38,6 +38,23 @@ class TrainingController extends Controller
         return view('recordTraining',compact('training','approval','provider','venue','category','subcategory','lesson','approval','registTrainings'));
     }
 
+    public function createtraining()
+    {
+        $category = CategoryTraining::all();
+        $lesson = Lesson::all();
+        $survey = Survey::all();
+        $category = CategoryTraining::all();
+        $subcategory = SubcategoryTraining::all();
+        $costtype = CostType::all();
+        $provider = Provider::all();
+        $venue = Venue::all();
+        $providerinternal_id = Provider::select("*")->where("typeProvider","=","Internal")->get();
+        $providerexternal_id = Provider::select("*")->where("typeProvider","=","External")->get();
+        $posttest_id = Test::select("*")->where("typeTest","=","PostTest")->get();
+        $pretest_id = Test::select("*")->where("typeTest","=","PreTest")->get();
+        return view('createTraining',compact('category','provider','venue','category','subcategory','survey','lesson','costtype','posttest_id','pretest_id','providerinternal_id','providerexternal_id'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -116,6 +133,45 @@ class TrainingController extends Controller
         Training::create($request->all());
         return redirect('/training')->with('succes','succes add data');
     }
+
+    public function storetraining(Request $request)
+    {
+
+        $request->validate([
+            'category_id' =>  'required',
+            'subcategory_id' => 'required',
+            'titleTraining' => 'required',
+            'quota' => 'required',
+            'objectiveTraining' => 'required',
+            'backgroundTraining' => 'required',
+            'description' => 'required',
+            'lesson_id' => 'required',
+            'posttest_id' => 'required',
+            'pretest_id' => 'required',
+            'methodTraining' => 'required',
+            'mandatoryTraining' => 'required',
+            'startDate'  => 'required|date',
+            'endDate'    => 'required|date|after:startDate',
+        ],
+        [
+            'category_id.required' =>  'Category Training is required',
+            'subcategory_id.required' => 'Subcategory Training is required',
+            'titleTraining.required' => 'Title Training is required',
+            'quota.required' => 'Jumlah Peserta is required',
+            'objectiveTraining.required' => 'Objective Training is required',
+            'backgroundTraining.required' => 'Background Training is required',
+            'description.required' => 'Catatan is required',
+        'lesson_id.required' => 'Lesson Training is required',
+            'posttest_id.required' => 'Post Test is required',
+            'pretest_id.required' => 'Pre Test is required',
+            'methodTraining.required' => 'Mandatory for Employee is required',
+            'mandatoryTraining.required' => 'Metode Training is required',
+            'startDate.required'  => 'Start Date is required',
+            'endDate.required'    => 'End Date is required'
+
+        ]
+        );
+
 
     /**
      * Display the specified resource.
