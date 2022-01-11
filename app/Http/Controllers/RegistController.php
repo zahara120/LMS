@@ -21,6 +21,7 @@ class RegistController extends Controller
      */
     public function index()
     {
+        
         $regist = Regist::orderBy('created_at', 'DESC')->get();
         return view('registTrainingRecord',compact('regist'));
     }
@@ -34,8 +35,9 @@ class RegistController extends Controller
     {
         $training = Training::find($training_id);
         $regist = Regist::all();
+        $test = Regist::where('user_id',Auth::user()->id)->where('training_id' , $training->id )->value('training_id');
         $date = Carbon::today()->toDateString();
-        return view('detailTraining',compact('training','date','regist'));
+        return view('detailTraining',compact('test','training','date','regist'));
     }
 
     /**

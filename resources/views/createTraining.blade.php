@@ -35,26 +35,21 @@
             <div class="col-md-4">
                 <div class="form-group">
                 <label>Category Training : </label>
-                <select class="form-control select2" id="category_id" name="category_id" placeholder="categoryTraining" style="width: 100%;">
+                <select class="form-control select2" id="category_id" name="category_trainings_id" placeholder="categoryTraining" style="width: 100%;">
                     <option value="">Name Category</option>
                     @foreach($category as $item)
                     <option value="{{ $item->id }}">{{ $item->nameCategory }}</option>
                     @endforeach
                 </select>
-                {{-- <div class="col-lg-2">
-                    <select class="form-control select2" id="subcategory" name="subcategory" placeholder="subcategoryTraining" style="width: 100%;">
-                    </select>
-                </div> --}}
                 </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                     <label>Subcategory Training :</label>
-                    <select class="form-control select2" id="subcategory_id" name="subcategory_id" placeholder="subcategoryTraining" style="width: 100%;">
+                    <select class="form-control select2" id="subcategory_id" name="subcategory_trainings_id" placeholder="subcategoryTraining" style="width: 100%;">
                     </select>
                 </div>
             </div>
-                
         </div>
 
         <div class="row">
@@ -89,13 +84,13 @@
                 <label class="col-sm-3 control-label">Mandatory for Employee :</label>
                 <div class="col-lg-4">
                     <div class="checkbox">
-                        <label><input type="radio" name="mandatoryTraining" value="yes"> Yes</label>
+                        <label><input type="radio" name="mandatory" value="yes"> Yes</label>
                     </div>
                 </div>
 
                 <div class="col-lg-2">
                     <div class="checkbox">
-                      <label><input type="radio" name="mandatoryTraining" value="no"> No</label>
+                      <label><input type="radio" name="mandatory" value="no"> No</label>
                     </div>
                 </div>
             </div>
@@ -104,13 +99,13 @@
                 <label class="col-sm-3 control-label">Metode Training :</label>
                 <div class="col-lg-4">
                     <div class="checkbox">
-                        <label><input type="radio" onclick="javascript:onlineorofflineCheck();" name="methodTraining" id="online" value="online"> Online</label>
+                        <label><input type="radio" onclick="javascript:onlineorofflineCheck();" name="mandatoryTraining" id="online" value="online"> Online</label>
                     </div>
                 </div>
 
                 <div class="col-lg-2">
                     <div class="checkbox">
-                      <label><input type="radio" onclick="javascript:onlineorofflineCheck();" name="methodTraining" id="offline" value="offline"> Offline</label>
+                      <label><input type="radio" onclick="javascript:onlineorofflineCheck();" name="mandatoryTraining" id="offline" value="offline"> Offline</label>
                     </div>
                 </div>
             </div>
@@ -127,36 +122,36 @@
             <div id="ifoffline" style="display:none">
                 {{-- Venue: <input type='text' id='venue' name='venue'><br> --}}
                 <div class="form-group row mt-2">
-                    <label class="col-sm-3 control-label">Location :</label>
-                    <div class="col-lg-4">
-                        <select class="form-control select2" id="venue_id" name="venue_id" placeholder="nameVenue" style="width: 100%;">
-                            <option value="">Name Venue</option>
-                            @foreach($venue as $item)
-                            <option value="{{ $item->id }}">{{ $item->nameVenue }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-lg-2">
-                        <select class="form-control select2" id="room_id" name="room_id" placeholder="nameRoom" style="width: 100%;">
-                            {{-- <option value="">Room</option>
-                            @foreach($room as $item)
-                            <option value="{{ $item->id }}">{{ $item->nameRoom }}</option>
-                            @endforeach --}}
-                        </select>
-                    </div>
+                <label class="col-sm-3 control-label">Location :</label>
+                <div class="col-lg-4">
+                    <select class="form-control select2" id="venue_id" name="venue_id" placeholder="nameVenue" style="width: 100%;">
+                        <option value="">Name Venue</option>
+                        @foreach($venue as $item)
+                        <option value="{{ $item->id }}">{{ $item->nameVenue }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <select class="form-control select2" id="room_id" name="room_id" placeholder="nameRoom" style="width: 100%;">
+                        {{-- <option value="">Room</option>
+                        @foreach($room as $item)
+                        <option value="{{ $item->id }}">{{ $item->nameRoom }}</option>
+                        @endforeach --}}
+                    </select>
+                </div>
                 </div>
             </div>
 
             <div class="form-group row mt-2" id="budget">
                 <label class="col-sm-3 control-label">Budget : </label>
-                <div class="col-sm-4">
+                {{--<div class="col-sm-4">
                     <select class="form-control select2" id="costtype_id" name="costtype_id[]" placeholder="Cost Type" style="width: 100%;">
                         <option value="">Cost Type</option>
                         @foreach($costtype as $item)
                         <option value="{{ $item->id }}">{{ $item->costType }}</option>
                         @endforeach
                     </select>
-                </div>
+                </div>--}}
 
                 <div class="col-sm-3">
                     <input type="number" class="form-control" name="budget[]" placeholder="Budget">
@@ -231,7 +226,7 @@
                     {{-- <div class="input-group-addon">
                         <i class="fa fa-clock-o"></i>
                     </div> --}}
-                    <input type="date" name="startDate" class="form-control pull-right" id="reservationtime">
+                    <input type="date" name="start_date" class="form-control pull-right" id="reservationtime">
                     </div>
                     </div>
 
@@ -244,7 +239,7 @@
                     {{-- <div class="input-group-addon">
                         <i class="fa fa-clock-o"></i>
                     </div> --}}
-                    <input type="date" name="endDate" class="form-control pull-right" id="reservationtime">
+                    <input type="date" name="end_date" class="form-control pull-right" id="reservationtime">
                     </div>
                     </div>
 
@@ -291,24 +286,24 @@
             <div class="form-group row mt-2">
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Evaluasi I (Materi) :</label>
-                    <div class="col-lg-3">
+                    {{--<div class="col-lg-3">
                         <select class="form-control select2" name="surveysatu_id" placeholder="Budget" style="width: 100%;">
                             @foreach($survey as $item)
                             <option value="{{ $item->id }}">{{ $item->nameSurvey }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div>--}}
 
                     <div class="col-lg-2">
                         <label>Evaluasi II (Trainer) :</label>
                     </div>
 
-                    <div class="col-lg-3">
+                    {{--<div class="col-lg-3">
                         <select class="form-control select2" name="surveydua_id" placeholder="Budget" style="width: 100%;">
                         @foreach($survey as $item)
                         <option value="{{ $item->id }}">{{ $item->nameSurvey }}</option>
                         @endforeach
-                        </select>
+                        </select>--}}
                     </div>
 
                 </div>
@@ -375,7 +370,7 @@
                 url: "{{url('api/fetch-subcategory')}}",
                 type: "POST",
                 data: {
-                    category_id: idCategory,
+                    category_trainings_id: idCategory,
                     _token: '{{csrf_token()}}'
                 },
                 dataType: 'json',
@@ -389,7 +384,29 @@
         });
     });
 </script>
-
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#venue_id').on('change', function () {
+            var idVenue = this.value;
+            $("#room_id").html('');
+            $.ajax({
+                url: "{{url('api/fetch-room')}}",
+                type: "POST",
+                data: {
+                    venue_id: idVenue,
+                    _token: '{{csrf_token()}}'
+                },
+                dataType: 'json',
+                success: function (result) {
+                    $('#room_id').html('<option value="">Select Room</option>');
+                    $.each(result.rooms, function (key, value) {
+                        $("#room_id").append('<option value="' + value.id + '">' + value.nameRoom + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript">
 

@@ -21,6 +21,11 @@ class CreateTestResultsTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
+            $table->foreignId('training_id')
+            ->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
             $table->foreignId('test_id')
             ->constrained()
             ->onUpdate('cascade')

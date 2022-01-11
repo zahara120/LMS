@@ -18,9 +18,7 @@
     <div class="box-header">
         <h3 class="box-title">Data Training</h3>
         <div class="pull-right">
-            <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">
-                create
-            </button>
+        <a href="/create/training" class="btn btn-primary btn-flat">create</a>
         </div>
     </div>
     <div class="box-body table-responsive">

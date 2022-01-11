@@ -28,8 +28,9 @@
             <div class="alert bg-gray color-palette alert-dismissible">Your test score: {{ $pretest_result->score }}</div>
             @else
             <br>
-            <form action="/test/{{$training->pretest->id}}/training" method="post">
+            <form action="/test/{{$training->id}}/training" method="post">
             @csrf
+            <input type="hidden" name="test_id" value="{{ $training->pretest->id }}"> 
             <?php $i = 1; ?>
             <div id="questionHide" style="display:none">
             @foreach($training->pretest->question as $item)
@@ -88,8 +89,9 @@
                 <div class="alert bg-gray color-palette alert-dismissible">Your test score: {{ $posttest_result->score }}</div>
                 @else
                 <br>
-                <form action="/test/{{$training->posttest->id}}/training" method="post">
+                <form action="/test/{{$training->id}}/training" method="post">
                 @csrf
+                <input type="hidden" name="test_id" value="{{ $training->posttest->id }}"> 
                 <?php $i = 1; ?>
                 <div id="questionHide2" style="display:none">
                 @foreach($training->posttest->question as $item)
