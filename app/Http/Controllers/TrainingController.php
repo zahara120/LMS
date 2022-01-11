@@ -171,6 +171,58 @@ class TrainingController extends Controller
 
         ]
         );
+        //store ke approval
+        $request->request->add(['user_id' => $request->user()->id]);
+        //$request->request->add(['status' => 1]);
+        $approval = Approval::create($request->all());
+        $approval_id = $approval->id;
+//store ke training
+$training = new Training;
+    $training ->approval_id = $approval_id;
+    $training ->venue_id = $request->venue_id;
+    $training ->room_id = $request->room_id;
+    $training ->lesson_id = $request->lesson_id;
+    $training ->surveysatu_id = $request ->surveysatu_id ;
+    $training ->surveydua_id = $request ->surveydua_id;
+    $training ->posttest_id = $request ->posttest_id;
+    $training ->pretest_id = $request ->pretest_id;
+    $training ->url = $request->url;
+    $training ->description = $request->description;
+    $training ->mandatoryTraining = $request->mandatoryTraining;
+    $training ->publish = $request ->publish;
+    $training ->methodTraining = $request->methodTraining;
+    $training ->startDate = $request ->startDate;
+    $training ->endDate = $request ->endDate;
+    $training->save();
+
+    $training_id = $training->id;
+    
+    $data = $request->all();
+
+    //store detail training
+        foreach($request->get('costtype_id') as $item=>$value){
+            $databudget = array(
+                'training_id' => $training_id,
+                'budget' => $data['budget'][$item],
+                'costtype_id' => $data['costtype_id'][$item],
+            );
+            DetailTraining::create($databudget);
+        }
+
+    foreach ($request->get('starttime') as $key => $value) {
+        $datasession = array(
+            'training_id' => $training_id,
+            'trainer' => $data['trainer'][$key],
+            'startDateEvent' => $data['starttime'][$key],
+            'endDateEvent' => $data['endtime'][$key],
+        );
+        DetailSessionTraining::create($datasession);
+
+    }
+        return redirect('/training')->with('succes','succes add data');
+        // return 'ini user';
+}
+
 
 
     /**
