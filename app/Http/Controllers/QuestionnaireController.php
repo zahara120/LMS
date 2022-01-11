@@ -77,10 +77,10 @@ class QuestionnaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $survey_id)
     {
         $questionnaire = Questionnaire::findorfail($id);
-        return view ('setting.editQuestionnaire',compact('questionnaire'));
+        return view ('setting.editQuestionnaire',compact('questionnaire','survey_id'));
     }
 
     /**
@@ -90,11 +90,11 @@ class QuestionnaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $survey_id)
     {
         $questionnaire = Questionnaire::findorfail($id);
         $questionnaire->update($request->all());
-        return back()->with('succes','succes edit data');
+        return redirect()->route('questionnaire.create', ['id' => $survey_id]);
     }
 
     /**

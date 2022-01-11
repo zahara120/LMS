@@ -29,7 +29,9 @@ class AnswerController extends Controller
         $test = Test::find($test_id);
         $questionoption = QuestionOption::all();
         $question = Question::all();
-        return view('setting.createAnswer',compact('question','questionoption','test'));
+        $correct = QuestionOption::where('test_id', $test_id)->where('correct', '=', 1)->count();
+        // dd($correct);    
+        return view('setting.createAnswer',compact('question','questionoption','test','correct'));
     }
 
     /**
@@ -69,10 +71,10 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $test_id)
     {
-         $answer = QuestionOption::findorfail($id);
-        return view ('setting.editAnswer',compact('answer'));
+        $answer = QuestionOption::findorfail($id);
+        return view ('setting.editAnswer',compact('answer', 'test_id'));
     }
 
     /**
@@ -82,11 +84,15 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $test)
     {
         $answer = QuestionOption::findorfail($id);
+        if(!$request->correct){
+            $request->request->add(['correct' => 0]);
+        }
         $answer->update($request->all());
-        return back()->with('succes','succes edit data');
+        // dd($request);
+        return redirect()->route('answer.create', ['id' => $test]);
     }
 
     /**

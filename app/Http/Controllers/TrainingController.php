@@ -171,6 +171,7 @@ class TrainingController extends Controller
 
         ]
         );
+    }
 
 
     /**

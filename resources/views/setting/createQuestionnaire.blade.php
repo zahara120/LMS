@@ -62,7 +62,7 @@
                     {{-- <a data-toggle="modal" data-target="#modal-edit" class="btn btn-xs btn-info">
                         <i class="fa fa-pencil"></i> Edit
                     </a> --}}
-                    <a href="{{url('/questionnaire/'.$item->id.'/edit')}}" class="btn btn-xs btn-primary">
+                    <a href="{{url('/questionnaire/'.$item->id.'/'.$survey->id.'/edit')}}" class="btn btn-xs btn-primary">
                         <i class="fa fa-pencil"></i> Edit
                     </a>
                 </div>

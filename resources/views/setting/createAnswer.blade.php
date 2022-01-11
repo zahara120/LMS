@@ -37,12 +37,13 @@
                     <div class="col-lg-4">
                     <input type="text" class="form-control" name="option_text" value="{{ old('option_text') }}" placeholder="Pilihan Pertanyaan">
                     </div>
-    
+                    
                     <div class="col-lg-2">
                         <div class="checkbox">
-                          <label><input name="correct" type="checkbox" value=1>Answer</label>
+                          {{--<label><input name="correct" type="checkbox" value=1 {{$correct != 0 ? 'disabled' : ''}}>Answer</label> --}}
+                          <label><input name="correct" type="checkbox" value=1 >Answer</label>
                         </div>
-                    </div>
+                    </div> 
                     
                     <div class="col-lg-2">
                     <button type="submit" class="btn btn-primary" style="float:right">Add option</button>
@@ -59,10 +60,16 @@
                     <input type="text" class="form-control" value="{{ $answers->option_text }}" placeholder="Pertanyaan" disabled>
                     </div>
 
+                    {{-- <div class="col-lg-2">
+                        <div class="radio">
+                          <label><input name="correct" type="radio" {{$answers->correct == 1 ? 'checked disabled' : 'disabled'}}>Answer</label>
+                        </div>
+                    </div> --}}
+
                     @if($answers->correct == 1)
                     <div class="col-lg-2">
                         <div class="checkbox">
-                          <label><input name="correct" type="checkbox" checked>Answer</label>
+                          <label><input name="correct" type="checkbox" {{$answers->correct == 1 ? 'checked disabled' : 'disabled'}}>Answer</label>
                         </div>
                     </div>
                     @else
@@ -85,7 +92,7 @@
                         {{-- <a data-toggle="modal" data-target="#modal-edit" class="btn btn-xs btn-info">
                             <i class="fa fa-pencil"></i> Edit
                         </a> --}}
-                        <a href="{{url('/answer/'.$answers->id.'/edit')}}" class="btn btn-xs btn-primary">
+                        <a href="{{url('/answer/'.$answers->id.'/'.$test->id.'/edit')}}" class="btn btn-xs btn-primary">
                             <i class="fa fa-pencil"></i> Edit
                         </a>
                     </div>

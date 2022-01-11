@@ -187,15 +187,15 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     //Route::resource('/answer',AnswerController::class);
     //create answer form test
-    Route::get('answer/{id}/test/create', [AnswerController::class,'create']);
+    Route::get('answer/{id}/test/create', [AnswerController::class,'create'])->name('answer.create');
     //store answer training
     Route::post('/answer/{test_id}/test', [AnswerController::class, 'store']);
     //delete answer
     Route::delete('answer/{id}', [AnswerController::class,'destroy']);
     //edit question
-    Route::get('/answer/{id}/edit', [AnswerController::class,'edit']);
+    Route::get('/answer/{id}/{test_id}/edit', [AnswerController::class,'edit']);
     //store/update question
-    Route::put('/answer/{id}', [AnswerController::class, 'update']);
+    Route::put('/answer/{id}/{test_id}', [AnswerController::class, 'update']);
 
     //survey
     //Route::resource('/survey', SurveyController::class);
@@ -219,15 +219,15 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::put('/questionoption/{id}', [QuestionOptionController::class, 'update']);
 
     //create questionner form survey
-    Route::get('questionnaire/{id}/survey/create', [QuestionnaireController::class,'create']);
+    Route::get('questionnaire/{id}/survey/create', [QuestionnaireController::class,'create'])->name('questionnaire.create');
     //store question
     Route::post('/questionnaire/{survey_id}/survey', [QuestionnaireController::class, 'store']);
     //delete question
     Route::delete('questionnaire/{id}', [QuestionnaireController::class,'destroy']);
     //edit question
-    Route::get('/questionnaire/{id}/edit', [QuestionnaireController::class,'edit']);
+    Route::get('/questionnaire/{id}/{survey_id}/edit', [QuestionnaireController::class,'edit']);
     //store/update question
-    Route::put('/questionnaire/{id}', [QuestionnaireController::class, 'update']);
+    Route::put('/questionnaire/{id}/{survey_id}', [QuestionnaireController::class, 'update']);
 
     // Roles
     //Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
