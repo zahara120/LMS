@@ -31,7 +31,8 @@ class CreateTestResultsTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
-            $table->integer('score');
+            $table->integer('pretestScore')->nullable();
+            $table->integer('posttestScore')->nullable();
             $table->timestamps();
         });
     }

@@ -10,6 +10,7 @@ use App\Models\TestResult;
 use App\Models\TestResultAnswer;
 use App\Models\QuestionOption;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Sentinel;
 
 class TestController extends Controller
@@ -65,9 +66,14 @@ class TestController extends Controller
                 ->where('user_id', \Auth::id())
                 ->first();
         }
-        // dd($test_result);
+        $result = TestResult::where('training_id',$training->id)->where('user_id', Auth::user()->id)->first();
+        // dd($pretest_result, $posttest_result);
+        // dd($result->pretestScore);
+        // dd($result);
         //$duration = DB::select("select * ");
-        return view('layout.nav', compact('training','pretest_result','posttest_result'));
+
+
+        return view('layout.nav', compact('training','pretest_result','posttest_result','result'));
         //return view('pretests', compact('questions','training','test_result'));
 
     }
@@ -136,7 +142,7 @@ class TestController extends Controller
     {
         $training = Training::where('id', $training_id)->firstOrFail();
         $answers = [];
-        //dd($request);
+        // dd($request);
         $test_score = 0;
         foreach ($request->get('answers') as $question_id => $answer_id) {
             $question = Question::find($question_id);
@@ -161,16 +167,68 @@ class TestController extends Controller
              */
         } 
 
+        $test_id = Test::find($request->test_id);
+        $result = TestResult::where('training_id',$training->id)->where('user_id', Auth::user()->id)->first();
+
         $request->request->add(['training_id' => $training_id]);
+        $request->request->add(['test_id' => $request->test_id]);
+        $request->request->add(['user_id' => Auth::user()->id]);
         
-        $test_result = TestResult::create([
-            'training_id' => $training_id,
-            'test_id' => $request->test_id,
-            'user_id' => \Auth::id(),
-            'score' => $test_score
-        ]);
+        if($result){
+            $result_id = $result->id;
+            $insert = TestResult::find($result_id);
+        }
+
+        // dd($test_score);
+        // dd($result->pretestScore);
+
+        if($test_id->typeTest == 'PreTest'){ //di cek dia tipe test nya apa?
+            // $request->request->add(['pretestScore' => $test_score]);
+            if($result){ //kalo table result nya udah ada  
+                if($result->posttestScore){ //kalo post test score nya udah ada, user dah ngerjain post test
+                    //kalo post test score nya udah ada, di update
+                    $insert->pretestScore = $test_score;
+                    $insert->save();
+                }
+            }else{
+                $request->request->add(['pretestScore' => $test_score]);
+            }
+        }elseif($test_id->typeTest == 'PostTest'){
+            if($result){
+                if($result->pretestScore){
+                    //kalo pre test score nya udah ada
+                    //update post test score nya 
+                    $insert->posttestScore = $test_score;
+                    $insert->save();
+                }
+            }else{
+                $request->request->add(['posttestScore' => $test_score]);
+            }
+        }
+        if(!$result){
+            TestResult::create($request->all());
+        }
+
+        // mau dipisah score pre-test/post-test
+        // if($test_id->typeTest == 'PreTest'){
+        //     $test_result = TestResult::create([
+        //         'training_id' => $training_id,
+        //         'test_id' => $request->test_id,
+        //         'user_id' => \Auth::id(),
+        //         // 'score' => $test_score,
+        //         'pretestScore' => $test_score
+        //     ]);
+        // }elseif($test_id->typeTest == 'PostTest'){
+        //     $test_result = TestResult::create([
+        //         'training_id' => $training_id,
+        //         'test_id' => $request->test_id,
+        //         'user_id' => \Auth::id(),
+        //         // 'score' => $test_score,
+        //         'posttestScore' => $test_score
+        //     ]);
+        // }
         
-        $test_result_id = $test_result->id;
+        // $test_result_id = $test_result->id;
 
         // $data = $request->all();
         
@@ -209,50 +267,5 @@ class TestController extends Controller
 
         // return redirect()->back();
         return back()->with('succes','success');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

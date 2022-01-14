@@ -88,9 +88,13 @@ class ApprovalRecordController extends Controller
 
         $approval = Approval::create($request->all());
         $approval_id = $approval->id;
+        
         //store approval detail table
         $request->request->add(['approval_id' => $approval_id]);
         $approver_id = Approver::where('user_id', Auth::user()->id)->value('id');
+        if(!$approver_id){
+            return back()->with('error', 'you don\'t have an approver');
+        }
         $request->request->add(['approver_id' => $approver_id]);
         $request->request->add(['user_id' => Auth::user()->id]);
         

@@ -12,26 +12,26 @@
         <div class="active tab-pane" id="pretest">
             <div class="panel-body">
             @if($training->pretest->end_date <= now())
-            <p style="color:red;"> time is up, next time try to be on time </p>
-            @elseif($pretest_result != null)
+                <p style="color:red;"> time is up, next time try to be on time </p>
+            @elseif($result != null && $result->pretestScore !== null)
             @else
-            <p>
-                Exam Time: <span id="timerPretest">{{$training->pretest->duration}}</span>
-                <br>
-                Name Test : {{ $training->pretest->nameTest }}.
-            </p>
-            <div class="icon-bar" >
-                <button id="btn1" class="btn btn-sm btn-success" onclick="countdownPretest();">Start Exam<span class="js-timeout"></span>  </button>
-            </div>
+                <p>
+                    Exam Time: <span id="timerPretest">{{$training->pretest->duration}}</span>
+                    <br>
+                    Name Test : {{ $training->pretest->nameTest }}.
+                </p>
+                <div class="icon-bar" >
+                    <button id="btn1" class="btn btn-sm btn-success" onclick="countdownPretest();">Start Exam<span class="js-timeout"></span>  </button>
+                </div>
             @endif
 
-            @if ($pretest_result != null )
-            <div class="alert bg-gray color-palette alert-dismissible">Your test score: {{ $pretest_result->score }}</div>
+            @if ($result != null && $result->pretestScore !== null)
+                <div class="alert bg-gray color-palette alert-dismissible">Your test score: {{ $result->pretestScore }}</div>
             @else
-            <br>
-            <form action="/test/{{$training->id}}/training" method="post">
+                <br>
+                <form action="/test/{{$training->id}}/training" method="post">
             @csrf
-            <input type="hidden" name="test_id" value="{{ $training->pretest->id }}"> 
+                <input type="hidden" name="test_id" value="{{ $training->pretest->id }}"> 
             <?php $i = 1; ?>
             <div id="questionHide" style="display:none">
             @foreach($training->pretest->question as $item)
@@ -74,7 +74,7 @@
             <div class="panel-body">
                 @if($training->posttest->end_date <= now())
                 <p style="color:red;"> time is up, next time try to be on time </p>
-                @elseif($posttest_result != null)
+                @elseif($result != null && $result->posttestScore !== null)
                 @else
                 <p>
                     Exam Time:    &nbsp; <span id="timer">{{$training->posttest->duration}}</span>
@@ -86,8 +86,8 @@
                 </div>
                 @endif
 
-                @if ($posttest_result != null )
-                <div class="alert bg-gray color-palette alert-dismissible">Your test score: {{ $posttest_result->score }}</div>
+                @if ($result != null && $result->posttestScore !== null)
+                <div class="alert bg-gray color-palette alert-dismissible">Your test score: {{ $result->posttestScore }}</div>
                 @else
                 <br>
                 <form action="/test/{{$training->id}}/training" method="post">
