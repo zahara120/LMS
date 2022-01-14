@@ -13,6 +13,7 @@
             <div class="panel-body">
             @if($training->pretest->end_date <= now())
             <p style="color:red;"> time is up, next time try to be on time </p>
+            @elseif($pretest_result != null)
             @else
             <p>
                 Exam Time: <span id="timerPretest">{{$training->pretest->duration}}</span>
@@ -34,7 +35,6 @@
             <?php $i = 1; ?>
             <div id="questionHide" style="display:none">
             @foreach($training->pretest->question as $item)
-                {{-- @if ($i > 1) <hr /> @endif --}}
                 <div class="row">
                     <div class="col-xs-12 form-group">
                         <div class="form-group">
@@ -74,6 +74,7 @@
             <div class="panel-body">
                 @if($training->posttest->end_date <= now())
                 <p style="color:red;"> time is up, next time try to be on time </p>
+                @elseif($posttest_result != null)
                 @else
                 <p>
                     Exam Time:    &nbsp; <span id="timer">{{$training->posttest->duration}}</span>

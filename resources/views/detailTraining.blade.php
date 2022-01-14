@@ -31,7 +31,7 @@
     </div>
     <div class="modal-footer">
     
-        @if($test != NULL || $training->endDate < $date )
+        @if($test != NULL || $training->end_date < $date )
             <button class="btn btn-success" type="submit" disabled>Registration</button>
             <a href="{{url()->previous()}}" class="btn btn-danger">Cancel</a>
         @else

@@ -75,4 +75,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Approver::class);
     }
+
+    public function test_result()
+    {
+        return $this->hasMany(TestResult::class);
+    }
 }

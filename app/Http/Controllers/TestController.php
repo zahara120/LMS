@@ -134,16 +134,6 @@ class TestController extends Controller
      */
     public function store(Request $request, $training_id)
     {
-        // $data = $request->all();
-        
-        // $question = new Question();
-        // $question->question = $request->question;
-        // $question->save();
-
-        // $question_option = new QuestionOption();
-        // $question_option->option_text = $request->option_text;
-        // $question_option->save();
-        
         $training = Training::where('id', $training_id)->firstOrFail();
         $answers = [];
         //dd($request);
@@ -169,8 +159,8 @@ class TestController extends Controller
              * Check if it is correct and then add points
              * Save all test result and show the points
              */
-        }
-        //dd($answers);
+        } 
+
         $request->request->add(['training_id' => $training_id]);
         
         $test_result = TestResult::create([
@@ -180,10 +170,18 @@ class TestController extends Controller
             'score' => $test_score
         ]);
         
-        
-        //dd($test_result);
         $test_result_id = $test_result->id;
+
+        // $data = $request->all();
         
+        // $question = new Question();
+        // $question->question = $request->question;
+        // $question->save();
+
+        // $question_option = new QuestionOption();
+        // $question_option->option_text = $request->option_text;
+        // $question_option->save();
+
         // foreach ($request->get('answers') as $question_id => $answer_id) {
         // TestResultAnswer::create([
         //     'question_id' => $question_id,

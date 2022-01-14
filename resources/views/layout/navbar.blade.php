@@ -43,16 +43,8 @@
           <li><a href="/role"><i class="fa fa-circle-o"></i>Role</a></li>
         </ul>
       </li>
-
       @endif
   
-      {{-- role:User
-      @elseif(auth()->user()->role()->where('nameRole', '=', 'User')) --}}
-      {{-- @elseif(auth()->user()->role()->nameRole='User') --}}
-  
       <li class="{{ request()->is('approval/create') ? 'active' : "" }}"><a href="{{route('approval.create')}}"><i class="fa"></i> <span>Add Training Submission</span></a></li>
-      
-      {{-- @endif --}}
-      {{-- <li class="{{ request()->is('setting') ? 'active' : "" }}"><a href="/setting"><i class="fa"></i> <span>Setting</span></a></li> --}}
-  
+      <li class="{{ request()->is('/scoreRecord') ? 'active' : "" }}"><a href="{{route('score.index')}}"><i class="fa"></i> <span>Score Record</span></a></li>
     </ul>

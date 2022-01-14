@@ -26,6 +26,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\RegistController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\QuestionOptionController;
+use App\Http\Controllers\ScoreRecordController;
 use App\Http\Controllers\TraineeController;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
@@ -297,6 +298,10 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::post('api/fetch-room', [TrainingController::class, 'getRoom']);
 
     Route::post('api/fetch-lesson', [TrainingController::class, 'getLesson']);
+
+    Route::name('score.')->group(function(){
+        Route::get('/scoreRecord', [ScoreRecordController::class, 'index'])->name('index');
+    });
 
 });
 

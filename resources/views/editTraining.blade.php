@@ -50,38 +50,36 @@
                 <input type="hidden" value="{{$training->mandatoryTraining}}" id="mandatoryTraining">
                 <div class="col-lg-4">
                     <div class="checkbox">
-                        <label><input type="radio" onclick="javascript:onlineorofflineCheck();" name="mandatoryTraining" id="online" value="online"> Online</label>
+                        <label><input type="radio" onclick="onlineorofflineCheck();" name="mandatoryTraining" id="online" value="online"> Online</label>
                     </div>
                 </div>
 
                 <div class="col-lg-2">
                     <div class="checkbox">
-                      <label><input type="radio" onclick="javascript:onlineorofflineCheck();" name="mandatoryTraining" id="offline" value="offline"> Offline</label>
+                      <label><input type="radio" onclick="onlineorofflineCheck();" name="mandatoryTraining" id="offline" value="offline"> Offline</label>
                     </div>
                 </div>
             </div>
 
-            @if($training->mandatoryTraining == "offline")
-                <div class="form-group row mt-2">
-                    <label class="col-sm-3 control-label">Location :</label>
-                    <div class="col-lg-4">
-                        <select class="form-control select2" id="venue_id" name="venue_id" placeholder="nameVenue" style="width: 100%;">
-                            <option value="">Name Venue</option>
-                            @foreach($venue as $item)
-                            <option value="{{ $item->id }}" {{ $item->id == $training->venue->id ? 'selected' : '' }}>{{ $item->nameVenue }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-lg-2">
-                        <select class="form-control select2" id="room_id" name="room_id" placeholder="nameRoom" style="width: 100%;">
-                            <option value="">Room</option>
-                            @foreach($room as $item)
-                            <option value="{{ $item->id }}" {{ $item->id == $training->room->id ? 'selected' : '' }}>{{ $item->nameRoom }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+            <div class="form-group row mt-2" id="ifoffline" style="{{$training->mandatoryTraining == "offline" ? 'display:block' : 'display:none'}}">
+                <label class="col-sm-3 control-label">Location :</label>
+                <div class="col-lg-4">
+                    <select class="form-control select2" id="venue_id" name="venue_id" placeholder="nameVenue" style="width: 100%;">
+                        <option value="">Name Venue</option>
+                        @foreach($venue as $item)
+                        <option value="{{ $item->id }}" {{ $item->id == $training->venue->id ? 'selected' : '' }}>{{ $item->nameVenue }}</option>
+                        @endforeach
+                    </select>
                 </div>
-            @endif
+                <div class="col-lg-2">
+                    <select class="form-control select2" id="room_id" name="room_id" placeholder="nameRoom" style="width: 100%;">
+                        <option value="">Room</option>
+                        @foreach($room as $item)
+                        <option value="{{ $item->id }}" {{ $item->id == $training->room->id ? 'selected' : '' }}>{{ $item->nameRoom }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
 
             <div class="form-group row mt-2">
                 <div class="form-group">

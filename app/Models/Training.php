@@ -23,6 +23,17 @@ class Training extends Model
     {
         return $this->belongsTo(Test::class);
     }
+
+    // coba dulu 
+    public function posttest_result()
+    {
+        return $this->belongsTo(Test::class, 'posttest_id');
+    }
+
+    public function pretest_result()
+    {
+        return $this->belongsTo(Test::class, 'pretest_id');
+    }
     
     public function lesson(){
         return $this->belongsTo(Lesson::class, 'lesson_id');

@@ -9,13 +9,14 @@ class TestResult extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function user(){
-        return $this->belongsTo('App\Models\User');
-    }
+    
     public function training(){
-        return $this->belongsTo('App\Models\Training');
+        return $this->belongsTo(Training::class, 'training_id');
     }
     public function test(){
-        return $this->belongsTo('App\Models\Test');
+        return $this->belongsTo(Test::class, 'test_id');
+    }
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

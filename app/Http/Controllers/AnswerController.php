@@ -30,7 +30,14 @@ class AnswerController extends Controller
         $questionoption = QuestionOption::all();
         $question = Question::all();
         $correct = QuestionOption::where('test_id', $test_id)->where('correct', '=', 1)->count();
-        // dd($correct);    
+        // $correct = QuestionOption::select('question_id')->where('test_id', $test_id)->where('correct', '=', 1)->get();
+        
+        // $question_id = '';
+        // foreach($correct as $item){
+        //     $question_id .= $item.','; //1,3,
+        // }
+        // $arrQuestion = explode(',',$question_id);//{1, 3}
+        // dd($question_id);    
         return view('setting.createAnswer',compact('question','questionoption','test','correct'));
     }
 

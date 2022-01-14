@@ -251,6 +251,12 @@ class TrainingController extends Controller
         // dd($request);
         $training = Training::findOrFail($training_id);
         $request->request->add(['approval_id' => $approval_id]);
+
+        if($request->mandatoryTraining == 'online'){
+            $request->request->add(['venue_id' => null]);
+            $request->request->add(['room_id' => null]);
+        }
+
         $input = $request->all();
         $training->fill($input)->save();
 

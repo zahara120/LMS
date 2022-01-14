@@ -35,7 +35,8 @@ class RegistController extends Controller
     {
         $training = Training::find($training_id);
         $regist = Regist::all();
-        $test = Regist::where('user_id',Auth::user()->id)->where('training_id' , $training->id )->value('training_id');
+        $test = Regist::where('user_id',Auth::user()->id)->where('training_id' , $training->id )->value('id');
+        // dd($test);
         $date = Carbon::today()->toDateString();
         return view('detailTraining',compact('test','training','date','regist'));
     }

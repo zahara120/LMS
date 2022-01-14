@@ -16,6 +16,11 @@ class Test extends Model
     }
 
     public function training(){
-        return $this->hasMany('App\Models\Training');
+        return $this->hasMany(Training::class, 'posttest_id');
+    }
+
+    public function test_result()
+    {
+        return $this->hasMany(TestResult::class);
     }
 }

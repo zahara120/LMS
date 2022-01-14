@@ -38,12 +38,19 @@
                     <input type="text" class="form-control" name="option_text" value="{{ old('option_text') }}" placeholder="Pilihan Pertanyaan">
                     </div>
                     
-                    <div class="col-lg-2">
-                        <div class="checkbox">
-                          {{--<label><input name="correct" type="checkbox" value=1 {{$correct != 0 ? 'disabled' : ''}}>Answer</label> --}}
-                          <label><input name="correct" type="checkbox" value=1 >Answer</label>
-                        </div>
-                    </div> 
+                        @if($item->id == $correct)
+                            <div class="col-lg-2">
+                                <div class="checkbox">
+                                <label><input name="correct" type="checkbox" value=1 disabled>Answer</label>
+                                </div>
+                            </div> 
+                        @else
+                            <div class="col-lg-2">
+                                <div class="checkbox">
+                                <label><input name="correct" type="checkbox" value=1>Answer</label>
+                                </div>
+                            </div> 
+                        @endif
                     
                     <div class="col-lg-2">
                     <button type="submit" class="btn btn-primary" style="float:right">Add option</button>
