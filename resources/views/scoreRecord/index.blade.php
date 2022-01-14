@@ -35,10 +35,12 @@
                 </tr> 
             </thead>
             <tbody>
+            <?php $number = 0;?>
                 @foreach ($test as $tests)
                 @foreach($tests->test_result as $result)
                 <tr>
-                    <td class="text-center">{{ $loop->iteration }}</td>
+                <?php $number++ ?>
+                    <td class="text-center">{{ $number }}</td>
                     <td>{{$result->user->name}}</td>
                     <td>{{$result->training->approval->titleTraining}}</td>
                     <td>{{$result->pretestScore}}</td>

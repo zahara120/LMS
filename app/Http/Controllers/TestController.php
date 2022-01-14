@@ -67,15 +67,8 @@ class TestController extends Controller
                 ->first();
         }
         $result = TestResult::where('training_id',$training->id)->where('user_id', Auth::user()->id)->first();
-        // dd($pretest_result, $posttest_result);
-        // dd($result->pretestScore);
-        // dd($result);
-        //$duration = DB::select("select * ");
-
 
         return view('layout.nav', compact('training','pretest_result','posttest_result','result'));
-        //return view('pretests', compact('questions','training','test_result'));
-
     }
 
     /**
@@ -209,6 +202,7 @@ class TestController extends Controller
             TestResult::create($request->all());
         }
 
+        return back()->with('succes','success');
         // mau dipisah score pre-test/post-test
         // if($test_id->typeTest == 'PreTest'){
         //     $test_result = TestResult::create([
@@ -266,6 +260,5 @@ class TestController extends Controller
         // }
 
         // return redirect()->back();
-        return back()->with('succes','success');
     }
 }
