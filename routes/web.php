@@ -28,6 +28,7 @@ use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\QuestionOptionController;
 use App\Http\Controllers\ScoreRecordController;
 use App\Http\Controllers\TraineeController;
+use App\Http\Controllers\TrainerController;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
@@ -302,6 +303,14 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::name('score.')->group(function(){
         Route::get('/scoreRecord', [ScoreRecordController::class, 'index'])->name('index');
     });
+    
+    //Trainer
+    Route::name('trainer.')->group(function(){
+        Route::get('/trainer', [TrainerController::class, 'index'])->name('index');
+        Route::get('/trainer/create', [TrainerController::class, 'create'])->name('create');
+        Route::post('/trainer/store', [TrainerController::class, 'store'])->name('store');
+    });
+
 
 });
 

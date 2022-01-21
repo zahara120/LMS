@@ -153,14 +153,14 @@ class ApprovalRecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $approval_id)
-    {
-        $approval = Approval::findOrFail($approval_id);
-        $request->request->add(['status' => 0]);
-        $input = $request->all();
-        $approval->fill($input)->save();
-        return redirect('/approval');
-    }
+    // public function update(Request $request, $approval_id)
+    // {
+    //     $approval = Approval::findOrFail($approval_id);
+    //     $request->request->add(['status' => 0]);
+    //     $input = $request->all();
+    //     $approval->fill($input)->save();
+    //     return redirect('/approval');
+    // }
 
     public function updateStatus(Request $request, $approvalDetail_id)
     {

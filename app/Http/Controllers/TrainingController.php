@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Approval;
+use App\Models\ApprovalDetail;
+use App\Models\Approver;
 use App\Models\RegistTraining;
 use App\Models\CategoryTraining;
 use App\Models\Provider;
@@ -14,6 +16,7 @@ use App\Models\Training;
 use App\Models\Venue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class TrainingController extends Controller
 {
@@ -52,6 +55,9 @@ class TrainingController extends Controller
         $providerexternal_id = Provider::select("*")->where("typeProvider","=","External")->get();
         $posttest_id = Test::select("*")->where("typeTest","=","PostTest")->get();
         $pretest_id = Test::select("*")->where("typeTest","=","PreTest")->get();
+        // $approver_id = Approver::where('user_id', Auth::user()->id)->value('id');
+        // dd($approver_id);
+        // dd(Auth::user()->id);
         return view('createTraining',compact('category','provider','venue','category','subcategory','lesson','posttest_id','pretest_id','providerinternal_id','providerexternal_id'));
     }
 
@@ -176,6 +182,26 @@ class TrainingController extends Controller
         $request->request->add(['user_id' => $request->user()->id]);
         $approval = Approval::create($request->all());
         $approval_id = $approval->id;
+        
+        //store ke approval_detail
+        $request->request->add(['approval_id' => $approval_id]);
+        $approver_id = Approver::where('user_id', Auth::user()->id)->value('id');
+        // dd($approver_id);
+        if(!$approver_id){
+            return back()->with('error', 'you don\'t have an approver');
+        }
+        $request->request->add(['approver_id' => $approver_id]);
+        $request->request->add(['user_id' => Auth::user()->id]);
+        
+        $approver_satu = Approver::where('user_id', Auth::user()->id)->value('approversatu_id');
+        $approver_dua = Approver::where('user_id', Auth::user()->id)->value('approverdua_id');
+        $approver_tiga = Approver::where('user_id', Auth::user()->id)->value('approvertiga_id');
+
+        $request->request->add(['approversatu_id' => $approver_satu]);
+        $request->request->add(['approverdua_id' => $approver_dua]);
+        $request->request->add(['approvertiga_id' => $approver_tiga]);
+        
+        ApprovalDetail::create($request->all());
 
         //store ke training
         $request->request->add(['approval_id' => $approval_id]);

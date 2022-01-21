@@ -17,7 +17,11 @@
         </ul>
     </div>
     @endif
-
+    @if(session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
         <form role="form" action="/training" method="post">
         @csrf
         <div class="box-body">
