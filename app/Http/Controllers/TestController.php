@@ -56,13 +56,13 @@ class TestController extends Controller
         $posttest_result = NULL;
         if ($training->posttest) {
             $posttest_result = TestResult::where('training_id',$training->id)
-                ->where('test_id', $training->posttest->id)
+                ->where('posttest_id', $training->posttest->id)
                 ->where('user_id', \Auth::id())
                 ->first();
                 //dd($test_result);
         }if($training->pretest){
             $pretest_result = TestResult::where('training_id',$training->id)
-                ->where('test_id', $training->pretest->id)
+                ->where('pretest_id', $training->pretest->id)
                 ->where('user_id', \Auth::id())
                 ->first();
         }
@@ -164,7 +164,7 @@ class TestController extends Controller
         $result = TestResult::where('training_id',$training->id)->where('user_id', Auth::user()->id)->first();
 
         $request->request->add(['training_id' => $training_id]);
-        $request->request->add(['test_id' => $request->test_id]);
+        // $request->request->add(['test_id' => $request->test_id]);
         $request->request->add(['user_id' => Auth::user()->id]);
         
         if($result){
@@ -180,22 +180,26 @@ class TestController extends Controller
             if($result){ //kalo table result nya udah ada  
                 if($result->posttestScore){ //kalo post test score nya udah ada, user dah ngerjain post test
                     //kalo post test score nya udah ada, di update
+                    $insert->pretest_id = $request->test_id;
                     $insert->pretestScore = $test_score;
                     $insert->save();
                 }
             }else{
                 $request->request->add(['pretestScore' => $test_score]);
+                $request->request->add(['pretest_id' => $request->test_id]);
             }
         }elseif($test_id->typeTest == 'PostTest'){
             if($result){
                 if($result->pretestScore){
                     //kalo pre test score nya udah ada
                     //update post test score nya 
+                    $insert->posttest_id = $request->test_id;
                     $insert->posttestScore = $test_score;
                     $insert->save();
                 }
             }else{
                 $request->request->add(['posttestScore' => $test_score]);
+                $request->request->add(['posttest_id' => $request->test_id]);
             }
         }
         if(!$result){
@@ -203,62 +207,5 @@ class TestController extends Controller
         }
 
         return back()->with('succes','success');
-        // mau dipisah score pre-test/post-test
-        // if($test_id->typeTest == 'PreTest'){
-        //     $test_result = TestResult::create([
-        //         'training_id' => $training_id,
-        //         'test_id' => $request->test_id,
-        //         'user_id' => \Auth::id(),
-        //         // 'score' => $test_score,
-        //         'pretestScore' => $test_score
-        //     ]);
-        // }elseif($test_id->typeTest == 'PostTest'){
-        //     $test_result = TestResult::create([
-        //         'training_id' => $training_id,
-        //         'test_id' => $request->test_id,
-        //         'user_id' => \Auth::id(),
-        //         // 'score' => $test_score,
-        //         'posttestScore' => $test_score
-        //     ]);
-        // }
-        
-        // $test_result_id = $test_result->id;
-
-        // $data = $request->all();
-        
-        // $question = new Question();
-        // $question->question = $request->question;
-        // $question->save();
-
-        // $question_option = new QuestionOption();
-        // $question_option->option_text = $request->option_text;
-        // $question_option->save();
-
-        // foreach ($request->get('answers') as $question_id => $answer_id) {
-        // TestResultAnswer::create([
-        //     'question_id' => $question_id,
-        //     'option_id' => $answer_id,
-        //     //'correct' => $request->score,
-        //     'correct' => $correct,
-        //     //'correct' => $request->correct,
-        //     'test_result_id' => $test_result_id
-        // ]);
-        // }
-        //TestResultAnswer::create($request->all());
-        //$test_result->answers()->createMany($answers);
-        //dd($test_result);
-
-        //dd($correct);
-
-        //$correct = QuestionOption::where('correct', 1)->get();
-
-        // if(count ($request->multiInput) >0){
-        // foreach ($request->multiInput as $key => $value){
-        //         //Question::create($value);
-        //         QuestionOption::create($value);
-        //     }
-        // }
-
-        // return redirect()->back();
     }
 }

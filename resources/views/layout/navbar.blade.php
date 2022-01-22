@@ -32,7 +32,7 @@
           <li><a href="/question"><i class="fa fa-circle-o"></i>Create Question</a></li> --}}
           <li><a href="/lesson"><i class="fa fa-circle-o"></i>Lesson Training</a></li>
           <li class="{{ request()->is('approver') || request()->is('approver/*') ? 'active' : "" }}"><a href="/approver"><i class="fa fa-circle-o"></i>Approver</a></li>
-          <li><a href="{{route('trainer.index')}}"><i class="fa fa-circle-o"></i>Trainer</a></li>
+          <li><a href="{{route('trainers.index')}}"><i class="fa fa-circle-o"></i>Trainer</a></li>
           <li><a href="{{route('category.index')}}"><i class="fa fa-circle-o"></i>Category Training</a></li>
           <li><a href="/subcategorytraining"><i class="fa fa-circle-o"></i>Subcategory Training</a></li>
           <li><a href="/exam"><i class="fa fa-circle-o"></i>Create Test</a></li>

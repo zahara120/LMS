@@ -30,6 +30,7 @@ use App\Http\Controllers\ScoreRecordController;
 use App\Http\Controllers\TraineeController;
 use App\Http\Controllers\TrainerController;
 use App\Models\Role;
+use App\Models\Trainer;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -62,6 +63,7 @@ Route::get('training/{id}', [TestController::class,'test']);
 //approver
 Route::get('/approver', [ApproverController::class,'index']);
 Route::post('/approver', [ApproverController::class,'store']);
+Route::delete('/approver/{approver}', [ApproverController::class,'destroy']);
 
 //strore test
 Route::post('/test/{id}/training', [TestController::class,'store']);
@@ -305,11 +307,14 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     });
     
     //Trainer
-    Route::name('trainer.')->group(function(){
-        Route::get('/trainer', [TrainerController::class, 'index'])->name('index');
-        Route::get('/trainer/create', [TrainerController::class, 'create'])->name('create');
-        Route::post('/trainer/store', [TrainerController::class, 'store'])->name('store');
-    });
+    Route::resource('trainers', TrainerController::class);
+
+    // Route::name('trainer.')->group(function(){
+    //     Route::get('/trainer', [TrainerController::class, 'index'])->name('index');
+    //     Route::get('/trainer/create', [TrainerController::class, 'create'])->name('create');
+    //     Route::post('/trainer/store', [TrainerController::class, 'store'])->name('store');
+    //     Route::delete('/trainer/{trainers}/delete', [TrainerController::class, 'destroy'])->name('delete');
+    // });
 
 
 });

@@ -29,11 +29,7 @@ class ApprovalRecordController extends Controller
         $approval_detail = ApprovalDetail::all();
         $user_id = ApprovalDetail::where('user_id', Auth::user()->id)->value('user_id');
         $trainings = Training::all();
-
-        $approver_satu = Approver::where('approversatu_id', Auth::user()->id)->value('approversatu_id');
-        $approver_dua = Approver::where('approverdua_id', Auth::user()->id)->value('approverdua_id');
-        $approver_tiga = Approver::where('approvertiga_id', Auth::user()->id)->value('approvertiga_id');
-        return view('approvalRecord',compact('approval', 'trainings', 'approval_detail','user_id','approver_satu','approver_dua','approver_tiga'));
+        return view('approvalRecord',compact('approval', 'trainings', 'approval_detail','user_id'));
     }
 
     /**
@@ -166,9 +162,17 @@ class ApprovalRecordController extends Controller
     {
         $approval_detail = ApprovalDetail::findOrFail($approvalDetail_id);
         // dd($approval_detail);
-        $approver_satu = Approver::where('approversatu_id', Auth::user()->id)->value('approversatu_id');
-        $approver_dua = Approver::where('approverdua_id', Auth::user()->id)->value('approverdua_id');
-        $approver_tiga = Approver::where('approvertiga_id', Auth::user()->id)->value('approvertiga_id');
+        
+        $approver = $approval_detail->approver_id;
+        // dd($approver);
+        
+        $check_approver = Approver::findOrFail($approver);
+        // dd($check_approver);
+        
+        $approver_satu = $check_approver->approversatu_id;
+        $approver_dua = $check_approver->approverdua_id;
+        $approver_tiga = $check_approver->approvertiga_id;
+        // dd($approver_satu, $approver_dua, $approver_tiga);
 
         if($approver_satu == Auth::user()->id){
             $request->request->add(['status_satu' => $request->status]);
@@ -184,7 +188,6 @@ class ApprovalRecordController extends Controller
         }
 
         $input = $request->all();
-        // dd($request);
         $approval_detail->fill($input)->save();
         return redirect('/approval');
     }

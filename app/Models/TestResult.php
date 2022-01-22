@@ -13,9 +13,14 @@ class TestResult extends Model
     public function training(){
         return $this->belongsTo(Training::class, 'training_id');
     }
-    public function test(){
-        return $this->belongsTo(Test::class, 'test_id');
+    public function pretest(){
+        return $this->belongsTo(Test::class, 'pretest_id');
     }
+    
+    public function posttest(){
+        return $this->belongsTo(Test::class, 'posttest_id');
+    }
+    
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }

@@ -59,7 +59,7 @@ class TrainerController extends Controller
                 'trainer_id' => $trainer_id
             ]);
         }
-        return redirect('/trainer');
+        return redirect('/trainers');
     }
 
     /**
@@ -81,7 +81,10 @@ class TrainerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $trainer = Trainer::findOrFail($id);
+        $lessons = Lesson::all();
+        $users = User::all();
+        return view('setting.trainer.edit', compact('trainer', 'lessons', 'users'));
     }
 
     /**
@@ -93,7 +96,7 @@ class TrainerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -102,8 +105,10 @@ class TrainerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($trainer_id)
     {
-        //
+        $trainers = Trainer::findOrFail($trainer_id);
+        $trainers->delete();
+        return redirect('/trainers')->with('succes','succes delete data');
     }
 }

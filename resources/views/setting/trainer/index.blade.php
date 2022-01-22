@@ -36,10 +36,10 @@
                 <td>{{ $item->user->name }}</td>
                 <td>{{$item->lesson->nameLesson}}</td>
                 <td class="text-center" width="200px">
-                    <a href="{{url('/approver/'.$item->id.'/edit')}}" class="btn btn-xs btn-primary">
+                    <a href="{{route('trainers.edit', $item->id)}}" class="btn btn-xs btn-primary">
                         <i class="fa fa-pencil"></i> Edit
                     </a>
-                    <form action="#" class="inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
+                    <form action="{{route('trainers.destroy', $item->id)}}" class="inline" method="post" onclick="return confirm('Are you sure want to delete this data?')">
                         @method('delete')
                         @csrf         
                         <button type="submit" class="btn btn-xs btn-danger" >
@@ -56,7 +56,7 @@
 @endsection
 
 
-<!-- Modal -->
+<!-- Modal Create -->
 <div class="modal fade" id="provider" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -65,7 +65,7 @@
           <h4 class="modal-title" id="myModalLabel">Add User</h4>
         </div>
         <div class="modal-body">
-            <form action="{{route('trainer.store')}}" method="post">
+            <form action="{{route('trainers.store')}}" method="post">
             @csrf 
             <div class="row">
                 <div class="col-md-6">

@@ -45,7 +45,9 @@
                 <th>Tittle Training</th>
                 <th>Category Training</th>
                 <th>Kuota</th>
-                <th>Status</th>
+                <th>Status 1</th>
+                <th>Status 2</th>
+                <th>Status 3</th>
                 <th>Waktu Pengajuan</th>
                 @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
                 <th >Action</th>
@@ -74,6 +76,50 @@
                 @foreach($item->approval_detail as $detail)
                     
                     <!-- kalo belom di approve sama approver 3 -->
+                    @if($detail->status_satu == 0)
+                      <label class="label label-warning">Pending</label>
+
+                    <!-- kalo udah di approve sama approver 3 -->
+                    @elseif($detail->status_satu == 1)
+                      <label class="label label-success">Approve</label>
+                    
+                    <!-- kalo udah di reject sama approver 3 -->
+                    @elseif($detail->status_satu == 2) 
+                      <label class="label label-danger">Reject</label>
+                      @if(auth()->user()->role()->where('nameRole', '=', 'User')->exists())
+                        <a href="{{route('approval.edit',  $item->id)}}" class="btn btn-xs btn-primary">
+                            <i class="fa fa-pencil"></i> Edit
+                        </a>
+                      @endif
+                    @endif
+                @endforeach
+                </td>
+                <td>
+                @foreach($item->approval_detail as $detail)
+                    
+                    <!-- kalo belom di approve sama approver 3 -->
+                    @if($detail->status_dua == 0)
+                      <label class="label label-warning">Pending</label>
+
+                    <!-- kalo udah di approve sama approver 3 -->
+                    @elseif($detail->status_dua == 1)
+                      <label class="label label-success">Approve</label>
+                    
+                    <!-- kalo udah di reject sama approver 3 -->
+                    @elseif($detail->status_dua == 2) 
+                      <label class="label label-danger">Reject</label>
+                      @if(auth()->user()->role()->where('nameRole', '=', 'User')->exists())
+                        <a href="{{route('approval.edit',  $item->id)}}" class="btn btn-xs btn-primary">
+                            <i class="fa fa-pencil"></i> Edit
+                        </a>
+                      @endif
+                    @endif
+                @endforeach
+                </td>
+                <td>
+                @foreach($item->approval_detail as $detail)
+                    
+                    <!-- kalo belom di approve sama approver 3 -->
                     @if($detail->status_tiga == 0)
                       <label class="label label-warning">Pending</label>
 
@@ -96,7 +142,7 @@
                 @if(auth()->user()->role()->where('nameRole', '=', 'Admin')->exists())
                 <td class="text-center">
                     @foreach($item->approval_detail as $detail)
-                      @if($approver_satu == Auth::user()->id && $detail->status_satu == 0 || $approver_dua == Auth::user()->id && $detail->status_dua == 0 || $approver_tiga == Auth::user()->id && $detail->status_tiga == 0)
+                      @if($detail->approversatu_id == Auth::user()->id && $detail->status_satu == 0 || $detail->approverdua_id == Auth::user()->id && $detail->status_dua == 0 || $detail->approvertiga_id == Auth::user()->id && $detail->status_tiga == 0)
                         <a href="/approval/{{$item->id}}/{{$detail->id}}" type="button" class="btn btn-warning status">Status</a>
                       @else
                         <a type="button" class="btn btn-warning status" disabled>Status</a>
