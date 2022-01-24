@@ -130,8 +130,31 @@
                 <label for="nameSubcategory">Title Forum :</label>
                 <input type="text" name="titleForum" class="form-control @error('titleForum') is-invalid @enderror" name="titleForum" value="{{ old('titleForum') }}" required autocomplete="titleForum" autofocus placeholder="Judul Forum">
             </div>   
-
+            
+            
             <div class="form-group">
+                <label for="nameSubcategory">Subcategory Training :</label>
+                <input type="text" name="subcategory_trainings_id" id="subcategory_trainings_id" class="form-control @error('subcategory_trainings_id') is-invalid @enderror" value="{{ old('subcategory_trainings_id') }}" required autocomplete="subcategory_trainings_id" autofocus placeholder="Subcategory Trainings">
+            </div>  
+            
+            <!-- auto complete -->
+            <link rel="stylesheet" href="	https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css"/>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+            
+            <script type="text/javascript">
+                var route = "{{ url('autocomplete') }}";
+                $('#subcategory_trainings_id').typeahead({
+                    source:  function (term, process) {
+                    return $.get(route, { term: term }, function (data) {
+                            return process(data);
+                        });
+                    }
+                });
+            </script>
+            
+
+            {{--<div class="form-group">
                 <label>Subcategory Training :</label>
                 <select class="form-control select2 @error('subcategory_trainings_id') is-invalid @enderror" id="subcategory_id" name="subcategory_trainings_id" value="{{ old('subcategory_trainings_id') }}" required autocomplete="subcategory_trainings_id" autofocus placeholder="categoryTraining" style="width: 100%;">
                     <option value="">Name Subategory</option>
@@ -139,7 +162,7 @@
                     <option value="{{ $item->id }}">{{ $item->nameSubcategory }}</option>
                     @endforeach
                 </select>
-            </div>
+            </div>--}}
 
             <div class="form-group">
                 <label>Content :</label>

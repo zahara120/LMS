@@ -103,6 +103,8 @@ Route::name('approval.')->group(function () {
 Route::post('api/fetch-subcategory', [TrainingController::class, 'getSubcategory']);
 
 Route::resource('/forum',ForumController::class);
+// auto complete forum
+Route::get('autocomplete', [ForumController::class, 'autocomplete'])->name('autocomplete');
 
 Route::resource('comment.forum',CommentController::class);
 

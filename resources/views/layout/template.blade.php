@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="{{asset('style/dist/css/skins/_all-skins.min.css')}}">
   <!-- filePond progress bar -->
   <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" crossorigin="anonymous"></script>
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" crossorigin="anonymous"></script> -->
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -168,9 +168,9 @@
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 <!-- jQuery 3 -->
 <script src="{{asset('style/bower_components/jquery/dist/jquery.min.js')}}"></script>
-@yield('scripts') 
 <!-- Bootstrap 3.3.7 -->
-<script src="{{asset('style/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('style/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>pt>
+@yield('scripts') 
 <!-- DataTables -->
 <script src="{{asset('style/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('style/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>

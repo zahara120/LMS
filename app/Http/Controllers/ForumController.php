@@ -18,11 +18,29 @@ class ForumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function test()
+    {
+        $subcategory = SubcategoryTraining::all();
+        return view ('TestAuto',compact('subcategory'));
+    }
+
     public function index()
     {
         $subcategory = SubcategoryTraining::all();
         $forum = Forum::orderBy('created_at','desc')->paginate(10);
         return view ('forum',compact('forum','subcategory'));
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $datas = SubcategoryTraining::select('nameSubcategory')->where('nameSubcategory', 'LIKE', "%{$request->input('query')}%")->get();
+        $dataModified = array();
+        foreach ($datas as $data)
+        {
+            $dataModified[] = $data->nameSubcategory;
+        }
+
+        return response()->json($dataModified);
     }
 
     /**
@@ -55,8 +73,10 @@ class ForumController extends Controller
             'content.required' => 'Content  is required'
         ]);
         // dd($request);
+        $subcategory_id = SubcategoryTraining::where('nameSubcategory', $request->subcategory_trainings_id)->value('id');
+        // dd($subcategory_id);
         $request->request->add(['user_id' => auth()->user()->id]);
-        $request->request->add(['subcategory_trainings_id' => $request->subcategory_trainings_id]);
+        $request->request->add(['subcategory_trainings_id' => $subcategory_id]);
         Forum::create($request->all());
         return redirect()->back()->with('success','succes add forum');
 
