@@ -59,7 +59,7 @@
             @foreach ($approval as $item)
             @foreach ($item->approval_detail as $detail)
             @if(Auth::user()->id == $detail->user_id || Auth::user()->role()->where('nameRole', '=', 'Admin')->exists() 
-            || Auth::user()->id == $approver_satu || Auth::user()->id == $approver_dua || Auth::user()->id == $approver_tiga)
+            || $detail->approversatu_id == Auth::user()->id || $detail->approverdua_id == Auth::user()->id || $detail->approvertiga_id == Auth::user()->id)
             <tr>
                 <?php $number++ ?>
                 <td class="text-center">{{ $number }}</td>

@@ -127,6 +127,7 @@ class ApprovalRecordController extends Controller
     public function show(Approval $approval, $approvalDetail_id)
     {
         $approval_detail = ApprovalDetail::findOrFail($approvalDetail_id);
+        // dd($approver);
         return view('approvalDetail', compact('approval', 'approval_detail'));
     }
 

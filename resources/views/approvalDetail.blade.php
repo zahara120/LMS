@@ -56,6 +56,27 @@
                 <input class="form-control select2" type="text" value="{{$approval->description}}}" disabled>
             </div>
         </div>
+
+        <div class="form-group row mt-2">
+            <label class="col-sm-3 control-label">Approver 1 :</label>
+            <div class="col-sm-8">
+                <input class="form-control select2" type="text" value="{{$approval_detail->approver->approversatu->name}}" disabled>
+            </div>
+        </div>
+
+        <div class="form-group row mt-2">
+            <label class="col-sm-3 control-label">Approver 2 :</label>
+            <div class="col-sm-8">
+                <input class="form-control select2" type="text" value="{{$approval_detail->approver->approverdua->name}}" disabled>
+            </div>
+        </div>
+
+        <div class="form-group row mt-2">
+            <label class="col-sm-3 control-label">Approver 3 :</label>
+            <div class="col-sm-8">
+                <input class="form-control select2" type="text" value="{{$approval_detail->approver->approvertiga->name}}" disabled>
+            </div>
+        </div>
         <form class="form-horizontal" role="form" action="/approval/{{$approval_detail->id}}" method="post">
         @csrf
         @method('PUT')

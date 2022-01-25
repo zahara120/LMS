@@ -17,17 +17,17 @@ class Approver extends Model
 
     public function approversatu()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class,'approversatu_id');
     }
 
     public function approverdua()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class,'approverdua_id');
     }
 
     public function approvertiga()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class,'approvertiga_id');
     }
 
     public function approval_detail(){

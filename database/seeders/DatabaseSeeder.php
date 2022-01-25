@@ -32,7 +32,9 @@ class DatabaseSeeder extends Seeder
             LessonSeederTable::class,
             AlertSeederTable::class,
             RoleUserSeederTable::class,
-            TestSeederTable::class
+            TestSeederTable::class,
+            QuestionSeederTable::class,
+            QuestionOptionSeederTable::class,
         ]);
     }
 }
